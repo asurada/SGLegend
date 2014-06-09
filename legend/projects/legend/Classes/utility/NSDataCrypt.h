@@ -2,7 +2,6 @@
 //  NSDataCrypt.h
 //  Roulette
 //
-//  Created by JP10553 on 11/04/11.
 //  Copyright __MyCompanyName__ 2011. All rights reserved.
 //
 
