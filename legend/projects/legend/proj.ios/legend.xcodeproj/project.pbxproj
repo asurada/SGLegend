@@ -1647,15 +1647,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				15A3D87E1682F7B3002FB0C5 /* cocos2dx.xcodeproj */,
-				15A3D8871682F7D5002FB0C5 /* Box2D */,
-				15A3D93A1682F7F9002FB0C5 /* chipmunk */,
+				A2007CB91945925500AA36E8 /* lib */,
 				15AA9C4015B7EC450033D6C2 /* Classes */,
-				15A3DA6B1682F8A6002FB0C5 /* CocosDenshion */,
-				15A3D9B31682F826002FB0C5 /* extensions */,
-				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				080E96DDFE201D6D7F000001 /* ios */,
-				1AB87036175E0A92005D39BF /* libwebsockets */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				78C7DDAA14EBA5050085D0C2 /* Resources */,
 			);
@@ -2141,6 +2134,21 @@
 				9CD6F9DA19286B45002C7D2C /* blade_sparkle.plist */,
 			);
 			path = particle;
+			sourceTree = "<group>";
+		};
+		A2007CB91945925500AA36E8 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				15A3D87E1682F7B3002FB0C5 /* cocos2dx.xcodeproj */,
+				15A3D8871682F7D5002FB0C5 /* Box2D */,
+				15A3D93A1682F7F9002FB0C5 /* chipmunk */,
+				15A3DA6B1682F8A6002FB0C5 /* CocosDenshion */,
+				15A3D9B31682F826002FB0C5 /* extensions */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				080E96DDFE201D6D7F000001 /* ios */,
+				1AB87036175E0A92005D39BF /* libwebsockets */,
+			);
+			name = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
