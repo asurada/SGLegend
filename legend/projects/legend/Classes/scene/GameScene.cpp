@@ -232,36 +232,54 @@ void GameScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 //
 void GameScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 {
-//    //CCTouch *touch = (CCTouch *)touches->anyObject();
+//    CCTouch *touch = (CCTouch *)touches->anyObject();
+//    CCPoint start = touch->getLocationInView();
+//    start = CCDirector::sharedDirector()->convertToGL(start);
+//    CCPoint end = touch->getPreviousLocationInView();
+//    end = CCDirector::sharedDirector()->convertToGL(end);
+//    
+//    target->begin();
+//    
+//    float distance = ccpDistance(start, end);
+//    
+//    for (int i = 0; i < distance; i++)
+//    {
+//        float difx = end.x - start.x;
+//        float dify = end.y - start.y;
+//        float delta = (float)i / distance;
+//        brush->setPosition(
+//                           ccp(start.x + (difx * delta), start.y + (dify * delta)));
+//        
+//		//brush->setOpacity(0.5);
+//        brush->visit();
+//    }
+//    target->end();
+//    
 //    
 //	CCSetIterator it;
 //	for( it = touches->begin(); it != touches->end(); it++)
 //    {
 //        CCTouch* touch = (CCTouch*)(*it);
+//        
 //        if(!touch)
 //            break;
-//
-//        CCPoint location = touch->getLocationInView();
-//        location = CCDirector::sharedDirector()->convertToGL(location);
-//        CCObject *obj;
 //        
-//  
-////todo
-////        if(startSprite != NULL){
-////            float distance = sqrt( pow(location.x - startSprite->getPosition().x, 2) + pow(location.y - startSprite->getPosition().y, 2));
-////            
-////            CCPoint start = startSprite->getPosition();
-////            if(distance > 15)
-////            {
-////                this->drawLineByPoint(start , location);
-////                
-////            }
-////
-////        }
-//
-//            }
+//        CCPoint location = touch->getLocationInView();
+//        
+//        location = CCDirector::sharedDirector()->convertToGL(location);
+//        
+//        float distance = sqrt( pow(location.x - previousLocation.x, 2) + pow(location.y - previousLocation.y, 2));
+//        
+//        if(distance > 15)
+//        {
+//            
+//            addRectangleBetweenPointsToBody(currentPlatformBody, previousLocation, location);
+//			//plataformPoints.push_back(location);
+//            previousLocation = location;
 //        }
+//        
 //    }
+
 }
 
 
@@ -443,6 +461,7 @@ void GameScene::endFire(AnalysisShape shape){
 
 
 void GameScene::addPhysics(std::vector<cocos2d::CCPoint> autoPoints){
+    
     CCSize s = CCDirector::sharedDirector()->getWinSize();
     b2BodyDef myBodyDef;
     myBodyDef.type = b2_dynamicBody; //this will be a dynamic body
@@ -453,7 +472,7 @@ void GameScene::addPhysics(std::vector<cocos2d::CCPoint> autoPoints){
     {
         CCPoint start = autoPoints[i];
         CCPoint end = autoPoints[i+1];
-        addRectangleBetweenPointsToBody(newBody,start,end);
+       // addRectangleBetweenPointsToBody(newBody,start,end);
         
     }
     world->DestroyBody(currentPlatformBody);
