@@ -279,6 +279,8 @@
 		9CFEFB5D193E29D6000D4ADE /* PhysicsSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFEFB5B193E29D6000D4ADE /* PhysicsSprite.cpp */; };
 		9CFEFB5F193F7951000D4ADE /* largeBrush.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFEFB5E193F7951000D4ADE /* largeBrush.png */; };
 		A2007CBF1945A8B400AA36E8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2007CBD1945A8B400AA36E8 /* GameScene.cpp */; };
+		A2007CC71945AB2F00AA36E8 /* NSDataCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = A2007CC21945AB2F00AA36E8 /* NSDataCrypt.m */; };
+		A2007CC91945AB2F00AA36E8 /* URLDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = A2007CC61945AB2F00AA36E8 /* URLDownload.m */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -854,6 +856,10 @@
 		9CFEFB5E193F7951000D4ADE /* largeBrush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeBrush.png; sourceTree = "<group>"; };
 		A2007CBD1945A8B400AA36E8 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		A2007CBE1945A8B400AA36E8 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		A2007CC11945AB2F00AA36E8 /* NSDataCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataCrypt.h; sourceTree = "<group>"; };
+		A2007CC21945AB2F00AA36E8 /* NSDataCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataCrypt.m; sourceTree = "<group>"; };
+		A2007CC51945AB2F00AA36E8 /* URLDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLDownload.h; sourceTree = "<group>"; };
+		A2007CC61945AB2F00AA36E8 /* URLDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLDownload.m; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1386,6 +1392,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A2007CC01945AB1300AA36E8 /* utility */,
 				A2007CBC1945A8B400AA36E8 /* scene */,
 				9CA1E96D1930D65100080A75 /* logic */,
 				9CA1E96B1930C6DB00080A75 /* callback */,
@@ -2160,6 +2167,18 @@
 			path = ../Classes/scene;
 			sourceTree = "<group>";
 		};
+		A2007CC01945AB1300AA36E8 /* utility */ = {
+			isa = PBXGroup;
+			children = (
+				A2007CC11945AB2F00AA36E8 /* NSDataCrypt.h */,
+				A2007CC21945AB2F00AA36E8 /* NSDataCrypt.m */,
+				A2007CC51945AB2F00AA36E8 /* URLDownload.h */,
+				A2007CC61945AB2F00AA36E8 /* URLDownload.m */,
+			);
+			name = utility;
+			path = ../Classes/utility;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2289,6 +2308,7 @@
 				9C9D3A831931BD8A0041258E /* AnalysisLogic.cpp in Sources */,
 				15A3D9071682F7D5002FB0C5 /* b2ChainShape.cpp in Sources */,
 				15A3D9081682F7D5002FB0C5 /* b2CircleShape.cpp in Sources */,
+				A2007CC91945AB2F00AA36E8 /* URLDownload.m in Sources */,
 				15A3D9091682F7D5002FB0C5 /* b2EdgeShape.cpp in Sources */,
 				15A3D90A1682F7D5002FB0C5 /* b2PolygonShape.cpp in Sources */,
 				9C773420193CA41F004D09E4 /* AnalysisTriangle.cpp in Sources */,
@@ -2363,6 +2383,7 @@
 				15A3D9AE1682F7F9002FB0C5 /* cpSpaceQuery.c in Sources */,
 				15A3D9AF1682F7F9002FB0C5 /* cpSpaceStep.c in Sources */,
 				15A3D9B01682F7F9002FB0C5 /* cpSpatialIndex.c in Sources */,
+				A2007CC71945AB2F00AA36E8 /* NSDataCrypt.m in Sources */,
 				15A3D9B11682F7F9002FB0C5 /* cpSweep1D.c in Sources */,
 				15A3D9B21682F7F9002FB0C5 /* cpVect.c in Sources */,
 				15A3DA311682F826002FB0C5 /* CCBAnimationManager.cpp in Sources */,

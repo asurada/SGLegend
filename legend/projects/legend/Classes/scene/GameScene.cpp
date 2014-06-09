@@ -637,9 +637,7 @@ CCRect GameScene::getBodyRectangle(b2Body* body)
     
     float width2 = maxX2 - minX2;
     float height2 = maxY2 - minY2;
-    
     float remY2 = s.height - maxY2;
-    
     return CCRectMake(minX2, remY2, width2, height2);
 }
 
