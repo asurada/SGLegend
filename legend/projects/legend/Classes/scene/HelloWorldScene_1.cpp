@@ -1,7 +1,10 @@
-#include "HelloWorldScene.h"
+#include "HelloWorldScene_1.h"
+#include "SimpleAudioEngine.h"
 #include "CCHttpRequest.h"
 
-USING_NS_CC;
+using namespace cocos2d;
+using namespace CocosDenshion;
+using namespace cocos2d::extension;
 
 CCScene* HelloWorld::scene()
 {
@@ -27,9 +30,6 @@ bool HelloWorld::init()
     {
         return false;
     }
-    
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -40,14 +40,12 @@ bool HelloWorld::init()
                                         "CloseNormal.png",
                                         "CloseSelected.png",
                                         this,
-                                        menu_selector(HelloWorld::menuCloseCallback));
-    
-	pCloseItem->setPosition(ccp(origin.x + visibleSize.width - pCloseItem->getContentSize().width/2 ,
-                                origin.y + pCloseItem->getContentSize().height/2));
+                                        menu_selector(HelloWorld::menuCloseCallback) );
+    pCloseItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20) );
 
     // create menu, it's an autorelease object
     CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
-    pMenu->setPosition(CCPointZero);
+    pMenu->setPosition( CCPointZero );
     this->addChild(pMenu, 1);
 
     /////////////////////////////
@@ -55,12 +53,13 @@ bool HelloWorld::init()
 
     // add a label shows "Hello World"
     // create and initialize a label
-    
-    CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Arial", 24);
-    
+    CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Thonburi", 34);
+
+    // ask director the window size
+    CCSize size = CCDirector::sharedDirector()->getWinSize();
+
     // position the label on the center of the screen
-    pLabel->setPosition(ccp(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - pLabel->getContentSize().height));
+    pLabel->setPosition( ccp(size.width / 2, size.height - 20) );
 
     // add the label as a child to this layer
     this->addChild(pLabel, 1);
@@ -69,13 +68,12 @@ bool HelloWorld::init()
     CCSprite* pSprite = CCSprite::create("HelloWorld.png");
 
     // position the sprite on the center of the screen
-    pSprite->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    pSprite->setPosition( ccp(size.width/2, size.height/2) );
 
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
     
-    
-    cocos2d::extension::CCHttpRequest *requestor = cocos2d::extension::CCHttpRequest::sharedHttpRequest();
+    CCHttpRequest *requestor = CCHttpRequest::sharedHttpRequest();
     
     std::string url = "http://192.168.1.12:8080/snippets/";
     std::string postData = "code=print 456";
@@ -86,20 +84,48 @@ bool HelloWorld::init()
     std::vector<std::string> downloads;
     downloads.push_back("http://192.168.1.12/project/image.jpg");
     requestor->addDownloadTask(downloads, this, callfuncND_selector(HelloWorld::onHttpRequestCompleted));
-
     
     return true;
 }
 
+void HelloWorld::onHttpRequestCompleted(cocos2d::CCObject *pSender, void *data)
+{
+    HttpResponsePacket *response = (HttpResponsePacket *)data;
+    
+    if (response->request->reqType == kHttpRequestGet) {
+        if (response->succeed) {
+            CCLog("Get Request Completed!");
+            CCLog("Content: %s", response->responseData.c_str());
+        } else {
+            CCLog("Get Error: %s", response->responseData.c_str());
+        }
+    } else if (response->request->reqType == kHttpRequestPost) {
+        if (response->succeed) {
+            CCLog("Post Request Completed!");
+            CCLog("Content: %s", response->responseData.c_str());
+        } else {
+            CCLog("Post Error: %s", response->responseData.c_str());
+        }
+    } else if (response->request->reqType == kHttpRequestDownloadFile) {
+        if (response->succeed) {
+            CCLog("Download Request Completed! Downloaded:");
+            
+            std::vector<std::string>::iterator iter;
+            for (iter = response->request->files.begin(); iter != response->request->files.end(); ++iter) {
+                std::string url = *iter;
+                CCLog("%s", url.c_str());
+            }
+        } else {
+            CCLog("Download Error: %s", response->responseData.c_str());
+        }
+    }
+}
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-#else
     CCDirector::sharedDirector()->end();
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
-#endif
 #endif
 }

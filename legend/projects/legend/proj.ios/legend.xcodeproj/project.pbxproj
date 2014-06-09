@@ -277,6 +277,7 @@
 		9CD6F9E81928E6F1002C7D2C /* fire2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD6F9E61928E6F1002C7D2C /* fire2.png */; };
 		9CFEFB5D193E29D6000D4ADE /* PhysicsSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFEFB5B193E29D6000D4ADE /* PhysicsSprite.cpp */; };
 		9CFEFB5F193F7951000D4ADE /* largeBrush.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFEFB5E193F7951000D4ADE /* largeBrush.png */; };
+		9CFEFB6319460B54000D4ADE /* CCHttpRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFEFB6119460B54000D4ADE /* CCHttpRequest.cpp */; };
 		A2007CBF1945A8B400AA36E8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2007CBD1945A8B400AA36E8 /* GameScene.cpp */; };
 		A2007CC71945AB2F00AA36E8 /* NSDataCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = A2007CC21945AB2F00AA36E8 /* NSDataCrypt.m */; };
 		A2007CC91945AB2F00AA36E8 /* URLDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = A2007CC61945AB2F00AA36E8 /* URLDownload.m */; };
@@ -852,6 +853,8 @@
 		9CFEFB5B193E29D6000D4ADE /* PhysicsSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsSprite.cpp; sourceTree = "<group>"; };
 		9CFEFB5C193E29D6000D4ADE /* PhysicsSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
 		9CFEFB5E193F7951000D4ADE /* largeBrush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeBrush.png; sourceTree = "<group>"; };
+		9CFEFB6119460B54000D4ADE /* CCHttpRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHttpRequest.cpp; sourceTree = "<group>"; };
+		9CFEFB6219460B54000D4ADE /* CCHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHttpRequest.h; sourceTree = "<group>"; };
 		A2007CBD1945A8B400AA36E8 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		A2007CBE1945A8B400AA36E8 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		A2007CC11945AB2F00AA36E8 /* NSDataCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataCrypt.h; sourceTree = "<group>"; };
@@ -2170,6 +2173,8 @@
 		A2007CC01945AB1300AA36E8 /* utility */ = {
 			isa = PBXGroup;
 			children = (
+				9CFEFB6119460B54000D4ADE /* CCHttpRequest.cpp */,
+				9CFEFB6219460B54000D4ADE /* CCHttpRequest.h */,
 				A2007CC11945AB2F00AA36E8 /* NSDataCrypt.h */,
 				A2007CC21945AB2F00AA36E8 /* NSDataCrypt.m */,
 				A2007CC51945AB2F00AA36E8 /* URLDownload.h */,
@@ -2424,6 +2429,7 @@
 				15A3DA4C1682F826002FB0C5 /* CCControlHuePicker.cpp in Sources */,
 				375BD50F1868454E0024609E /* CCActionFrame.cpp in Sources */,
 				15A3DA4D1682F826002FB0C5 /* CCControlPotentiometer.cpp in Sources */,
+				9CFEFB6319460B54000D4ADE /* CCHttpRequest.cpp in Sources */,
 				15A3DA4E1682F826002FB0C5 /* CCControlSaturationBrightnessPicker.cpp in Sources */,
 				15A3DA4F1682F826002FB0C5 /* CCControlSlider.cpp in Sources */,
 				15A3DA501682F826002FB0C5 /* CCControlStepper.cpp in Sources */,
