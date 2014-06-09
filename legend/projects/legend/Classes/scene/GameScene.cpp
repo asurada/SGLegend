@@ -313,8 +313,6 @@ void GameScene::startFireAnm(CCPoint &pos,const char * image,const char * plist,
     
     CCCallFuncND *cleanupAction = CCCallFuncND::create(this,callfuncND_selector(GameScene::cleanupSprite),animationSprite);
     CCSequence *seq = CCSequence::create(animate, cleanupAction,NULL);
-
-    
     animationSprite->runAction(seq);
 
 }
