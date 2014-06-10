@@ -54,6 +54,8 @@ OperationLayer::OperationLayer()
     linkBalls->retain();
     factory = new AnalysisFactory();
     analysisLogic = new AnalysisHexagon();
+    brush = CCSprite::create("largeBrush.png");
+    brush->retain();
 }
 
 
@@ -68,8 +70,9 @@ OperationLayer* OperationLayer::create()
 bool OperationLayer::init()
 {
     bool bRet = false;
+    CCSize s = CCDirector::sharedDirector()->getWinSize();
     cocos2d::CCDirector * pDirector = cocos2d::CCDirector::sharedDirector();
-    CCLOG("width=%f,height=%f",pDirector->getWinSize().width,pDirector->getWinSize().height);
+    CCLOG("width=%f,height=%f",s.width,s.height);
     TouchTrailLayer *layer = TouchTrailLayer::create();
     if(!CCLayerColor::initWithColor(ccc4(241, 196, 15, 0),pDirector->getWinSize().width,pDirector->getWinSize().height/2))
     {
@@ -77,6 +80,13 @@ bool OperationLayer::init()
     }
     setTouchEnabled(true);
     bRet = true;
+    
+    target = CCRenderTexture::create(s.width, s.height, kCCTexture2DPixelFormat_RGBA8888);
+    target->retain();
+    target->setPosition(ccp(s.width / 2, s.height / 2));
+    
+    this->addChild(target);
+    
     this->initDrawNode();
     this->addChild(layer,1);
     this->createBall(HEXAGON);
@@ -472,7 +482,6 @@ void OperationLayer::autoDrawLine(){
         autoPoints.push_back(center);
         autoPoints.push_back(end);
     }
-    operationCallBack->addPhysics(autoPoints);
     schedule(schedule_selector(OperationLayer::drawCacheLine), 0.06);
     
 }
@@ -510,16 +519,36 @@ void OperationLayer::drawCacheLine(){
     if(autoPoints.size() >1){
         CCPoint start = autoPoints[0];
         CCPoint end = autoPoints[1];
-        drawNode->drawSegment(start,                    // 起点
-                              end,                      // 終点
-                              10,                            // 太さ
-                              ccc4FFromccc3B(ccYELLOW)          // 色
-                              );
+        
+        target->begin();
+        float distance = ccpDistance(start, end);
+            
+        for (int i = 0; i < distance; i++)
+        {
+            float difx = end.x - start.x;
+            float dify = end.y - start.y;
+            float delta = (float)i / distance;
+            brush->setPosition(
+                                ccp(start.x + (difx * delta), start.y + (dify * delta)));
+                
+                
+                
+                //brush->setOpacity(0.5);
+            brush->visit();
+        }
+        target->end();
+//        drawNode->drawSegment(start,                    // 起点
+//                              end,                      // 終点
+//                              10,                            // 太さ
+//                              ccc4FFromccc3B(ccYELLOW)          // 色
+//                              );
         autoPoints.erase(autoPoints.begin());
     }else{
         if(beginFire){
            if(operationCallBack != NULL){
+               brush->cocos2d::CCNode::removeAllChildrenWithCleanup(true);
                operationCallBack->beginFire(_linkShape);
+           
            }
         }else{
            // clearMagicSquare();

@@ -62,7 +62,8 @@ private:
     cocos2d::CCPoint ballPos_6;
     cocos2d::CCArray * balls;
     cocos2d::CCArray *linkBalls;
-   
+    cocos2d::CCSprite *brush;
+    cocos2d::CCRenderTexture *target;
 
     void initBall();
     int anlysisWriteHanding(CCArray *linkballs);

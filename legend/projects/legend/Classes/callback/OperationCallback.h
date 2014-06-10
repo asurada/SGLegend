@@ -17,7 +17,7 @@ public:
 //    virtual void beginAutoDrawMagicSquare( int a, int b, int c );
 //    virtual void endAutoDrawMagicSquare( int a, int b, int c );
     
-    virtual void addPhysics( std::vector<cocos2d::CCPoint> autoPoints) = 0;
+
     virtual void beginFire(AnalysisShape shape) = 0;
     virtual void endFire(AnalysisShape shape) = 0;
 

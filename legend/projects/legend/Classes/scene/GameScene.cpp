@@ -148,24 +148,9 @@ bool GameScene::init()
     pSprite_monster->setScale(1.5);
     this->addChild(pSprite_monster, 0);
     
-    
-    
-
-    
     this->scheduleUpdate();
     
-    target = CCRenderTexture::create(s.width, s.height, kCCTexture2DPixelFormat_RGBA8888);
-    target->retain();
-    target->setPosition(ccp(s.width / 2, s.height / 2));
-    
-    this->addChild(target);
 
-    
-
-  
-
-    brush = CCSprite::create("largeBrush.png");
-    brush->retain();
     return true;
 }
 
@@ -232,56 +217,8 @@ void GameScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 //
 void GameScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 {
-//    CCTouch *touch = (CCTouch *)touches->anyObject();
-//    CCPoint start = touch->getLocationInView();
-//    start = CCDirector::sharedDirector()->convertToGL(start);
-//    CCPoint end = touch->getPreviousLocationInView();
-//    end = CCDirector::sharedDirector()->convertToGL(end);
-//    
-//    target->begin();
-//    
-//    float distance = ccpDistance(start, end);
-//    
-//    for (int i = 0; i < distance; i++)
-//    {
-//        float difx = end.x - start.x;
-//        float dify = end.y - start.y;
-//        float delta = (float)i / distance;
-//        brush->setPosition(
-//                           ccp(start.x + (difx * delta), start.y + (dify * delta)));
-//        
-//		//brush->setOpacity(0.5);
-//        brush->visit();
-//    }
-//    target->end();
-//    
-//    
-//	CCSetIterator it;
-//	for( it = touches->begin(); it != touches->end(); it++)
-//    {
-//        CCTouch* touch = (CCTouch*)(*it);
-//        
-//        if(!touch)
-//            break;
-//        
-//        CCPoint location = touch->getLocationInView();
-//        
-//        location = CCDirector::sharedDirector()->convertToGL(location);
-//        
-//        float distance = sqrt( pow(location.x - previousLocation.x, 2) + pow(location.y - previousLocation.y, 2));
-//        
-//        if(distance > 15)
-//        {
-//            
-//            addRectangleBetweenPointsToBody(currentPlatformBody, previousLocation, location);
-//			//plataformPoints.push_back(location);
-//            previousLocation = location;
-//        }
-//        
-//    }
-
+   
 }
-
 
 
 
@@ -420,7 +357,6 @@ void GameScene::update(float dt)
         bullet->setVisible(false);
         pSprite_monster->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
         this->startFireAnm(monster,"fire2.png","fire2.plist","fire",40);
-       
     }
 
 	
@@ -459,51 +395,6 @@ void GameScene::endFire(AnalysisShape shape){
     
 }
 
-
-void GameScene::addPhysics(std::vector<cocos2d::CCPoint> autoPoints){
-    
-    CCSize s = CCDirector::sharedDirector()->getWinSize();
-    b2BodyDef myBodyDef;
-    myBodyDef.type = b2_dynamicBody; //this will be a dynamic body
-    myBodyDef.position.Set(currentPlatformBody->GetPosition().x, currentPlatformBody->GetPosition().y); //set the starting position
-    b2Body* newBody = world->CreateBody(&myBodyDef);
-    
-    for(int i=0; i < autoPoints.size()-1; i++)
-    {
-        CCPoint start = autoPoints[i];
-        CCPoint end = autoPoints[i+1];
-       // addRectangleBetweenPointsToBody(newBody,start,end);
-        
-    }
-    world->DestroyBody(currentPlatformBody);
-    CCRect bodyRectangle = getBodyRectangle(newBody);
-    CCImage *pImage = target->newCCImage();
-    CCTexture2D *tex = CCTextureCache::sharedTextureCache()->addUIImage(pImage,NULL);
-    CC_SAFE_DELETE(pImage);
-
-    //CCSprite *sprite = CCSprite::create(tex, bodyRectangle);
-    
-    CCSprite *sprite = new CCSprite();
-    sprite->initWithTexture(tex, bodyRectangle);
-
-    float anchorX = newBody->GetPosition().x * PTM_RATIO_WIN - bodyRectangle.origin.x;
-    float anchorY = bodyRectangle.size.height - (s.height - bodyRectangle.origin.y - newBody->GetPosition().y * PTM_RATIO_WIN);
-    
-    sprite->setAnchorPoint(ccp(anchorX / bodyRectangle.size.width,  anchorY / bodyRectangle.size.height));
-    newBody->SetUserData(sprite);
-    addChild(sprite,6);
-    
-    removeChild(target,true);
-    target->release();
-    
-    target = CCRenderTexture::create(s.width, s.height, kCCTexture2DPixelFormat_RGBA8888);
-    target->retain();
-    target->setPosition(ccp(s.width / 2, s.height / 2));
-    
-    this->addChild(target, 4);
-
-
-}
 
 
 void GameScene::cleanupSprite(CCSprite* inSprite)
@@ -570,93 +461,6 @@ void GameScene::initPhysics()
     groundBody->CreateFixture(&groundBox,0);
 }
 
-void GameScene::addRectangleBetweenPointsToBody(b2Body *body, CCPoint start, CCPoint end)
-{
-    
-    float distance = sqrt( pow(end.x - start.x, 2) + pow(end.y - start.y, 2));
-    
-    float sx=start.x;
-    float sy=start.y;
-    float ex=end.x;
-    float ey=end.y;
-    float dist_x=sx-ex;
-    float dist_y=sy-ey;
-    float angle= atan2(dist_y,dist_x);
-    
-    float px= (sx+ex)/2/PTM_RATIO_WIN - body->GetPosition().x;
-    float py = (sy+ey)/2/PTM_RATIO_WIN - body->GetPosition().y;
-    
-    float width = abs(distance)/PTM_RATIO;
-    float height =  brush->boundingBox().size.height/PTM_RATIO;
-    
-    b2PolygonShape boxShape;
-    boxShape.SetAsBox(width / 2, height / 2, b2Vec2(px,py),angle);
-    
-    b2FixtureDef boxFixtureDef;
-    boxFixtureDef.shape = &boxShape;
-    boxFixtureDef.density = 5;
-    
-    boxFixtureDef.filter.categoryBits = 2;
-    
-    body->CreateFixture(&boxFixtureDef);
-}
-
-
-CCRect GameScene::getBodyRectangle(b2Body* body)
-{
-    
-    CCSize s = CCDirector::sharedDirector()->getWinSize();
-    
-    float minX2 = s.width;
-    float maxX2 = 0;
-    float minY2 = s.height;
-    float maxY2 = 0;
-    
-    const b2Transform& xf = body->GetTransform();
-    for (b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext())
-    {
-        
-        b2PolygonShape* poly = (b2PolygonShape*)f->GetShape();
-        int32 vertexCount = poly->m_vertexCount;
-        b2Assert(vertexCount <= b2_maxPolygonVertices);
-        
-        for (int32 i = 0; i < vertexCount; ++i)
-        {
-            b2Vec2 vertex = b2Mul(xf, poly->m_vertices[i]);
-            
-            
-            if(vertex.x < minX2)
-            {
-                minX2 = vertex.x;
-            }
-            
-            if(vertex.x > maxX2)
-            {
-                maxX2 = vertex.x;
-            }
-            
-            if(vertex.y < minY2)
-            {
-                minY2 = vertex.y;
-            }
-            
-            if(vertex.y > maxY2)
-            {
-                maxY2 = vertex.y;
-            }
-        }
-    }
-    
-    maxX2 *= PTM_RATIO;
-    minX2 *= PTM_RATIO;
-    maxY2 *= PTM_RATIO;
-    minY2 *= PTM_RATIO;
-    
-    float width2 = maxX2 - minX2;
-    float height2 = maxY2 - minY2;
-    float remY2 = s.height - maxY2;
-    return CCRectMake(minX2, remY2, width2, height2);
-}
 
 
 

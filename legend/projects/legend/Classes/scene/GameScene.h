@@ -27,10 +27,7 @@ public:
     
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
-    
-
     void startFireAnm(cocos2d::CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count);
-//    void fire();
     void cleanupSprite(cocos2d::CCSprite* inSprite);
     void addRectangleBetweenPointsToBody(b2Body *body, CCPoint start, CCPoint end);
     
@@ -42,23 +39,19 @@ public:
    
     
     int anlysisWriteHanding(cocos2d::CCArray *spriteList);
-  //  virtual void draw();
-
     virtual void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 	virtual void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 	virtual void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     virtual void ccTouchesCancelled(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     virtual void beginFire(AnalysisShape shape);
     virtual void endFire(AnalysisShape shape);
-    virtual void addPhysics(std::vector<cocos2d::CCPoint> autoPoints);
-    
+
     // implement the "static node()" method manually
     CREATE_FUNC(GameScene);
     
     
 private:
     b2World* world;
-    cocos2d::CCSprite *brush;
     cocos2d::CCPoint previousLocation;
 	b2Body* currentPlatformBody;
     cocos2d::CCPoint ballPos_1;
@@ -90,11 +83,8 @@ private:
     cocos2d::CCPoint endPoint;
     OperationLayer *operationlayer;
     void initPhysics();
-    void addNewSpriteAtPosition(CCPoint p);
-    CCRect getBodyRectangle(b2Body* body);
-    
     cocos2d::CCSprite* animationSprite;
-    cocos2d::CCRenderTexture *target;
+
 //    cocos2d::CCDrawNode* drawNode;
 //    cocos2d::CCPoint calCenterPoint(cocos2d::CCPoint startPoint,cocos2d::CCPoint endPoint);
 //    void autoDrawLine();
