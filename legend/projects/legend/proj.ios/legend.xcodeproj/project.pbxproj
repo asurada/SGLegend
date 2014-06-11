@@ -284,6 +284,8 @@
 		A2007CCF1945AD4700AA36E8 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2007CCD1945AD4700AA36E8 /* HelloWorldScene.cpp */; };
 		A21DC6D81946FF8C00ECFCB5 /* largeBrush_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A21DC6D71946FF8C00ECFCB5 /* largeBrush_2.png */; };
 		A21DC6DA194700C700ECFCB5 /* texture_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A21DC6D9194700C700ECFCB5 /* texture_1.png */; };
+		A27784F91947EDCB00765D69 /* Concept.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784F81947EDCB00765D69 /* Concept.strings */; };
+		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -867,6 +869,8 @@
 		A2007CCE1945AD4700AA36E8 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
 		A21DC6D71946FF8C00ECFCB5 /* largeBrush_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeBrush_2.png; sourceTree = "<group>"; };
 		A21DC6D9194700C700ECFCB5 /* texture_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_1.png; sourceTree = "<group>"; };
+		A27784F81947EDCB00765D69 /* Concept.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Concept.strings; sourceTree = "<group>"; };
+		A27784FA1947F61600765D69 /* TechMemo.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TechMemo.strings; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1658,6 +1662,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A27784F71947EDB400765D69 /* Managemnet */,
 				A2007CB91945925500AA36E8 /* lib */,
 				15AA9C4015B7EC450033D6C2 /* Classes */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -2190,6 +2195,16 @@
 			path = ../Classes/utility;
 			sourceTree = "<group>";
 		};
+		A27784F71947EDB400765D69 /* Managemnet */ = {
+			isa = PBXGroup;
+			children = (
+				A27784F81947EDCB00765D69 /* Concept.strings */,
+				A27784FA1947F61600765D69 /* TechMemo.strings */,
+			);
+			name = Managemnet;
+			path = ../Managemnet;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2264,6 +2279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A27784F91947EDCB00765D69 /* Concept.strings in Resources */,
 				9CC8AC16192A6146009D4B0C /* fire1.png in Resources */,
 				9CC8AC14192A44FE009D4B0C /* round.png in Resources */,
 				7855E0E1153FEF240059DD9A /* Default.png in Resources */,
@@ -2297,6 +2313,7 @@
 				9C69D73719337DBC007C4286 /* fire_1.png in Resources */,
 				9C69D73819337DBC007C4286 /* fire_2.png in Resources */,
 				9C15AA011927833B00737452 /* monster.png in Resources */,
+				A27784FB1947F61600765D69 /* TechMemo.strings in Resources */,
 				9C15A9F819277FDC00737452 /* bll_01.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

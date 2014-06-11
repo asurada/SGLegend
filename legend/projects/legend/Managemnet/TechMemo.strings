@@ -1,0 +1,39 @@
+/* 
+  TechMemo.strings
+  legend
+
+  Created by Yan Wei on 2014/06/11.
+
+*/
+
+
+ゲーム端末
+　iphone ios 5.0,
+  android
+
+開発言語
+　c++
+library
+  cocos2dx
+
+
+サーバ
+　google cloud
+  python
+  NOSQL
+
+
+
+
+端末課題：
+1.指で魔法陣描写
+　　魔法石の間に指で引くと、CCScale9Sprite矢印画像をのばす
+   魔法石に到達すると、矢印位置固定
+　　順番による、色付き
+2.魔法陣自動描画
+
+3.魔法陣パータン
+
+
+
+サーバ課題：
