@@ -6,6 +6,7 @@
 
 */
 
+/*
 
 ゲーム端末
 　iphone ios 5.0,
@@ -19,7 +20,7 @@ library
 
 サーバ
 　google cloud
-  python
+  python 2.3 django+rest
   NOSQL
 
 
@@ -34,6 +35,10 @@ library
 
 3.魔法陣パータン
 
-
-
 サーバ課題：
+    API
+    REAlTIME
+    暗号化
+    負荷
+
+*/

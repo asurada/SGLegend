@@ -50,7 +50,7 @@ void TouchTrailLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
 		CCBlade *blade = CCBlade::create(kFileStreak, 24, 40);
-    
+        CCLOG("touch begin");
         _map[touch] = blade;
 		addChild(blade);
         
@@ -69,6 +69,7 @@ void TouchTrailLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 {
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
+        CCLOG("touch move");
         if (_map.find(touch) == _map.end()) continue;
         CCBlade *blade = _map[touch];
         CCPoint point = convertTouchToNodeSpace(touch);
@@ -82,6 +83,7 @@ void TouchTrailLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 {
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
+        CCLOG("touch end");
         if (_map.find(touch) == _map.end()) continue;
         
         CCBlade *blade = _map[touch];
