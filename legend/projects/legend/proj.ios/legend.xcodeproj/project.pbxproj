@@ -286,6 +286,7 @@
 		A21DC6DA194700C700ECFCB5 /* texture_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A21DC6D9194700C700ECFCB5 /* texture_1.png */; };
 		A27784F91947EDCB00765D69 /* Concept.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784F81947EDCB00765D69 /* Concept.strings */; };
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
+		A27784FD1947F93B00765D69 /* schedule.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FC1947F93B00765D69 /* schedule.strings */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -871,6 +872,7 @@
 		A21DC6D9194700C700ECFCB5 /* texture_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_1.png; sourceTree = "<group>"; };
 		A27784F81947EDCB00765D69 /* Concept.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Concept.strings; sourceTree = "<group>"; };
 		A27784FA1947F61600765D69 /* TechMemo.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TechMemo.strings; sourceTree = "<group>"; };
+		A27784FC1947F93B00765D69 /* schedule.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = schedule.strings; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -2200,6 +2202,7 @@
 			children = (
 				A27784F81947EDCB00765D69 /* Concept.strings */,
 				A27784FA1947F61600765D69 /* TechMemo.strings */,
+				A27784FC1947F93B00765D69 /* schedule.strings */,
 			);
 			name = Managemnet;
 			path = ../Managemnet;
@@ -2297,6 +2300,7 @@
 				9C15A9FB19277FDC00737452 /* bll_04.png in Resources */,
 				9CD6F9DD19286B5E002C7D2C /* Deco_shine_v1.png in Resources */,
 				9C15A9EE1927273F00737452 /* ball.png in Resources */,
+				A27784FD1947F93B00765D69 /* schedule.strings in Resources */,
 				A21DC6DA194700C700ECFCB5 /* texture_1.png in Resources */,
 				9CFEFB5F193F7951000D4ADE /* largeBrush.png in Resources */,
 				9C15AA001927833B00737452 /* char.png in Resources */,
