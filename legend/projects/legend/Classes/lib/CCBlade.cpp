@@ -28,6 +28,13 @@
 
 USING_NS_CC;
 
+
+#define POINT_LIMIT_MIN 3
+
+#define DISTANCE_TO_INTERPOLATE 10
+
+#define DELETE_START_LIMIT 30
+
 static inline CGPoint_x cgpSub(const CGPoint_x& v1, const CGPoint_x& v2)
 {
     return cgp(v1.x - v2.x, v1.y - v2.y);
@@ -120,7 +127,7 @@ CCBlade::~CCBlade()
     free(_texCoords);
 }
 
-#define POINT_LIMIT_MIN 3
+
 
 CCBlade::CCBlade(const char *filePath, float stroke, int pointLimit)
 : _texture(NULL)
@@ -180,7 +187,6 @@ void CCBlade::populateVertices()
     CGPointSet(&_texCoords[2*i-1], 0.75, 0.5);
 }
 
-#define DISTANCE_TO_INTERPOLATE 10
 
 void CCBlade::push(const CCPoint &point)
 {
@@ -214,7 +220,7 @@ void CCBlade::push(const CCPoint &point)
 
 void CCBlade::pop(int count)
 {
-    while (_path.size() > 0 && count > 0) {
+    while (_path.size() > 0 && count > DELETE_START_LIMIT) {
         _path.pop_back();
         count--;
     }
