@@ -44,8 +44,8 @@ TouchTrailLayer::TouchTrailLayer()
     //blade->setColor(ccc3(255,0,0));
     //blade->setOpacity(100);
     blade->setDrainInterval(1.0/40);
-    _x = 250;
-    _y = 250;
+    _x = 350;
+    _y = 350;
     point = ccp(_x, _y);
     blade->push(point);
    // _bladeSparkle->setPosition(point);
@@ -114,30 +114,87 @@ void TouchTrailLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
     }
 }
 
-float alphaX = 2.3;
-float alphaY = 2.3;
+float alphaX = 1;
+float alphaY = 1;
+//void TouchTrailLayer::autoMove(){
+//    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+//
+//    if(_x > winSize.width){
+//        alphaX = -( CCRANDOM_0_1()+ 10);
+//    }
+//    
+//    if(_x < 0){
+//        alphaX = CCRANDOM_0_1()+ 10;
+//    }
+//    
+//    if(_y >winSize.height){
+//        alphaY = -(CCRANDOM_0_1()+ 10);
+//    }
+//    
+//    if(_y < 0){
+//        alphaY = CCRANDOM_0_1()+ 10;
+//    }
+//    _x = _x + alphaX;
+//    _y = _y + alphaY;
+//    point = ccp(_x, _y);
+//    //_bladeSparkle->setPosition(point);
+//    
+//    
+//    float root = 60 - pow(_y,2);
+//    if(root > 0){
+//        _x = sqrtf(root);
+//    }else{
+//        _x = -sqrtf(root);
+//    }
+//    
+//    blade->push(point);
+//}
+
+
 void TouchTrailLayer::autoMove(){
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    
 
-    if(_x > winSize.width){
-        alphaX = -( CCRANDOM_0_1()+ 5);
-    }
-    
-    if(_x < 0){
-        alphaX = CCRANDOM_0_1()+ 5;
-    }
-    
-    if(_y >winSize.height){
-        alphaY = -(CCRANDOM_0_1()+ 5);
-    }
-    
-    if(_y < 0){
-        alphaY = CCRANDOM_0_1()+ 5;
-    }
-    _x = _x + alphaX;
+//    if(_y >winSize.height){
+//        alphaY = -(CCRANDOM_0_1()+ 10);
+//    }
+//    
+//    if(_y < 0){
+//        alphaY = CCRANDOM_0_1()+ 10;
+//    }
+    //_x = _x + alphaX;
     _y = _y + alphaY;
-    point = ccp(_x, _y);
-    //_bladeSparkle->setPosition(point);
+    
+    if(_y > 650){
+        alphaY = -5;
+    }
+    
+    if(_y < 50){
+        alphaY = 5;
+    }
+    
+    float root = pow(300,2) - pow(_y-350,2);
+    if(root > 350){
+        _x = sqrtf(root);
+    }else{
+        _x = -sqrtf(-root);
+    }
+    point = ccp(_x+350, _y);
     blade->push(point);
 }
+
+
+
+void TouchTrailLayer::insertPoint(cocos2d::CCPoint point){
+    _points.insert(_points.begin(), point);
+}
+
+void TouchTrailLayer::autoDrawPoints(){
+    if(_points.size() > 0){
+        blade->push(_points.back());
+        _points.pop_back();
+    }
+}
+
+
 

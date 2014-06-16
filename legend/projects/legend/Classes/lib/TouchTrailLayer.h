@@ -46,8 +46,14 @@ private:
     void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     void autoMove();
+    void autoDrawPoints();
 public:
     static TouchTrailLayer* create();
+    void setPointLists(std::vector<cocos2d::CCPoint>  _points);
+    void insertPoint(cocos2d::CCPoint point);
+    void startDrawPoints();
+    
+   
 };
 
 #endif
