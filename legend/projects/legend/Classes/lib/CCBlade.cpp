@@ -33,7 +33,7 @@ USING_NS_CC;
 
 #define DISTANCE_TO_INTERPOLATE 10
 
-#define DELETE_START_LIMIT 30
+#define DELETE_START_LIMIT 0
 
 static inline CGPoint_x cgpSub(const CGPoint_x& v1, const CGPoint_x& v2)
 {
