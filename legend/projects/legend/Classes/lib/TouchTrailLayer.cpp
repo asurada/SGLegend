@@ -101,16 +101,16 @@ void TouchTrailLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 
 void TouchTrailLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 {
-//    for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
-//        CCTouch *touch = (CCTouch *)*it;
-//        CCLOG("touch end");
-//        if (_map.find(touch) == _map.end()) continue;
-//        CCBlade *blade = _map[touch];
-//        blade->autoCleanup();
-//        _map.erase(touch);
+    for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
+        CCTouch *touch = (CCTouch *)*it;
+        CCLOG("touch end");
+        if (_map.find(touch) == _map.end()) continue;
+        CCBlade *blade = _map[touch];
+        blade->autoCleanup();
+        _map.erase(touch);
         _bladeSparkle->stopSystem();
 //
-//    }
+    }
     initAutoMove();
 }
 
@@ -178,6 +178,8 @@ void TouchTrailLayer::autoDrawPoints(){
     if(_points.size() > 0){
         blade->push(_points.back());
         _points.pop_back();
+    }else{
+        unschedule(schedule_selector(TouchTrailLayer::autoDrawPoints));
     }
 }
 
