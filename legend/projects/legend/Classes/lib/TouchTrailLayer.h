@@ -38,6 +38,7 @@ private:
     cocos2d::CCParticleSystemQuad *_bladeSparkle;
     CCBlade *blade;
     cocos2d::CCPoint point;
+    cocos2d::CCPoint previewsPoint;
     float _x;
     float _y;
 private:
@@ -46,13 +47,15 @@ private:
     void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     void autoMove();
-    void initAutoMove();
-    void autoDrawPoints();
+    void autoDraw();
+    void autoDrawRound(cocos2d::CCPoint center);
 public:
     static TouchTrailLayer* create();
     void setPointLists(std::vector<cocos2d::CCPoint>  _points);
     void insertPoint(cocos2d::CCPoint point);
     void startDrawPoints();
+    void initAutoMove();
+    void autoDrawPoints();
     
    
 };

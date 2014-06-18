@@ -8,12 +8,13 @@
 
 #include "OperationLayer.h"
 #include "cocos2d.h"
-#include "TouchTrailLayer.h"
+
 #include "Utility.h"
 #include "ShapeConst.h"
 
 
 
+#define SPEED_CONST 0.01f
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 //デバイスがiOSの時
@@ -73,7 +74,7 @@ bool OperationLayer::init()
     CCSize s = CCDirector::sharedDirector()->getWinSize();
     cocos2d::CCDirector * pDirector = cocos2d::CCDirector::sharedDirector();
     CCLOG("width=%f,height=%f",s.width,s.height);
-    TouchTrailLayer *layer = TouchTrailLayer::create();
+    _layer = TouchTrailLayer::create();
     if(!CCLayerColor::initWithColor(ccc4(241, 196, 15, 0),pDirector->getWinSize().width,pDirector->getWinSize().height/2))
     {
         return false;
@@ -84,11 +85,9 @@ bool OperationLayer::init()
     target = CCRenderTexture::create(s.width, s.height, kCCTexture2DPixelFormat_RGBA8888);
     target->retain();
     target->setPosition(ccp(s.width / 2, s.height / 2));
-    
     this->addChild(target);
-    
     this->initDrawNode();
-    this->addChild(layer,1);
+    this->addChild(_layer,1);
     this->createBall(HEXAGON);
     return bRet;
 }
@@ -108,11 +107,9 @@ void OperationLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
         
         if(!touch)
             break;
-        
         if(linkBalls != NULL && this->linkBalls->count()>0){
             linkBalls->removeAllObjects();
         }
-        
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
         
@@ -194,6 +191,7 @@ void OperationLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
        
         this->autoDrawLine();
     }
+    //_layer->initAutoMove();
     
     //drawNode->setRotation(3.14);
     //this->removeDrawNode();
@@ -473,6 +471,7 @@ void OperationLayer::autoDrawLine(){
     }
     if(tempPoints.size()>0){
         autoPoints.push_back(tempPoints[0]);
+       // _layer->insertPoint(tempPoints[0]);
     }
     for(int i=0; i < tempPoints.size()-1; i++)
     {
@@ -481,8 +480,12 @@ void OperationLayer::autoDrawLine(){
         CCPoint center = Utility::calCenterPoint(start,end);
         autoPoints.push_back(center);
         autoPoints.push_back(end);
+       // _layer->insertPoint(center);
+       // _layer->insertPoint(end);
+        
     }
-    schedule(schedule_selector(OperationLayer::drawCacheLine), 0.06);
+   // _layer->initAutoMove();
+  // schedule(schedule_selector(OperationLayer::drawCacheLine), SPEED_CONST);
     
 }
 

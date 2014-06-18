@@ -31,7 +31,7 @@ USING_NS_CC;
 
 #define POINT_LIMIT_MIN 3
 
-#define DISTANCE_TO_INTERPOLATE 10
+#define DISTANCE_TO_INTERPOLATE 15
 
 #define DELETE_START_LIMIT 0
 
@@ -170,7 +170,13 @@ void CCBlade::populateVertices()
     CGPoint_x previous = _vertices[0];
     while (i < _path.size()-1) {
         CGPoint_x current = _path[i];
-        populateBorderVertices(previous, current, _stroke-i*strokeFactor, &_vertices[2*i-1], &_vertices[2*i]);
+//        if(i>(_path.size()-1)/2){
+//           populateBorderVertices(previous, current, (_path.size()-i/2+3)*0.5, &_vertices[2*i-1], &_vertices[2*i]);
+//        }else{
+//           populateBorderVertices(previous, current, (i+3)*0.5, &_vertices[2*i-1], &_vertices[2*i]);
+//        }
+        populateBorderVertices(previous, current, _stroke-i*strokeFactor, &_vertices[2*i-1], &_vertices[2*i]); //太さ調整
+        //populateBorderVertices(previous, current, 14.0f, &_vertices[2*i-1], &_vertices[2*i]);
         CGPointSet(&_texCoords[2*i-1], 0.5, 1.0);
         CGPointSet(&_texCoords[2*i], 0.5, 0.0);
         
@@ -221,6 +227,7 @@ void CCBlade::push(const CCPoint &point)
 void CCBlade::pop(int count)
 {
     while (_path.size() > 0 && count > DELETE_START_LIMIT) {
+        CCLOG("pop_back: x %f, y:%f ",_path.back().x,_path.back().y);
         _path.pop_back();
         count--;
     }
@@ -278,6 +285,10 @@ void CCBlade::draw()
     
     glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, _vertices);
     glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, _texCoords);
+    // set line smoothing
+//    glLineWidth(3.0f);
+//    cocos2d::ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
+//    cocos2d::ccDrawLine(ccp(200,200), ccp(300, 300));
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 2*_path.size()-2);
     
     CC_INCREMENT_GL_DRAWS(1);

@@ -13,6 +13,7 @@
 #include "AnalysisHexagon.h"
 #include "OperationCallback.h"
 #include "AnalysisFactory.h"
+#include "TouchTrailLayer.h"
 USING_NS_CC;
 
 class OperationLayer : public cocos2d::CCLayerColor
@@ -36,7 +37,7 @@ public:
     
 private:
     OperationLayer();
-    
+    TouchTrailLayer *_layer;
     bool _isLoop;
     AnalysisShape _linkShape;
     bool beginFire = false;
