@@ -36,21 +36,21 @@ TouchTrailLayer::TouchTrailLayer()
     _bladeSparkle = CCParticleSystemQuad::create("blade_sparkle.plist");
     _bladeSparkle->stopSystem();
     this->addChild(_bladeSparkle);
-    
+//    
     blade = CCBlade::create(kFileStreak, 24, 40);
-    CCLOG("touch begin");
+    blade->setDrainInterval(1.0/40);
     addChild(blade);
+//
+////     blade->setColor(ccc3(255,0,0));
+////     blade->setOpacity(100);
+   
+////     _x = 350;
+////     _y = 350;
+////     point = ccp(_x, _y);
+//     blade->push(point);
+//    // _bladeSparkle->setPosition(point);
+//     _bladeSparkle->resetSystem();
     
-   // blade->setColor(ccc3(255,0,0));
-   // blade->setOpacity(100);
-     blade->setDrainInterval(1.0/40);
-     _x = 350;
-     _y = 350;
-     point = ccp(_x, _y);
-     blade->push(point);
-     _bladeSparkle->setPosition(point);
-     _bladeSparkle->resetSystem();
-     schedule(schedule_selector(TouchTrailLayer::autoDraw), 0.0167f);
 
     
 }
@@ -113,7 +113,8 @@ void TouchTrailLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
  //       _bladeSparkle->stopSystem();
 ////
 //    }
-    initAutoMove();
+    autoDrawAfterFinger();
+    //initAutoMove();
 }
 
 float alphaX = 5;
@@ -146,11 +147,11 @@ void TouchTrailLayer::autoDraw(){
 //    }else{
 //        _x = -sqrtf(root);
 //    }
-        blade->push(point);
+    blade->push(point);
 }
 
 
-void TouchTrailLayer::autoDrawRound(CCPoint center){
+void TouchTrailLayer::drawRound(CCPoint center){
     _y = _y + alphaY;
     if(_y > 650){
         alphaY = -5;
@@ -175,6 +176,9 @@ void TouchTrailLayer::insertPoint(cocos2d::CCPoint point){
 void TouchTrailLayer::autoDrawPoints(){
     CCLOG("_point.size :%d",(int)_points.size());
     if(_points.size() > 0){
+        CCPoint point = _points.back();
+        bool dist  = isCollide(point, ccp(0, 0), 20);
+        
         blade->push(_points.back());
         _points.pop_back();
     }else{
@@ -191,6 +195,17 @@ void TouchTrailLayer::initAutoMove(){
 }
 
 
+void TouchTrailLayer::autoDrawAfterFinger(){
+    schedule(schedule_selector(TouchTrailLayer::autoDrawPoints), 0.0167f);
+}
 
+
+bool TouchTrailLayer::isCollide(cocos2d::CCPoint object, cocos2d::CCPoint target, float distance){
+    float result = ccpLength(ccpSub(object,target));
+    if(result <= distance){
+        return true;
+    }
+    return false;
+}
 
 

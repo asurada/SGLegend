@@ -48,7 +48,9 @@ private:
     void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     void autoMove();
     void autoDraw();
-    void autoDrawRound(cocos2d::CCPoint center);
+    void autoDrawAfterFinger();
+    void drawRound(cocos2d::CCPoint center);
+    bool isCollide(cocos2d::CCPoint object, cocos2d::CCPoint target, float distance);
 public:
     static TouchTrailLayer* create();
     void setPointLists(std::vector<cocos2d::CCPoint>  _points);

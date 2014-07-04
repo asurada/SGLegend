@@ -67,7 +67,6 @@ bool GameScene::init()
         return false;
     }
     setTouchEnabled( true );
-    CCSize s = CCDirector::sharedDirector()->getWinSize();
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
     
@@ -77,11 +76,8 @@ bool GameScene::init()
     ballArray->retain();
     touchBallArray = CCArray::create();
     touchBallArray->retain();
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
     
-    // add a "close" icon to exit the progress. it's an autorelease object
+    
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
                                                           "CloseNormal.png",
                                                           "CloseSelected.png",
@@ -96,11 +92,7 @@ bool GameScene::init()
     pMenu->setPosition(CCPointZero);
     this->addChild(pMenu, 1);
     
-    
-//    TouchTrailLayer *layer = TouchTrailLayer::create();
-//    this->addChild(layer,12);
-    
-    
+
     operationlayer = OperationLayer::create();
     operationlayer->setDelegate(this);
     operationlayer->init();
@@ -170,12 +162,8 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
         if(!touch)
             break;
 
-        
-        
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
-        
-
         
         previousLocation = location;
         
@@ -323,7 +311,7 @@ int GameScene::anlysisWriteHanding(CCArray *spriteList){
 }
 
 
-
+//背景
 void GameScene::update(float dt)
 {
 	CCPoint bg1Pos = pSprite_bg_1->getPosition();

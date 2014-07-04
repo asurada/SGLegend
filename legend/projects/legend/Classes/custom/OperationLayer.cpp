@@ -188,7 +188,6 @@ void OperationLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
         if(_linkShape != noresult){
             beginFire = true;
         }
-       
         this->autoDrawLine();
     }
     //_layer->initAutoMove();
