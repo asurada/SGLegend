@@ -28,6 +28,7 @@
 #define __TouchTrailLayer__
 
 #include "cocos2d.h"
+#include "TouchTrailCallback.h"
 
 class CCBlade;
 
@@ -53,8 +54,9 @@ private:
     bool isCollide(cocos2d::CCPoint object, cocos2d::CCPoint target, float distance);
 public:
     static TouchTrailLayer* create();
+    CC_SYNTHESIZE(TouchTrailCallback*, touchTrailCallback, Delegate);
     void setPointLists(std::vector<cocos2d::CCPoint>  _points);
-    void insertPoint(cocos2d::CCPoint point);
+    void insert(cocos2d::CCPoint point);
     void startDrawPoints();
     void initAutoMove();
     void autoDrawPoints();

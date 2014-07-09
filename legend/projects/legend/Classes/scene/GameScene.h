@@ -14,7 +14,7 @@
 #include "cocos2d.h"
 #include "Box2D.h"
 
-class GameScene : public cocos2d::CCLayer,OperationCallback
+class GameScene : public cocos2d::CCLayer,OperationCallback,TouchTrailCallback
 {
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -43,6 +43,11 @@ public:
 	virtual void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 	virtual void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     virtual void ccTouchesCancelled(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    
+    virtual void touchBegin_TouchTrail(cocos2d::CCPoint point);
+    virtual void touchMove_TouchTrail(cocos2d::CCPoint point);
+    virtual void touchEnd_TouchTrail(cocos2d::CCPoint point);
+    
     virtual void beginFire(AnalysisShape shape);
     virtual void endFire(AnalysisShape shape);
 

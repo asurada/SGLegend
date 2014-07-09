@@ -36,23 +36,10 @@ TouchTrailLayer::TouchTrailLayer()
     _bladeSparkle = CCParticleSystemQuad::create("blade_sparkle.plist");
     _bladeSparkle->stopSystem();
     this->addChild(_bladeSparkle);
-//    
     blade = CCBlade::create(kFileStreak, 24, 40);
     blade->setDrainInterval(1.0/40);
     addChild(blade);
-//
-////     blade->setColor(ccc3(255,0,0));
-////     blade->setOpacity(100);
-   
-////     _x = 350;
-////     _y = 350;
-////     point = ccp(_x, _y);
-//     blade->push(point);
-//    // _bladeSparkle->setPosition(point);
-//     _bladeSparkle->resetSystem();
-    
 
-    
 }
 
 TouchTrailLayer* TouchTrailLayer::create()
@@ -64,6 +51,7 @@ TouchTrailLayer* TouchTrailLayer::create()
 
 void TouchTrailLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
+    
     _points.clear();
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
@@ -76,9 +64,12 @@ void TouchTrailLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
         //blade->setOpacity(100);
         blade->setDrainInterval(1.0/40);
         point = convertTouchToNodeSpace(touch);
-		blade->push(point);
+		if(touchTrailCallback != NULL){
+            touchTrailCallback->touchBegin_TouchTrail(point);
+        }
+        blade->push(point);
         //previewsPoint = point;
-        insertPoint(point);
+        insert(point);
         _bladeSparkle->setPosition(point);
         _bladeSparkle->resetSystem();
 	}
@@ -92,7 +83,10 @@ void TouchTrailLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
         if (_map.find(touch) == _map.end()) continue;
         CCBlade *blade = _map[touch];
         CCPoint point = convertTouchToNodeSpace(touch);
-        insertPoint(point);
+        insert(point);
+        if(touchTrailCallback != NULL){
+            touchTrailCallback->touchMove_TouchTrail(point);
+        }
         //previewsPoint = point;
         point = ccpAdd(ccpMult(point, 0.5f), ccpMult(touch->getPreviousLocation(), 0.5f));
         CCLOG("touch x:%f y:%f",point.x,point.y);
@@ -103,16 +97,19 @@ void TouchTrailLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 
 void TouchTrailLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 {
-//    for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
-//        CCTouch *touch = (CCTouch *)*it;
-//        CCLOG("touch end");
-//        if (_map.find(touch) == _map.end()) continue;
-//        CCBlade *blade = _map[touch];
-//        blade->autoCleanup();
-//        _map.erase(touch);
- //       _bladeSparkle->stopSystem();
-////
-//    }
+    for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
+        CCTouch *touch = (CCTouch *)*it;
+        CCLOG("touch end");
+        if (_map.find(touch) == _map.end()) continue;
+        CCBlade *blade = _map[touch];
+        blade->autoCleanup();
+        CCPoint point = convertTouchToNodeSpace(touch);
+        if(touchTrailCallback != NULL){
+            touchTrailCallback->touchEnd_TouchTrail(point);
+        }
+        _map.erase(touch);
+        _bladeSparkle->stopSystem();
+    }
     autoDrawAfterFinger();
     //initAutoMove();
 }
@@ -169,7 +166,7 @@ void TouchTrailLayer::drawRound(CCPoint center){
     blade->push(point);
 }
 
-void TouchTrailLayer::insertPoint(cocos2d::CCPoint point){
+void TouchTrailLayer::insert(cocos2d::CCPoint point){
     _points.insert(_points.begin(), point);
 }
 
