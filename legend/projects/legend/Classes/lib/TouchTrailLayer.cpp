@@ -51,7 +51,6 @@ TouchTrailLayer* TouchTrailLayer::create()
 
 void TouchTrailLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
-    
     _points.clear();
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
@@ -59,7 +58,6 @@ void TouchTrailLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
         CCLOG("touch begin");
         _map[touch] = blade;
 		addChild(blade);
-        
         blade->setColor(ccc3(255,0,0));
         //blade->setOpacity(100);
         blade->setDrainInterval(1.0/40);
@@ -111,7 +109,6 @@ void TouchTrailLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
         _bladeSparkle->stopSystem();
     }
     autoDrawAfterFinger();
-    //initAutoMove();
 }
 
 float alphaX = 5;
@@ -174,8 +171,6 @@ void TouchTrailLayer::autoDrawPoints(){
     CCLOG("_point.size :%d",(int)_points.size());
     if(_points.size() > 0){
         CCPoint point = _points.back();
-        bool dist  = isCollide(point, ccp(0, 0), 20);
-        
         blade->push(_points.back());
         _points.pop_back();
     }else{
@@ -183,9 +178,9 @@ void TouchTrailLayer::autoDrawPoints(){
     }
 }
 
-void TouchTrailLayer::initAutoMove(){
+void TouchTrailLayer::autoMove(){
+    CCLOG("autoMove");
     blade = CCBlade::create(kFileStreak, 24, 40);
-    CCLOG("touch begin");
     addChild(blade);
     blade->setDrainInterval(1.0/40.0);
     schedule(schedule_selector(TouchTrailLayer::autoDraw), 0.012);
