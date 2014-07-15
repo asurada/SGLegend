@@ -74,7 +74,6 @@ private:
      int anlysisWriteHanding(CCArray *linkballs);
     bool isCloseLoop(cocos2d::CCSprite * _ball);
     bool isExistedBall(cocos2d::CCSprite * _ball);
-    void autoDrawLine();
     void removeDrawNode();
     void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);

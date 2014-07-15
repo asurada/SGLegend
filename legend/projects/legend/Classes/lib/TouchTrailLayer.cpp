@@ -37,9 +37,9 @@ TouchTrailLayer::TouchTrailLayer()
     _bladeSparkle = CCParticleSystemQuad::create("blade_sparkle.plist");
     _bladeSparkle->stopSystem();
     this->addChild(_bladeSparkle);
-    blade = CCBlade::create(kFileStreak, 24, 40);
-    blade->setDrainInterval(2.0/40);
-    addChild(blade);
+//    blade = CCBlade::create(kFileStreak, 24, 25);
+//    blade->setDrainInterval(2.0/40);
+//    addChild(blade);
 
 }
 
@@ -55,11 +55,11 @@ void TouchTrailLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     _points.clear();
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
-        CCBlade *blade = CCBlade::create(kBrushStreak, 24, 40);
+        CCBlade *blade = CCBlade::create(kFileStreak, 24, 20);
         CCLOG("touch begin");
         _map[touch] = blade;
 		addChild(blade);
-        //blade->setColor(ccc3(255,0,0));
+        blade->setColor(ccc3(255,0,0));
         //blade->setOpacity(100);
         blade->setDrainInterval(1.0/40);
         point = convertTouchToNodeSpace(touch);
@@ -192,11 +192,9 @@ void TouchTrailLayer::autoDrawPoints(){
 }
 
 
-
-
 void TouchTrailLayer::autoDrawAfterFinger(){
     CCLOG("autoDrawAfterFinger");
-    blade = CCBlade::create(kFileStreak, 24, 40);
+    blade = CCBlade::create(kFileStreak, 24, 30);
     addChild(blade);
     blade->setDrainInterval(1.5/40.0);
     schedule(schedule_selector(TouchTrailLayer::autoDrawPoints), 1.0/40.0f);

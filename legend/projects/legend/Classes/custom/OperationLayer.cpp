@@ -432,35 +432,6 @@ bool OperationLayer::isCloseLoop(CCSprite * _ball){
 }
 
 
-
-void OperationLayer::autoDrawLine(){
-    std::vector<cocos2d::CCPoint> tempPoints;
-    if(linkBalls->count()>0){
-        for(int i=0; i < linkBalls->count(); i++)
-        {
-            CCSprite *sprite = (CCSprite *)linkBalls->objectAtIndex(i);
-            tempPoints.push_back(sprite->getPosition());
-        }
-    }
-    
-    if(tempPoints.size()>0){
-        _touchTrailLayer->insert(tempPoints[0]);
-    }
-    
-    for(int i=0; i < tempPoints.size()-1; i++)
-    {
-        CCPoint start = tempPoints[i];
-        CCPoint end = tempPoints[i+1];
-        CCPoint center = Utility::calCenterPoint(start,end);
-        _touchTrailLayer->insert(center);
-        _touchTrailLayer->insert(end);
-    }
-   // _layer->initAutoMove();
-   // schedule(schedule_selector(OperationLayer::drawCacheLine), SPEED_CONST);
-    
-}
-
-
 CCSprite* OperationLayer::isHit(cocos2d::CCPoint point){
     CCObject *obj=NULL;
     CCARRAY_FOREACH(balls,obj){
@@ -535,7 +506,7 @@ void OperationLayer::draw(cocos2d::CCPoint point){
         float cocosAngle = CC_RADIANS_TO_DEGREES(angleRadians);
         brushSprite->setScaleX(dist/320);
         brushSprite->setRotation(cocosAngle);
-        brushSprite->runAction(CCTintTo::create(2, 0, 255, 0));
+        brushSprite->runAction(CCTintTo::create(1, 255, 0, 0));
         autoPoints.pop_back();
     }
     
