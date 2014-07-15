@@ -25,9 +25,6 @@
 USING_NS_CC;
 
 
-
-
-
 enum Position{
     ENUM_PST_1=1,
     ENUM_PST_2=2,
@@ -59,6 +56,9 @@ OperationLayer::OperationLayer()
     brush->retain();
 }
 
+OperationLayer::~OperationLayer(){
+    
+}
 
 OperationLayer* OperationLayer::create()
 {
@@ -74,7 +74,8 @@ bool OperationLayer::init()
     CCSize s = CCDirector::sharedDirector()->getWinSize();
     cocos2d::CCDirector * pDirector = cocos2d::CCDirector::sharedDirector();
     CCLOG("width=%f,height=%f",s.width,s.height);
-    _layer = TouchTrailLayer::create();
+    _touchTrailLayer = TouchTrailLayer::create();
+    _touchTrailLayer->setDelegate(this);
     if(!CCLayerColor::initWithColor(ccc4(241, 196, 15, 0),pDirector->getWinSize().width,pDirector->getWinSize().height/2))
     {
         return false;
@@ -86,8 +87,7 @@ bool OperationLayer::init()
     target->retain();
     target->setPosition(ccp(s.width / 2, s.height / 2));
     this->addChild(target);
-    this->initDrawNode();
-    this->addChild(_layer,1);
+    this->addChild(_touchTrailLayer,1);
     this->createBall(HEXAGON);
     return bRet;
 }
@@ -99,12 +99,9 @@ void OperationLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 
     CCSetIterator it;
     CCTouch* touch;
-    
-
     for( it = pTouches->begin(); it != pTouches->end(); it++)
     {
         touch = (CCTouch*)(*it);
-        
         if(!touch)
             break;
         if(linkBalls != NULL && this->linkBalls->count()>0){
@@ -112,62 +109,20 @@ void OperationLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
         }
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
-        
-        CCObject *obj=NULL;
-        CCARRAY_FOREACH(balls,obj){
-            CCSprite * spirit = (CCSprite *)obj;
-            if(spirit->boundingBox().containsPoint(location)){
-                linkBalls->addObject(spirit);
-                if(startSprite == NULL){
-                    startSprite = spirit;
-                }
-                
-            }
-        }
     }
-
-    
 }
 
 void OperationLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 {
-
-    
 	CCSetIterator it;
 	for( it = pTouches->begin(); it != pTouches->end(); it++)
     {
         CCTouch* touch = (CCTouch*)(*it);
         if(!touch)
             break;
-        
+
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
-        CCObject *ball = NULL;
-        
-
-        CCARRAY_FOREACH(balls,ball){
-            CCSprite * spirit = static_cast<CCSprite *>(ball);
-            if(spirit!= NULL && spirit->boundingBox().containsPoint(location)){
-                
-               // this->fire();
-                
-                if(this->isExistedBall(spirit)){
-                    startSprite = spirit;
-                }else{
-                    linkBalls->addObject(spirit);
-                    if(startSprite == NULL){
-                        startSprite = spirit;
-                    }else{
-                        endSprite = spirit;
-                        this->drawLine();
-                        startSprite = spirit;
-                        endSprite = NULL;
-                    }
-                }
-                _isLoop = this->isCloseLoop(spirit);
-                
-            }
-        }
     }
 }
 
@@ -188,12 +143,8 @@ void OperationLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
         if(_linkShape != noresult){
             beginFire = true;
         }
-        this->autoDrawLine();
+        //this->autoDrawLine();
     }
-    //_layer->initAutoMove();
-    
-    //drawNode->setRotation(3.14);
-    //this->removeDrawNode();
 }
 
 
@@ -242,7 +193,6 @@ void OperationLayer::initBall(){
         pSprite_2->setPosition(ballPos_2);
         this->addChild(pSprite_2);
         
-        
         pSprite_3 = CCSprite::create("bll_03.png");
         pSprite_3->setTag(ENUM_PST_3);
         pSprite_3->setPosition(ballPos_3);
@@ -267,7 +217,7 @@ void OperationLayer::initBall(){
         pSprite_5->setTag(ENUM_PST_5);
         pSprite_5->setPosition(ballPos_5);
         this->addChild(pSprite_5);
-         balls->addObject(pSprite_5);
+        balls->addObject(pSprite_5);
     }
     
     if(_shape >= HEXAGON){
@@ -300,6 +250,10 @@ void OperationLayer::setBallInTriangle(){
     ballPos_1 = ccp(x1, y1);
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
+    axisPoints.clear();
+    axisPoints.push_back(ballPos_1);
+    axisPoints.push_back(ballPos_2);
+    axisPoints.push_back(ballPos_3);
     
 }
 
@@ -327,7 +281,11 @@ void OperationLayer::setBallInRect(){
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
     ballPos_4 = ccp(x4, y4);
-
+    axisPoints.clear();
+    axisPoints.push_back(ballPos_1);
+    axisPoints.push_back(ballPos_2);
+    axisPoints.push_back(ballPos_3);
+    axisPoints.push_back(ballPos_4);
 }
 
 
@@ -351,7 +309,12 @@ void OperationLayer::setBallInRhombus(){
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
     ballPos_4 = ccp(x4, y4);
-    
+    axisPoints.clear();
+    axisPoints.push_back(ballPos_1);
+    axisPoints.push_back(ballPos_2);
+    axisPoints.push_back(ballPos_3);
+    axisPoints.push_back(ballPos_4);
+
 }
 
 
@@ -386,7 +349,12 @@ void OperationLayer::setBallInPentagon(){
     ballPos_3 = ccp(x3, y3);
     ballPos_4 = ccp(x4, y4);
     ballPos_5 = ccp(x5, y5);
-    
+    axisPoints.clear();
+    axisPoints.push_back(ballPos_1);
+    axisPoints.push_back(ballPos_2);
+    axisPoints.push_back(ballPos_3);
+    axisPoints.push_back(ballPos_4);
+    axisPoints.push_back(ballPos_5);
 }
 
 
@@ -420,13 +388,19 @@ void OperationLayer::setBallInHexagon(){
     
     x6 = centerX -(x2 - centerX);
     y6 = y2;
-    
+    axisPoints.clear();
     ballPos_1 = ccp(x1, y1);
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
     ballPos_4 = ccp(x4, y4);
     ballPos_5 = ccp(x5, y5);
     ballPos_6 = ccp(x6, y6);
+    axisPoints.push_back(ballPos_1);
+    axisPoints.push_back(ballPos_2);
+    axisPoints.push_back(ballPos_3);
+    axisPoints.push_back(ballPos_4);
+    axisPoints.push_back(ballPos_5);
+    axisPoints.push_back(ballPos_6);
 
 }
 
@@ -468,102 +442,110 @@ void OperationLayer::autoDrawLine(){
             tempPoints.push_back(sprite->getPosition());
         }
     }
+    
     if(tempPoints.size()>0){
-        autoPoints.push_back(tempPoints[0]);
-       // _layer->insertPoint(tempPoints[0]);
+        _touchTrailLayer->insert(tempPoints[0]);
     }
+    
     for(int i=0; i < tempPoints.size()-1; i++)
     {
         CCPoint start = tempPoints[i];
         CCPoint end = tempPoints[i+1];
         CCPoint center = Utility::calCenterPoint(start,end);
-        autoPoints.push_back(center);
-        autoPoints.push_back(end);
-       // _layer->insertPoint(center);
-       // _layer->insertPoint(end);
-        
+        _touchTrailLayer->insert(center);
+        _touchTrailLayer->insert(end);
     }
    // _layer->initAutoMove();
-  // schedule(schedule_selector(OperationLayer::drawCacheLine), SPEED_CONST);
+   // schedule(schedule_selector(OperationLayer::drawCacheLine), SPEED_CONST);
     
 }
 
-void OperationLayer::initDrawNode(){
-    if(drawNode == NULL || drawNode->getParent() == NULL){
-        drawNode = CCDrawNode::create();
-        drawNode->retain();
-        drawNode->setPosition(ccp(0, 0));
-        drawNode->setTag(1);
-        this->addChild(drawNode,2);
-    }
-  
-}
 
-void OperationLayer::removeDrawNode(){
-    startSprite = NULL;
-    endSprite = NULL;
-    //drawNode->removeFromParentAndCleanup(true);
-}
-
-void OperationLayer::drawLine(){
-    
-    this->initDrawNode();
-    drawNode->drawSegment(startSprite->getPosition(),                    // 起点
-                          endSprite->getPosition(),                      // 終点
-                          3,                            // 太さ
-                          ccc4FFromccc3B(ccRED)         // 色
-                          );
-}
-
-
-void OperationLayer::drawCacheLine(){
-    
-    if(autoPoints.size() >1){
-        CCPoint start = autoPoints[0];
-        CCPoint end = autoPoints[1];
-        
-        target->begin();
-        float distance = ccpDistance(start, end);
-            
-        for (int i = 0; i < distance; i++)
-        {
-            float difx = end.x - start.x;
-            float dify = end.y - start.y;
-            float delta = (float)i / distance;
-            brush->setPosition(
-                                ccp(start.x + (difx * delta), start.y + (dify * delta)));
-                
-                
-                
-                //brush->setOpacity(0.5);
-            brush->visit();
+CCSprite* OperationLayer::isHit(cocos2d::CCPoint point){
+    CCObject *obj=NULL;
+    CCARRAY_FOREACH(balls,obj){
+        CCSprite *spirit = (CCSprite *)obj;
+        if(spirit->boundingBox().containsPoint(point)){
+            return spirit;
         }
-        target->end();
-//        drawNode->drawSegment(start,                    // 起点
-//                              end,                      // 終点
-//                              10,                            // 太さ
-//                              ccc4FFromccc3B(ccYELLOW)          // 色
-//                              );
-        autoPoints.erase(autoPoints.begin());
-    }else{
-        if(beginFire){
-           if(operationCallBack != NULL){
-               brush->cocos2d::CCNode::removeAllChildrenWithCleanup(true);
-               operationCallBack->beginFire(_linkShape);
-           
-           }
-        }else{
-           // clearMagicSquare();
-        }
-        beginFire = false;
     }
+    return NULL;
+}
+
+
+
+
+
+
+
+
+
+
+//==========================TouchTrailCallback====================================
+
+
+void OperationLayer::touchBegin_TouchTrail(cocos2d::CCPoint point){
+    CCLOG("touchBegin_TouchTrail");
+    CCSprite *spirit =isHit(point);
+    if(spirit){
+        _touchTrailLayer->insert(spirit->getPosition());
+    }
+    
+    
+}
+void OperationLayer::touchMove_TouchTrail(cocos2d::CCPoint point){
+    CCLOG("touchMove_TouchTrail");
+    CCSprite *spirit =isHit(point);
+    if(spirit){
+        _touchTrailLayer->insert(spirit->getPosition());
+    }
+    
+}
+void OperationLayer::touchEnd_TouchTrail(cocos2d::CCPoint point){
+     CCLOG("touchEnd_TouchTrail");
+     _touchTrailLayer->autoDrawAfterFinger();
+    
+}
+
+
+void OperationLayer::onPop(cocos2d::CCPoint point){
+   draw(point);
+}
+
+void OperationLayer::onPopLast(cocos2d::CCPoint point){
+    draw(point);
+    autoPoints.clear();
+    _touchTrailLayer->bladeCleanup();
+}
+
+void OperationLayer::draw(cocos2d::CCPoint point){
+    autoPoints.insert(autoPoints.begin(),point);
+    if(autoPoints.size() < 2){
+        brushSprite = CCSprite::create("brush.png");
+        brushSprite->setAnchorPoint(CCPointMake(0,0.5));//image height/2
+        brushSprite->setPosition(autoPoints[0]);
+        brushSprite->setScaleX(1/320);
+        this->addChild(brushSprite);
+        return;
+    }else if(autoPoints.size() == 2){
+        CCPoint diffPoint = ccpSub(autoPoints[0], autoPoints[1]);
+        float dist = ccpDistance(autoPoints[0], autoPoints[1]);
+        float angleRadians = atan2f(diffPoint.y, diffPoint.x);
+        angleRadians = -angleRadians;
+        float cocosAngle = CC_RADIANS_TO_DEGREES(angleRadians);
+        brushSprite->setScaleX(dist/320);
+        brushSprite->setRotation(cocosAngle);
+        brushSprite->runAction(CCTintTo::create(2, 0, 255, 0));
+        autoPoints.pop_back();
+    }
+    
+    brushSprite = CCSprite::create("brush.png");
+    brushSprite->setAnchorPoint(CCPointMake(0,0.5));//image height/2
+    brushSprite->setPosition(autoPoints[0]);
+    brushSprite->setScaleX(1/320);
+    this->addChild(brushSprite);
 
 }
 
 
-void OperationLayer::clearMagicSquare(){
-    startSprite = NULL;
-    endSprite = NULL;
-    drawNode->removeFromParentAndCleanup(true);
-}
 

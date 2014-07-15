@@ -227,9 +227,6 @@ void GameScene::attack(){
 
 void GameScene::explode(){
     bullet->setVisible(false);
-    operationlayer->clearMagicSquare();
-    
-    
 }
 
 void GameScene::startFireAnm(CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count){
@@ -449,15 +446,7 @@ void GameScene::initPhysics()
     groundBody->CreateFixture(&groundBox,0);
 }
 
-void GameScene::touchBegin_TouchTrail(cocos2d::CCPoint point){
-    
-}
-void GameScene::touchMove_TouchTrail(cocos2d::CCPoint point){
-    
-}
-void GameScene::touchEnd_TouchTrail(cocos2d::CCPoint point){
-    
-}
+
 
 
 void GameScene::menuCloseCallback(CCObject* pSender)

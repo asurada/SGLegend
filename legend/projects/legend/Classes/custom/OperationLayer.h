@@ -14,9 +14,10 @@
 #include "OperationCallback.h"
 #include "AnalysisFactory.h"
 #include "TouchTrailLayer.h"
+#include "TouchTrailCallback.h"
 USING_NS_CC;
 
-class OperationLayer : public cocos2d::CCLayerColor
+class OperationLayer : public cocos2d::CCLayerColor,TouchTrailCallback
 {
 public:
     int _shape;
@@ -29,26 +30,28 @@ public:
     void setBallInRhombus();
     void setBallInPentagon();
     void setBallInHexagon();
-    void clearMagicSquare();
+    TouchTrailLayer *_touchTrailLayer;
     CC_SYNTHESIZE(OperationCallback*, operationCallBack, Delegate);
     std::vector<cocos2d::CCPoint> autoPoints;
+    std::vector<cocos2d::CCPoint> axisPoints;
+    void touchBegin_TouchTrail(cocos2d::CCPoint point);
+    void touchMove_TouchTrail(cocos2d::CCPoint point);
+    void touchEnd_TouchTrail(cocos2d::CCPoint point);
+    void onPop(cocos2d::CCPoint point);
+    void onPopLast(cocos2d::CCPoint point);
+    cocos2d::CCSprite* brushSprite;
+    void draw(cocos2d::CCPoint point);
 
- 
     
 private:
     OperationLayer();
-    TouchTrailLayer *_layer;
+    ~OperationLayer();
     bool _isLoop;
     AnalysisShape _linkShape;
     bool beginFire = false;
     AnalysisFactory* factory;
     AnalysisHexagon* analysisLogic;
-    
-//  OperationCallback* operationCallBack;
-    
     cocos2d::CCDrawNode* drawNode;
-    cocos2d::CCSprite *startSprite;
-    cocos2d::CCSprite *endSprite;
     cocos2d::CCSprite* pSprite_1;
     cocos2d::CCSprite* pSprite_2;
     cocos2d::CCSprite* pSprite_3;
@@ -66,23 +69,16 @@ private:
     cocos2d::CCSprite *brush;
     cocos2d::CCRenderTexture *target;
 
+    CCSprite* isHit(cocos2d::CCPoint point);
     void initBall();
-    int anlysisWriteHanding(CCArray *linkballs);
+     int anlysisWriteHanding(CCArray *linkballs);
     bool isCloseLoop(cocos2d::CCSprite * _ball);
     bool isExistedBall(cocos2d::CCSprite * _ball);
     void autoDrawLine();
     void removeDrawNode();
-    void drawCacheLine();
-    void initDrawNode();
-    void drawLine();
     void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
-
-
-
-   // void ccTouchesCancelled(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
-    
 };
 
 #endif

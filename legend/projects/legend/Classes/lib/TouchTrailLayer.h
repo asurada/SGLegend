@@ -34,7 +34,7 @@ class CCBlade;
 
 class TouchTrailLayer : public cocos2d::CCLayer {
 private:
-    std::map< cocos2d::CCTouch *, CCBlade * >  _map;
+    std::map< cocos2d::CCTouch *, CCBlade *>  _map;
     std::vector<cocos2d::CCPoint>  _points;
     cocos2d::CCParticleSystemQuad *_bladeSparkle;
     CCBlade *blade;
@@ -53,10 +53,10 @@ public:
     CC_SYNTHESIZE(TouchTrailCallback*, touchTrailCallback, Delegate);
     void setPointLists(std::vector<cocos2d::CCPoint>  _points);
     void insert(cocos2d::CCPoint point);
-    void autoMove();
     void autoDraw();
     void autoDrawPoints();
     void autoDrawAfterFinger();
+    void bladeCleanup();
     void drawRound(cocos2d::CCPoint center);
     
    
