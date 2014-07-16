@@ -30,12 +30,12 @@ AnalysisShape AnalysisHexagon::recogize(CCArray *linkballs){
             preTag = tag;
         }else{
             //6角形判断
-            if(linkballs->count() == 7){
+            if(linkballs->count() == 6){
                 if(abs(preTag-tag)==1 || abs(preTag-tag)==5){
                     sameInterval++;
                 }
                 preTag = tag;
-            }else if(linkballs->count() == 6){//星形
+            }else if(linkballs->count() == 5){//星形
                 if(abs(preTag-tag) < 2){
                     return noresult;
                 }
@@ -45,7 +45,7 @@ AnalysisShape AnalysisHexagon::recogize(CCArray *linkballs){
                     sameInterval++;
                 }
                 preTag = tag;
-            }else if(linkballs->count() == 5){//四角
+            }else if(linkballs->count() == 4){//四角
                 if(tag == 1 || tag == 4)
                     return noresult;
                 if(abs(preTag-tag) == 3){
@@ -54,7 +54,7 @@ AnalysisShape AnalysisHexagon::recogize(CCArray *linkballs){
                     return rect;
                 }
                 preTag = tag;
-            }else if(linkballs->count() == 4){//三角
+            }else if(linkballs->count() == 3){//三角
                 if(tag == 1 || tag == 3 || tag == 5){
                     triangleCount++;
                 }
@@ -72,11 +72,11 @@ AnalysisShape AnalysisHexagon::recogize(CCArray *linkballs){
         }
     }
 
-    if(sameInterval == 6 && linkballs->count() == 7){
+    if(sameInterval == 6 && linkballs->count() == 6){
         return hexagon;
     }
     
-    if(starCount == 2 && linkballs->count() == 6){
+    if(starCount == 2 && linkballs->count() == 5){
         return star;
     }
     

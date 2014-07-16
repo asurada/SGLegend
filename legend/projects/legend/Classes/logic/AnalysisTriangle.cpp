@@ -13,7 +13,7 @@
 AnalysisShape AnalysisTriangle::recogize(CCArray *linkballs){
 
     AnalysisShape result = noresult;
-    if(linkballs->count() == 4){
+    if(linkballs->count() == 3){
         return triangle;
     }
     return result;

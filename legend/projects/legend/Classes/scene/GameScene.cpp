@@ -77,7 +77,6 @@ bool GameScene::init()
     touchBallArray = CCArray::create();
     touchBallArray->retain();
     
-    
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
                                                           "CloseNormal.png",
                                                           "CloseSelected.png",
@@ -212,21 +211,19 @@ void GameScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 
 void GameScene::attack(){
     
-
-//    CCRotateBy *rotate = CCRotateBy::create(0.8f, 360.0f);
-//    drawNode->runAction(CCRepeatForever::create(rotate));
     bullet->setPosition(ccp(320,284));
     bullet->setVisible(true);
     bullet->stopAllActions();
     CCLOG("position = (%f,%f)",pSprite_char->getPosition().x,pSprite_char->getPosition().y);
     CCLOG("position = (%f,%f)",pSprite_monster->getPosition().x,pSprite_monster->getPosition().y);
     bullet->runAction(CCSequence::create(CCMoveTo::create(0.6, ccp(320,pSprite_monster->getPosition().y)), CCCallFuncN::create(this, callfuncN_selector(GameScene::explode)), NULL  // DO NOT FORGET TO TERMINATE WITH NULL
-                                            ));
+                                        ));
 }
 
 
 void GameScene::explode(){
     bullet->setVisible(false);
+    operationlayer->removeAllMagicSquare();
 }
 
 void GameScene::startFireAnm(CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count){
@@ -258,54 +255,6 @@ void GameScene::startFireAnm(CCPoint &pos,const char * image,const char * plist,
 }
 
 
-
-
-int GameScene::anlysisWriteHanding(CCArray *spriteList){
-    int preTag = -1;
-    int result = -1;
-    int starCount = 0;
-    for(int i=0; i < spriteList->count(); i++)
-    {
-        CCSprite *sprite = (CCSprite *)spriteList->objectAtIndex(i);
-        int tag = sprite->getTag();
-        CCLOG("tag = %d", tag);
-        tag = tag%3;
-        if(preTag == -1){
-            preTag = tag;
-        }else{
-            //星形判断
-            if(spriteList->count() == 6){
-                result = SHARP_PENTAGON;
-                if(preTag == tag ){
-                    starCount++;
-                    preTag = tag;
-                }else{
-                    preTag = tag;
-                }
-            }
-            if(spriteList->count() == 5){
-                if(preTag == tag){
-                    return 0;
-                }else{
-                    preTag = tag;
-                }
-            }
-            if(spriteList->count() == 4){
-                if(preTag == tag){
-                    return 0;
-                }else{
-                    preTag = tag;
-                }
-            }
-        }
-    }
-    
-    if(starCount == 2 && spriteList->count() == 6){
-        return SHARP_STAR;
-    }
-    return result;
-
-}
 
 
 //背景
@@ -367,7 +316,6 @@ void GameScene::beginFire(AnalysisShape shape){
             bullet->setVisible(false);
             this->addChild(bullet,3);
             this->attack();
-            
             // this->startFireAnm(monster,"fire.png","fire.plist","fire_",20);
             break;
         default:
@@ -386,7 +334,6 @@ void GameScene::cleanupSprite(CCSprite* inSprite)
 {
     bullet->setPosition(center);
     inSprite->removeFromParentAndCleanup(true);
-    //this->removeDrawNode();
 }
 
 

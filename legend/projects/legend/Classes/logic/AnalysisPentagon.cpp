@@ -19,7 +19,7 @@ AnalysisShape AnalysisPentagon::recogize(CCArray *linkballs){
     AnalysisShape result = noresult;
     
     
-    if(linkballs->count() != 6){
+    if(linkballs->count() != 5){
         //        if(logic! = NULL ){
         //            return logic->recogize(linkballs);
         //        }
@@ -36,7 +36,7 @@ AnalysisShape AnalysisPentagon::recogize(CCArray *linkballs){
             preTag = tag;
         }else{
             //5角形判断
-            if(linkballs->count() == 6){
+            if(linkballs->count() == 5){
                 if(abs(preTag-tag)== 1 || abs(preTag-tag)==4){
                     sameInterval++;
                 }
@@ -45,7 +45,7 @@ AnalysisShape AnalysisPentagon::recogize(CCArray *linkballs){
         }
     }
     
-    if(sameInterval == 5 && linkballs->count() == 6){
+    if(sameInterval == 5 && linkballs->count() == 5){
         return pentagon;
     }
     

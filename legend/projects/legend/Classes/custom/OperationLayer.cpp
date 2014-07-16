@@ -8,7 +8,6 @@
 
 #include "OperationLayer.h"
 #include "cocos2d.h"
-
 #include "Utility.h"
 #include "ShapeConst.h"
 
@@ -46,12 +45,14 @@ enum DrawShape{
 OperationLayer::OperationLayer()
 {
     
-    balls = CCArray::create();
-    balls->retain();
-    linkBalls = CCArray::create();
-    linkBalls->retain();
+    spritesContainer = CCArray::create();
+    spritesContainer->retain();
+    magicSprites = CCArray::create();
+    magicSprites->retain();
     factory = new AnalysisFactory();
     analysisLogic = new AnalysisHexagon();
+    magicMarks = new CCArray();
+    magicMarks->retain();
     brush = CCSprite::create("largeBrush.png");
     brush->retain();
 }
@@ -83,10 +84,6 @@ bool OperationLayer::init()
     setTouchEnabled(true);
     bRet = true;
     
-    target = CCRenderTexture::create(s.width, s.height, kCCTexture2DPixelFormat_RGBA8888);
-    target->retain();
-    target->setPosition(ccp(s.width / 2, s.height / 2));
-    this->addChild(target);
     this->addChild(_touchTrailLayer,1);
     this->createBall(HEXAGON);
     return bRet;
@@ -104,8 +101,8 @@ void OperationLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
         touch = (CCTouch*)(*it);
         if(!touch)
             break;
-        if(linkBalls != NULL && this->linkBalls->count()>0){
-            linkBalls->removeAllObjects();
+        if(magicSprites != NULL && this->magicSprites->count()>0){
+            magicSprites->removeAllObjects();
         }
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
@@ -123,6 +120,7 @@ void OperationLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
+       
     }
 }
 
@@ -137,13 +135,7 @@ void OperationLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
         
         if(!touch)
             break;
-        
-        _linkShape = factory->analysis(_shape,linkBalls);
-        CCLOG("shape = %d",_linkShape);
-        if(_linkShape != noresult){
-            beginFire = true;
-        }
-        //this->autoDrawLine();
+
     }
 }
 
@@ -181,7 +173,7 @@ void OperationLayer::createBall(int shape){
 
 void OperationLayer::initBall(){
     
-    balls->removeAllObjects();
+    spritesContainer->removeAllObjects();
     if(_shape >= TRIANGLE){
         pSprite_1 = CCSprite::create("bll_01.png");
         pSprite_1->setPosition(ballPos_1);
@@ -198,9 +190,9 @@ void OperationLayer::initBall(){
         pSprite_3->setPosition(ballPos_3);
         this->addChild(pSprite_3);
         
-        balls->addObject(pSprite_1);
-        balls->addObject(pSprite_2);
-        balls->addObject(pSprite_3);
+        spritesContainer->addObject(pSprite_1);
+        spritesContainer->addObject(pSprite_2);
+        spritesContainer->addObject(pSprite_3);
     }
     
     if(_shape >= RECT || _shape >= RHOMBUS){
@@ -209,7 +201,7 @@ void OperationLayer::initBall(){
         pSprite_4->setTag(ENUM_PST_4);
         pSprite_4->setPosition(ballPos_4);
         this->addChild(pSprite_4);
-        balls->addObject(pSprite_4);
+        spritesContainer->addObject(pSprite_4);
     }
     
     if(_shape >= PENTAGON){
@@ -217,7 +209,7 @@ void OperationLayer::initBall(){
         pSprite_5->setTag(ENUM_PST_5);
         pSprite_5->setPosition(ballPos_5);
         this->addChild(pSprite_5);
-        balls->addObject(pSprite_5);
+        spritesContainer->addObject(pSprite_5);
     }
     
     if(_shape >= HEXAGON){
@@ -225,9 +217,9 @@ void OperationLayer::initBall(){
         pSprite_6->setTag(ENUM_PST_6);
         pSprite_6->setPosition(ballPos_6);
         this->addChild(pSprite_6);
-        balls->addObject(pSprite_6);
+        spritesContainer->addObject(pSprite_6);
     }
-    balls->retain();
+    spritesContainer->retain();
         
 }
 
@@ -250,11 +242,6 @@ void OperationLayer::setBallInTriangle(){
     ballPos_1 = ccp(x1, y1);
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
-    axisPoints.clear();
-    axisPoints.push_back(ballPos_1);
-    axisPoints.push_back(ballPos_2);
-    axisPoints.push_back(ballPos_3);
-    
 }
 
 
@@ -268,7 +255,7 @@ void OperationLayer::setBallInRect(){
     float x1,x2,x3,x4,y1,y2,y3,y4;
     
     
-    x1  = width  * 3.0 / 4.0;
+    x1  = width * 3.0 / 4.0;
     x2 = x1;
     y1 = height * 3.0 / 4.0;
     y4 = y1;
@@ -281,11 +268,7 @@ void OperationLayer::setBallInRect(){
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
     ballPos_4 = ccp(x4, y4);
-    axisPoints.clear();
-    axisPoints.push_back(ballPos_1);
-    axisPoints.push_back(ballPos_2);
-    axisPoints.push_back(ballPos_3);
-    axisPoints.push_back(ballPos_4);
+
 }
 
 
@@ -295,7 +278,6 @@ void OperationLayer::setBallInRhombus(){
     float width =visibleSize.width;
     float height =visibleSize.height;
     float x1,x2,x3,x4,y1,y2,y3,y4;
-    
     x1 = width  * 1.0 / 2.0;
     x3 = x1;
     y1 = height * 4.0 / 5.0;
@@ -304,16 +286,11 @@ void OperationLayer::setBallInRhombus(){
     y4 = y2;
     x2 = width  * 4.0 / 5.0;
     x4 = width  * 1.0 / 5.0;
-   
     ballPos_1 = ccp(x1, y1);
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
     ballPos_4 = ccp(x4, y4);
-    axisPoints.clear();
-    axisPoints.push_back(ballPos_1);
-    axisPoints.push_back(ballPos_2);
-    axisPoints.push_back(ballPos_3);
-    axisPoints.push_back(ballPos_4);
+
 
 }
 
@@ -349,12 +326,7 @@ void OperationLayer::setBallInPentagon(){
     ballPos_3 = ccp(x3, y3);
     ballPos_4 = ccp(x4, y4);
     ballPos_5 = ccp(x5, y5);
-    axisPoints.clear();
-    axisPoints.push_back(ballPos_1);
-    axisPoints.push_back(ballPos_2);
-    axisPoints.push_back(ballPos_3);
-    axisPoints.push_back(ballPos_4);
-    axisPoints.push_back(ballPos_5);
+
 }
 
 
@@ -388,42 +360,24 @@ void OperationLayer::setBallInHexagon(){
     
     x6 = centerX -(x2 - centerX);
     y6 = y2;
-    axisPoints.clear();
     ballPos_1 = ccp(x1, y1);
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
     ballPos_4 = ccp(x4, y4);
     ballPos_5 = ccp(x5, y5);
     ballPos_6 = ccp(x6, y6);
-    axisPoints.push_back(ballPos_1);
-    axisPoints.push_back(ballPos_2);
-    axisPoints.push_back(ballPos_3);
-    axisPoints.push_back(ballPos_4);
-    axisPoints.push_back(ballPos_5);
-    axisPoints.push_back(ballPos_6);
+
 
 }
 
 
-bool OperationLayer::isExistedBall(cocos2d::CCSprite * _ball){
-    if(linkBalls->count() == 0){
-        return false;
-    }
-    CCSprite *lastBall = (CCSprite *)linkBalls->objectAtIndex(linkBalls->count()-1);
-    if(lastBall == _ball){
-        return true;
-    }else{
-        return false;
-    }
-    
-}
 
 bool OperationLayer::isCloseLoop(CCSprite * _ball){
-    if(linkBalls->count() < 3){
+    if(magicSprites->count() < 3){
         return false;
     }
-    for (int index =0; index<linkBalls->count()-1; index++) {
-        CCSprite * spirit = (CCSprite *)linkBalls->objectAtIndex(index);
+    for (int index =0; index<magicSprites->count()-1; index++) {
+        CCSprite * spirit = (CCSprite *)magicSprites->objectAtIndex(index);
         if(spirit == _ball){
             return true;
         }
@@ -434,7 +388,7 @@ bool OperationLayer::isCloseLoop(CCSprite * _ball){
 
 CCSprite* OperationLayer::isHit(cocos2d::CCPoint point){
     CCObject *obj=NULL;
-    CCARRAY_FOREACH(balls,obj){
+    CCARRAY_FOREACH(spritesContainer,obj){
         CCSprite *spirit = (CCSprite *)obj;
         if(spirit->boundingBox().containsPoint(point)){
             return spirit;
@@ -443,79 +397,127 @@ CCSprite* OperationLayer::isHit(cocos2d::CCPoint point){
     return NULL;
 }
 
-
-
-
-
-
-
-
-
-
 //==========================TouchTrailCallback====================================
-
-
 void OperationLayer::touchBegin_TouchTrail(cocos2d::CCPoint point){
     CCLOG("touchBegin_TouchTrail");
+    magicSprites->removeAllObjects();
     CCSprite *spirit =isHit(point);
     if(spirit){
-        _touchTrailLayer->insert(spirit->getPosition());
+        if(_touchTrailLayer->insert(spirit->getPosition())){
+            magicSprites->addObject(spirit);
+            brushSprite = addMark(spirit->getPosition());
+            //animate(spirit);
+        }
     }
-    
-    
 }
+
 void OperationLayer::touchMove_TouchTrail(cocos2d::CCPoint point){
     CCLOG("touchMove_TouchTrail");
     CCSprite *spirit =isHit(point);
+    brushSprite = adjustMark(brushSprite, brushSprite->getPosition(), point);
     if(spirit){
-        _touchTrailLayer->insert(spirit->getPosition());
+        if(_touchTrailLayer->insert(spirit->getPosition())){
+            magicSprites->addObject(spirit);
+            magicMarks->addObject(brushSprite);
+            brushSprite = addMark(spirit->getPosition());
+        }
     }
-    
-}
-void OperationLayer::touchEnd_TouchTrail(cocos2d::CCPoint point){
-     CCLOG("touchEnd_TouchTrail");
-     _touchTrailLayer->autoDrawAfterFinger();
-    
 }
 
+void OperationLayer::animate(CCSprite *spirit){
+    CCActionInterval* scaleAction = CCScaleBy::create(.5, 2);
+    //縮小のアクション
+    CCActionInterval* scaleAction2 = CCScaleBy::create(.5, .5);
+    //拡大->縮小の順番にアクションを並べる
+    CCSequence* sequence = CCSequence::create(scaleAction, scaleAction2, NULL);
+    //3回リピート
+    CCRepeat* repeat = CCRepeat::create(sequence, -1);
+    spirit->runAction(repeat);
+}
+
+
+
+void OperationLayer::touchEnd_TouchTrail(cocos2d::CCPoint point){
+    CCLOG("touchEnd_TouchTrail");
+    removeAllMagicSquare();
+    _touchTrailLayer->autoDrawAfterFinger();
+    
+    
+}
 
 void OperationLayer::onPop(cocos2d::CCPoint point){
-   draw(point);
+    draw(point);
 }
 
 void OperationLayer::onPopLast(cocos2d::CCPoint point){
     draw(point);
-    autoPoints.clear();
-    _touchTrailLayer->bladeCleanup();
+    _linkShape = factory->analysis(_shape,magicSprites);
+    CCLOG("shape = %d",_linkShape);
+    if(_linkShape != noresult){
+        operationCallBack->beginFire(_linkShape);
+    }
+    tempMagicPoints.clear();
 }
 
 void OperationLayer::draw(cocos2d::CCPoint point){
-    autoPoints.insert(autoPoints.begin(),point);
-    if(autoPoints.size() < 2){
-        brushSprite = CCSprite::create("brush.png");
-        brushSprite->setAnchorPoint(CCPointMake(0,0.5));//image height/2
-        brushSprite->setPosition(autoPoints[0]);
-        brushSprite->setScaleX(1/320);
-        this->addChild(brushSprite);
+    tempMagicPoints.insert(tempMagicPoints.begin(),point);
+    if(tempMagicPoints.size() < 2){
+        brushSprite = makeBrushImage();
+        magicMarks->addObject(brushSprite);
         return;
-    }else if(autoPoints.size() == 2){
-        CCPoint diffPoint = ccpSub(autoPoints[0], autoPoints[1]);
-        float dist = ccpDistance(autoPoints[0], autoPoints[1]);
+    }else if(tempMagicPoints.size() == 2){
+        CCPoint diffPoint = ccpSub(tempMagicPoints[0], tempMagicPoints[1]);
+        float dist = ccpDistance(tempMagicPoints[0], tempMagicPoints[1]);
         float angleRadians = atan2f(diffPoint.y, diffPoint.x);
         angleRadians = -angleRadians;
         float cocosAngle = CC_RADIANS_TO_DEGREES(angleRadians);
         brushSprite->setScaleX(dist/320);
         brushSprite->setRotation(cocosAngle);
         brushSprite->runAction(CCTintTo::create(1, 255, 0, 0));
-        autoPoints.pop_back();
+        tempMagicPoints.pop_back();
     }
-    
-    brushSprite = CCSprite::create("brush.png");
-    brushSprite->setAnchorPoint(CCPointMake(0,0.5));//image height/2
-    brushSprite->setPosition(autoPoints[0]);
-    brushSprite->setScaleX(1/320);
-    this->addChild(brushSprite);
+    brushSprite = makeBrushImage();
+    magicMarks->addObject(brushSprite);
+}
 
+cocos2d::CCSprite* OperationLayer::makeBrushImage(){
+    CCSprite *brush= CCSprite::create("brush.png");
+    brush->setAnchorPoint(CCPointMake(0,0.5));//image height/2
+    brush->setPosition(tempMagicPoints[0]);
+    brush->setScaleX(1/320);
+    this->addChild(brush);
+    return brush;
+}
+
+cocos2d::CCSprite* OperationLayer::addMark(CCPoint point){
+    CCSprite *brush= CCSprite::create("brush.png");
+    brush->setAnchorPoint(CCPointMake(0,0.5));//image height/2
+    brush->setPosition(point);
+    brush->setScaleX(1/320);
+    this->addChild(brush);
+    return brush;
+}
+
+cocos2d::CCSprite* OperationLayer::adjustMark(CCSprite* brush,CCPoint start,CCPoint end){
+    float dist = ccpDistance(start, end);
+    CCPoint diffPoint = ccpSub(end,start);
+    float angleRadians = atan2f(diffPoint.y, diffPoint.x);
+    angleRadians = -angleRadians;
+    float cocosAngle = CC_RADIANS_TO_DEGREES(angleRadians);
+    brush->setRotation(cocosAngle);
+    brush->setScaleX(dist/320);
+    return brush;
+}
+
+
+
+void OperationLayer::removeAllMagicSquare(){
+    CCObject* obj = NULL;
+    CCARRAY_FOREACH(magicMarks,obj)
+    {
+        ((CCSprite *)obj)->removeFromParentAndCleanup(true);
+    }
+    magicMarks->removeAllObjects();
 }
 
 

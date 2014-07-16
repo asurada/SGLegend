@@ -52,7 +52,9 @@ public:
     static TouchTrailLayer* create();
     CC_SYNTHESIZE(TouchTrailCallback*, touchTrailCallback, Delegate);
     void setPointLists(std::vector<cocos2d::CCPoint>  _points);
-    void insert(cocos2d::CCPoint point);
+    bool insert(cocos2d::CCPoint point);
+    bool isCloseShape(cocos2d::CCPoint point);
+    
     void autoDraw();
     void autoDrawPoints();
     void autoDrawAfterFinger();

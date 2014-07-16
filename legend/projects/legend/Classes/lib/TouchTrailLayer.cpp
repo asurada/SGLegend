@@ -37,10 +37,6 @@ TouchTrailLayer::TouchTrailLayer()
     _bladeSparkle = CCParticleSystemQuad::create("blade_sparkle.plist");
     _bladeSparkle->stopSystem();
     this->addChild(_bladeSparkle);
-//    blade = CCBlade::create(kFileStreak, 24, 25);
-//    blade->setDrainInterval(2.0/40);
-//    addChild(blade);
-
 }
 
 TouchTrailLayer* TouchTrailLayer::create()
@@ -83,7 +79,6 @@ void TouchTrailLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
         if(touchTrailCallback != NULL){
             touchTrailCallback->touchMove_TouchTrail(point);
         }
-        //previewsPoint = point;
         point = ccpAdd(ccpMult(point, 0.5f), ccpMult(touch->getPreviousLocation(), 0.5f));
         CCLOG("touch x:%f y:%f",point.x,point.y);
 		blade->push(point);
@@ -161,18 +156,34 @@ void TouchTrailLayer::drawRound(CCPoint center){
     blade->push(point);
 }
 
-void TouchTrailLayer::insert(cocos2d::CCPoint point){
+bool TouchTrailLayer::insert(cocos2d::CCPoint point){
     if(_points.size() == 0){
         _points.insert(_points.begin(), point);
+        return true;
     }else if(_points.size() > 0){
         CCPoint beginPoint =  _points.at(0);
         if(beginPoint.getDistance(point)){
             _points.insert(_points.begin(), point);
+            return true;
         }
     }
-        
-   
+    return false;
 }
+
+bool TouchTrailLayer::isCloseShape(cocos2d::CCPoint point){
+    if(_points.size() < 3){
+        return false;
+    }
+    for (int index =0; index<_points.size()-1; index++) {
+        CCPoint it = _points.at(index);
+        if(it.equals(point)){
+            return true;
+        }
+    }
+    return false;
+}
+
+
 
 void TouchTrailLayer::autoDrawPoints(){
     CCLOG("_point.size :%d",(int)_points.size());

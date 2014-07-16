@@ -289,6 +289,7 @@
 		A27784F91947EDCB00765D69 /* Concept.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784F81947EDCB00765D69 /* Concept.strings */; };
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
 		A27784FD1947F93B00765D69 /* schedule.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FC1947F93B00765D69 /* schedule.strings */; };
+		A2786304197661B20039476C /* CCShake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2786302197661B20039476C /* CCShake.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -878,6 +879,8 @@
 		A27784F81947EDCB00765D69 /* Concept.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Concept.strings; sourceTree = "<group>"; };
 		A27784FA1947F61600765D69 /* TechMemo.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TechMemo.strings; sourceTree = "<group>"; };
 		A27784FC1947F93B00765D69 /* schedule.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = schedule.strings; sourceTree = "<group>"; };
+		A2786302197661B20039476C /* CCShake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCShake.cpp; sourceTree = "<group>"; };
+		A2786303197661B20039476C /* CCShake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShake.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -2034,6 +2037,8 @@
 				9C0097C8192CF03200B57729 /* OperationLayer.h */,
 				9CFEFB5B193E29D6000D4ADE /* PhysicsSprite.cpp */,
 				9CFEFB5C193E29D6000D4ADE /* PhysicsSprite.h */,
+				A2786302197661B20039476C /* CCShake.cpp */,
+				A2786303197661B20039476C /* CCShake.h */,
 			);
 			name = custom;
 			path = ../Classes/custom;
@@ -2397,6 +2402,7 @@
 				15A3D92A1682F7D5002FB0C5 /* b2WheelJoint.cpp in Sources */,
 				15A3D9391682F7D5002FB0C5 /* b2Rope.cpp in Sources */,
 				9CD6F9D4192869C5002C7D2C /* CCBlade.cpp in Sources */,
+				A2786304197661B20039476C /* CCShake.cpp in Sources */,
 				15A3D9951682F7F9002FB0C5 /* chipmunk.c in Sources */,
 				15A3D9971682F7F9002FB0C5 /* cpConstraint.c in Sources */,
 				9CFEFB5D193E29D6000D4ADE /* PhysicsSprite.cpp in Sources */,

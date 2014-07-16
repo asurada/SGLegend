@@ -36,9 +36,7 @@ public:
     void explode();
  
     void update(float dt);
-   
     
-    int anlysisWriteHanding(cocos2d::CCArray *spriteList);
     virtual void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 	virtual void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 	virtual void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);

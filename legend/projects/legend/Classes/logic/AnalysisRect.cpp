@@ -39,7 +39,7 @@ AnalysisShape AnalysisRect::recogize(CCArray *linkballs){
         }
         
     }
-    if(starCount == 2 && linkballs->count() == 6){
+    if(starCount == 2 && linkballs->count() == 5){
         return star;
     }
     
