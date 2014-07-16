@@ -77,6 +77,14 @@ bool OperationLayer::init()
     CCLOG("width=%f,height=%f",s.width,s.height);
     _touchTrailLayer = TouchTrailLayer::create();
     _touchTrailLayer->setDelegate(this);
+    marklayer = CCLayer::create();
+
+
+    marklayer = CCLayer::create();
+    marklayer->setContentSize(CCSize(pDirector->getWinSize().width,pDirector->getWinSize().height/2));
+    marklayer->setAnchorPoint(CCPointMake(0.5,0.5));
+    marklayer->setPosition(ccp(0,0));
+    
     if(!CCLayerColor::initWithColor(ccc4(241, 196, 15, 0),pDirector->getWinSize().width,pDirector->getWinSize().height/2))
     {
         return false;
@@ -84,7 +92,8 @@ bool OperationLayer::init()
     setTouchEnabled(true);
     bRet = true;
     
-    this->addChild(_touchTrailLayer,1);
+    this->addChild(_touchTrailLayer,2);
+    this->addChild(marklayer,1);
     this->createBall(HEXAGON);
     return bRet;
 }
@@ -406,6 +415,7 @@ void OperationLayer::touchBegin_TouchTrail(cocos2d::CCPoint point){
         if(_touchTrailLayer->insert(spirit->getPosition())){
             magicSprites->addObject(spirit);
             brushSprite = addMark(spirit->getPosition());
+            magicMarks->addObject(brushSprite);
             //animate(spirit);
         }
     }
@@ -439,7 +449,9 @@ void OperationLayer::animate(CCSprite *spirit){
 
 void OperationLayer::touchEnd_TouchTrail(cocos2d::CCPoint point){
     CCLOG("touchEnd_TouchTrail");
-    removeAllMagicSquare();
+    //removeAllMagicSquare();
+    CCFiniteTimeAction *rotate = CCRotateTo::create(2.0f, 270.f);
+    marklayer->runAction(rotate);
     _touchTrailLayer->autoDrawAfterFinger();
     
     
@@ -457,6 +469,8 @@ void OperationLayer::onPopLast(cocos2d::CCPoint point){
         operationCallBack->beginFire(_linkShape);
     }
     tempMagicPoints.clear();
+    
+
 }
 
 void OperationLayer::draw(cocos2d::CCPoint point){
@@ -485,7 +499,7 @@ cocos2d::CCSprite* OperationLayer::makeBrushImage(){
     brush->setAnchorPoint(CCPointMake(0,0.5));//image height/2
     brush->setPosition(tempMagicPoints[0]);
     brush->setScaleX(1/320);
-    this->addChild(brush);
+    marklayer->addChild(brush);
     return brush;
 }
 
@@ -493,8 +507,9 @@ cocos2d::CCSprite* OperationLayer::addMark(CCPoint point){
     CCSprite *brush= CCSprite::create("brush.png");
     brush->setAnchorPoint(CCPointMake(0,0.5));//image height/2
     brush->setPosition(point);
+    brush->setOpacity(150);
     brush->setScaleX(1/320);
-    this->addChild(brush);
+    marklayer->addChild(brush);
     return brush;
 }
 

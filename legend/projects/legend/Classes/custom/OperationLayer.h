@@ -68,6 +68,7 @@ private:
     cocos2d::CCPoint ballPos_5;
     cocos2d::CCPoint ballPos_6;
     cocos2d::CCSprite *brush;
+    CCLayer * marklayer;
     cocos2d::CCRenderTexture *target;
     CCSprite* isHit(cocos2d::CCPoint point);
     void animate(CCSprite *spirit);
