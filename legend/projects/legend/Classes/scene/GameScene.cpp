@@ -28,15 +28,9 @@ GameScene::GameScene(){
    
 }
 
-
 GameScene::~GameScene(){
     
 }
-
-//void GameScene::registerWithTouchDispatcher()
-//{
-//    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, this->getTouchPriority(), true);
-//}
 
 CCScene* GameScene::scene()
 {
@@ -163,6 +157,15 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
+        if (pSprite_char->boundingBox().containsPoint(location))
+        {
+            bullet = CCSprite::create("fire_1.png");
+            bullet->setScale(2.0);
+            bullet->setVisible(false);
+            this->addChild(bullet,3);
+            this->attack();
+        }
+        
         
         previousLocation = location;
         
@@ -178,12 +181,7 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 
 void GameScene::ccTouchesCancelled(CCSet* touches, CCEvent* event)
 {
-//    drawNode->removeFromParentAndCleanup(true);
-//    //    if (_mouseJoint)
-//    //    {
-//    //        _world->DestroyJoint(_mouseJoint);
-//    //        _mouseJoint = NULL;
-//    //    }
+
 //    
 }
 //
@@ -321,7 +319,6 @@ void GameScene::beginFire(AnalysisShape shape){
         default:
             break;
     }
-
 }
 
 void GameScene::endFire(AnalysisShape shape){

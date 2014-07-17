@@ -425,15 +425,11 @@ void OperationLayer::touchBegin_TouchTrail(cocos2d::CCPoint point){
 void OperationLayer::touchMove_TouchTrail(cocos2d::CCPoint point){
     CCLOG("touchMove_TouchTrail");
     CCSprite *spirit =isHit(point);
-    brushSprite = adjustMark(brushSprite, brushSprite->getPosition(), point);
+    adjustMark(brushSprite, brushSprite->getPosition(), point);
     if(spirit){
         if(_touchTrailLayer->insert(spirit->getPosition())){
             magicSprites->addObject(spirit);
-            CCPoint diffPoint = ccpSub(point,brushSprite->getPosition());
-            float angleRadians = atan2f(diffPoint.y, diffPoint.x);
-            angleRadians = -angleRadians;
-            float cocosAngle = CC_RADIANS_TO_DEGREES(angleRadians);
-            brushSprite->setRotation(cocosAngle);
+            adjustMark(brushSprite, brushSprite->getPosition(), point);
             magicMarks->addObject(brushSprite);
             brushSprite = addMark(spirit->getPosition());
         }
