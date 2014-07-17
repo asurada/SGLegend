@@ -416,6 +416,7 @@ void OperationLayer::touchBegin_TouchTrail(cocos2d::CCPoint point){
             magicSprites->addObject(spirit);
             brushSprite = addMark(spirit->getPosition());
             magicMarks->addObject(brushSprite);
+            //魔法石毎アニメ
             //animate(spirit);
         }
     }
@@ -428,6 +429,11 @@ void OperationLayer::touchMove_TouchTrail(cocos2d::CCPoint point){
     if(spirit){
         if(_touchTrailLayer->insert(spirit->getPosition())){
             magicSprites->addObject(spirit);
+            CCPoint diffPoint = ccpSub(point,brushSprite->getPosition());
+            float angleRadians = atan2f(diffPoint.y, diffPoint.x);
+            angleRadians = -angleRadians;
+            float cocosAngle = CC_RADIANS_TO_DEGREES(angleRadians);
+            brushSprite->setRotation(cocosAngle);
             magicMarks->addObject(brushSprite);
             brushSprite = addMark(spirit->getPosition());
         }
@@ -449,9 +455,10 @@ void OperationLayer::animate(CCSprite *spirit){
 
 void OperationLayer::touchEnd_TouchTrail(cocos2d::CCPoint point){
     CCLOG("touchEnd_TouchTrail");
-    //removeAllMagicSquare();
-    CCFiniteTimeAction *rotate = CCRotateTo::create(2.0f, 270.f);
-    marklayer->runAction(rotate);
+    removeAllMagicSquare();
+    //魔方陣アニメ
+    //CCFiniteTimeAction *rotate = CCRotateTo::create(2.0f, 270.f);
+    //marklayer->runAction(rotate);
     _touchTrailLayer->autoDrawAfterFinger();
     
     
@@ -469,9 +476,9 @@ void OperationLayer::onPopLast(cocos2d::CCPoint point){
         operationCallBack->beginFire(_linkShape);
     }
     tempMagicPoints.clear();
-    
-
 }
+
+
 
 void OperationLayer::draw(cocos2d::CCPoint point){
     tempMagicPoints.insert(tempMagicPoints.begin(),point);
