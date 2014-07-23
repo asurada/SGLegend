@@ -32,7 +32,6 @@ public:
     void addRectangleBetweenPointsToBody(b2Body *body, CCPoint start, CCPoint end);
     
     void fire(const char *pszFileName);
-    void attack();
     void monsterAttack();
     void explode();
  
@@ -56,23 +55,11 @@ private:
     b2World* world;
     cocos2d::CCPoint previousLocation;
 	b2Body* currentPlatformBody;
-//    cocos2d::CCPoint ballPos_1;
-//    cocos2d::CCPoint ballPos_2;
-//    cocos2d::CCPoint ballPos_3;
-//    cocos2d::CCPoint ballPos_4;
-//    cocos2d::CCPoint ballPos_5;
-//    cocos2d::CCPoint ballPos_6;
     cocos2d::CCPoint center;
     cocos2d::CCPoint monster;
     cocos2d::CCSprite *startSprite;
     cocos2d::CCSprite *endSprite;
     cocos2d::CCSprite *bullet;
-    cocos2d::CCSprite* pSprite_1;
-    cocos2d::CCSprite* pSprite_2;
-    cocos2d::CCSprite* pSprite_3;
-    cocos2d::CCSprite* pSprite_4;
-    cocos2d::CCSprite* pSprite_5;
-    cocos2d::CCSprite* pSprite_6;
     cocos2d::CCSprite* pSprite_round;
     cocos2d::CCSprite* pSprite_char;
     cocos2d::CCSprite* pSprite_monster;
@@ -87,9 +74,5 @@ private:
     void initPhysics();
     cocos2d::CCSprite* animationSprite;
 
-//    cocos2d::CCDrawNode* drawNode;
-//    cocos2d::CCPoint calCenterPoint(cocos2d::CCPoint startPoint,cocos2d::CCPoint endPoint);
-//    void autoDrawLine();
-//    void drawCacheLine();
 };
 #endif /* defined(__legend__GameScene__) */

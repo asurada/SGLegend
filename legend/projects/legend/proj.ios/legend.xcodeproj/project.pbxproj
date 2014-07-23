@@ -290,6 +290,7 @@
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
 		A27784FD1947F93B00765D69 /* schedule.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FC1947F93B00765D69 /* schedule.strings */; };
 		A2786304197661B20039476C /* CCShake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2786302197661B20039476C /* CCShake.cpp */; };
+		A2BF55CD197FB0F90077BD5F /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -881,6 +882,8 @@
 		A27784FC1947F93B00765D69 /* schedule.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = schedule.strings; sourceTree = "<group>"; };
 		A2786302197661B20039476C /* CCShake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCShake.cpp; sourceTree = "<group>"; };
 		A2786303197661B20039476C /* CCShake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShake.h; sourceTree = "<group>"; };
+		A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseMagic.cpp; path = ../Classes/BaseMagic.cpp; sourceTree = "<group>"; };
+		A2BF55CC197FB0F90077BD5F /* BaseMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMagic.h; path = ../Classes/BaseMagic.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1413,6 +1416,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A2BF55CA197FB0D80077BD5F /* pattern */,
 				A2007CC01945AB1300AA36E8 /* utility */,
 				A2007CBC1945A8B400AA36E8 /* scene */,
 				9CA1E96D1930D65100080A75 /* logic */,
@@ -2221,6 +2225,15 @@
 			path = ../Managemnet;
 			sourceTree = "<group>";
 		};
+		A2BF55CA197FB0D80077BD5F /* pattern */ = {
+			isa = PBXGroup;
+			children = (
+				A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */,
+				A2BF55CC197FB0F90077BD5F /* BaseMagic.h */,
+			);
+			name = pattern;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2486,6 +2499,7 @@
 				298B29BB18D0668400C1920F /* CheckBoxReader.cpp in Sources */,
 				15A3DA531682F826002FB0C5 /* CCInvocation.cpp in Sources */,
 				15A3DA541682F826002FB0C5 /* CCScale9Sprite.cpp in Sources */,
+				A2BF55CD197FB0F90077BD5F /* BaseMagic.cpp in Sources */,
 				15A3DA551682F826002FB0C5 /* CCEditBox.cpp in Sources */,
 				15A3DA571682F826002FB0C5 /* CCEditBoxImplIOS.mm in Sources */,
 				15A3DA591682F826002FB0C5 /* CCScrollView.cpp in Sources */,

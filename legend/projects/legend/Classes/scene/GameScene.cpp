@@ -190,27 +190,11 @@ void GameScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
     {
         touch = (CCTouch*)(*it);
     }
-    
-    
-  
 }
-
 
 void GameScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 {
    
-}
-
-
-
-void GameScene::attack(){
-    bullet->setPosition(ccp(320,284));
-    bullet->setVisible(true);
-    bullet->stopAllActions();
-    CCLOG("position = (%f,%f)",pSprite_char->getPosition().x,pSprite_char->getPosition().y);
-    CCLOG("position = (%f,%f)",pSprite_monster->getPosition().x,pSprite_monster->getPosition().y);
-    bullet->runAction(CCSequence::create(CCMoveTo::create(0.6, ccp(320,pSprite_monster->getPosition().y)), CCCallFuncN::create(this, callfuncN_selector(GameScene::explode)), NULL  // DO NOT FORGET TO TERMINATE WITH NULL
-        ));
 }
 
 
@@ -322,7 +306,6 @@ void GameScene::beginFire(AnalysisShape shape){
             break;
         case hexagon:
             fire("fire_2.png");
-            // this->startFireAnm(monster,"fire.png","fire.plist","fire_",20);
             break;
         default:
             break;

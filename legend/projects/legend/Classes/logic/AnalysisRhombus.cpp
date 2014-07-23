@@ -55,3 +55,35 @@ AnalysisShape AnalysisRhombus::recogize(CCArray *linkballs){
     return result;
     
 }
+
+
+void AnalysisRhombus::init(CCSize visibleSize){
+    spritesContainer->removeAllObjects();
+
+    pSprite_1 = CCSprite::create("bll_01.png");
+    pSprite_1->setPosition(ballPos_1);
+    pSprite_1->setTag(ENUM_PST_1);
+    parent->addChild(pSprite_1);
+        
+    pSprite_2 = CCSprite::create("bll_02.png");
+    pSprite_2->setTag(ENUM_PST_2);
+    pSprite_2->setPosition(ballPos_2);
+    parent->addChild(pSprite_2);
+        
+    pSprite_3 = CCSprite::create("bll_03.png");
+    pSprite_3->setTag(ENUM_PST_3);
+    pSprite_3->setPosition(ballPos_3);
+    parent->addChild(pSprite_3);
+        
+    spritesContainer->addObject(pSprite_1);
+    spritesContainer->addObject(pSprite_2);
+    spritesContainer->addObject(pSprite_3);
+    
+    
+    pSprite_4 = CCSprite::create("bll_04.png");
+    pSprite_4->setTag(ENUM_PST_4);
+    pSprite_4->setPosition(ballPos_4);
+    parent->addChild(pSprite_4);
+    spritesContainer->addObject(pSprite_4);
+    
+}

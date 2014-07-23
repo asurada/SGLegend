@@ -25,13 +25,37 @@ enum AnalysisShape{
 };
 
 
+enum Position{
+    ENUM_PST_1=1,
+    ENUM_PST_2=2,
+    ENUM_PST_3=3,
+    ENUM_PST_4=4,
+    ENUM_PST_5=5,
+    ENUM_PST_6=6,
+};
+
 class AnalysisLogic{
 
     private:
     
     
     public:
+        CCArray *spritesContainer;
+        cocos2d::CCSprite* pSprite_1;
+        cocos2d::CCSprite* pSprite_2;
+        cocos2d::CCSprite* pSprite_3;
+        cocos2d::CCSprite* pSprite_4;
+        cocos2d::CCSprite* pSprite_5;
+        cocos2d::CCSprite* pSprite_6;
+        cocos2d::CCPoint ballPos_1;
+        cocos2d::CCPoint ballPos_2;
+        cocos2d::CCPoint ballPos_3;
+        cocos2d::CCPoint ballPos_4;
+        cocos2d::CCPoint ballPos_5;
+        cocos2d::CCPoint ballPos_6;
+        CCLayer* parent;
         AnalysisLogic *logic;
+        void init(CCSize visibleSize);
         AnalysisLogic(int formate);
         AnalysisLogic();
         ~AnalysisLogic();
