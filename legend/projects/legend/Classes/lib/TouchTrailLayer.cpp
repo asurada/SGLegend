@@ -198,6 +198,7 @@ void TouchTrailLayer::autoDrawPoints(){
         touchTrailCallback->onPopLast(point);
         _points.pop_back();
     }else{
+        touchTrailCallback->onPopStop();
         unschedule(schedule_selector(TouchTrailLayer::autoDrawPoints));
     }
 }

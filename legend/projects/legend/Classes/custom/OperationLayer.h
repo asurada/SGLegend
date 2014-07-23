@@ -43,6 +43,8 @@ public:
     void touchEnd_TouchTrail(cocos2d::CCPoint point);
     void onPop(cocos2d::CCPoint point);
     void onPopLast(cocos2d::CCPoint point);
+    void onPopStop();
+    void fadeout(CCSprite* sprite,float time);
     cocos2d::CCSprite* brushSprite;
     void draw(cocos2d::CCPoint point);
     cocos2d::CCSprite* makeBrushImage();

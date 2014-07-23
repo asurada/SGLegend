@@ -14,7 +14,7 @@
 #include "cocos2d.h"
 #include "Box2D.h"
 
-class GameScene : public cocos2d::CCLayer,OperationCallback
+class GameScene : public cocos2d::CCLayer,OperationCallback,b2ContactListener
 {
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -31,17 +31,20 @@ public:
     void cleanupSprite(cocos2d::CCSprite* inSprite);
     void addRectangleBetweenPointsToBody(b2Body *body, CCPoint start, CCPoint end);
     
+    void fire(const char *pszFileName);
     void attack();
     void monsterAttack();
     void explode();
  
     void update(float dt);
+    void backgroundRun();
     
     virtual void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 	virtual void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 	virtual void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     virtual void ccTouchesCancelled(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
-        
+    virtual void BeginContact(b2Contact* contact);
+    virtual void EndContact(b2Contact* contact);
     virtual void beginFire(AnalysisShape shape);
     virtual void endFire(AnalysisShape shape);
 
@@ -53,12 +56,12 @@ private:
     b2World* world;
     cocos2d::CCPoint previousLocation;
 	b2Body* currentPlatformBody;
-    cocos2d::CCPoint ballPos_1;
-    cocos2d::CCPoint ballPos_2;
-    cocos2d::CCPoint ballPos_3;
-    cocos2d::CCPoint ballPos_4;
-    cocos2d::CCPoint ballPos_5;
-    cocos2d::CCPoint ballPos_6;
+//    cocos2d::CCPoint ballPos_1;
+//    cocos2d::CCPoint ballPos_2;
+//    cocos2d::CCPoint ballPos_3;
+//    cocos2d::CCPoint ballPos_4;
+//    cocos2d::CCPoint ballPos_5;
+//    cocos2d::CCPoint ballPos_6;
     cocos2d::CCPoint center;
     cocos2d::CCPoint monster;
     cocos2d::CCSprite *startSprite;

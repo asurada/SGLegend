@@ -29,7 +29,8 @@ GameScene::GameScene(){
 }
 
 GameScene::~GameScene(){
-    
+    delete world;        //Worldを解放
+    world = NULL;
 }
 
 CCScene* GameScene::scene()
@@ -135,7 +136,6 @@ bool GameScene::init()
     
     this->scheduleUpdate();
     
-
     return true;
 }
 
@@ -159,11 +159,7 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
         location = CCDirector::sharedDirector()->convertToGL(location);
         if (pSprite_char->boundingBox().containsPoint(location))
         {
-            bullet = CCSprite::create("fire_1.png");
-            bullet->setScale(2.0);
-            bullet->setVisible(false);
-            this->addChild(bullet,3);
-            this->attack();
+            fire("fire_1.png");
         }
         
         
@@ -181,16 +177,15 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 
 void GameScene::ccTouchesCancelled(CCSet* touches, CCEvent* event)
 {
-
-//    
+    
 }
-//
+
+
 void GameScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
     //Add a new body/atlas sprite at the touched location
     CCSetIterator it;
     CCTouch* touch;
-    
     for( it = touches->begin(); it != touches->end(); it++)
     {
         touch = (CCTouch*)(*it);
@@ -199,7 +194,8 @@ void GameScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
     
   
 }
-//
+
+
 void GameScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 {
    
@@ -208,14 +204,13 @@ void GameScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 
 
 void GameScene::attack(){
-    
     bullet->setPosition(ccp(320,284));
     bullet->setVisible(true);
     bullet->stopAllActions();
     CCLOG("position = (%f,%f)",pSprite_char->getPosition().x,pSprite_char->getPosition().y);
     CCLOG("position = (%f,%f)",pSprite_monster->getPosition().x,pSprite_monster->getPosition().y);
     bullet->runAction(CCSequence::create(CCMoveTo::create(0.6, ccp(320,pSprite_monster->getPosition().y)), CCCallFuncN::create(this, callfuncN_selector(GameScene::explode)), NULL  // DO NOT FORGET TO TERMINATE WITH NULL
-                                        ));
+        ));
 }
 
 
@@ -258,11 +253,50 @@ void GameScene::startFireAnm(CCPoint &pos,const char * image,const char * plist,
 //背景
 void GameScene::update(float dt)
 {
-	CCPoint bg1Pos = pSprite_bg_1->getPosition();
+    world->Step(dt, 10, 10);
+    
+    backgroundRun();
+    CCSize s = CCDirector::sharedDirector()->getWinSize();
+	// simple collision test
+	pSprite_monster->setColor(ccWHITE);
+	//pSprite_monster->setFlipY(false);
+   
+    
+   
+
+    for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
+        if (b->GetUserData() != NULL) {
+            CCSprite *sprite = (CCSprite *)b->GetUserData();
+            sprite->setPosition(ccp(b->GetPosition().x * PTM_RATIO_WIN,
+                                  b->GetPosition().y * PTM_RATIO_WIN));
+            sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
+            
+            
+
+            if (sprite != NULL && pSprite_monster->boundingBox().intersectsRect(sprite->boundingBox()))
+            {
+                pSprite_monster->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
+                this->startFireAnm(monster,"fire2.png","fire2.plist","fire",40);
+                b->GetWorld()->DestroyBody(b);
+                sprite->removeFromParentAndCleanup(true);
+            }else if(sprite != NULL && sprite->getPosition().y > s.height){
+                b->GetWorld()->DestroyBody(b);
+                sprite->removeFromParentAndCleanup(true);
+                //delete sprite;
+            }
+        }
+    }
+	
+//	CCLabelAtlas* posLabel = (CCLabelAtlas*)[_player getChildByTag:1];
+//	posLabel.string = [NSString stringWithFormat:@"%.0f/%.0f", _player.position.x, _player.position.y];
+}
+
+void GameScene::backgroundRun(){
+    CCPoint bg1Pos = pSprite_bg_1->getPosition();
 	CCPoint bg2Pos = pSprite_bg_2->getPosition();
 	bg1Pos.y -= kScrollSpeed;
 	bg2Pos.y -= kScrollSpeed;
-	
+    
 	// move scrolling background back from left to right end to achieve "endless" scrolling
 	if (bg1Pos.y < -pSprite_bg_1->getContentSize().height/2)
 	{
@@ -278,42 +312,16 @@ void GameScene::update(float dt)
 	bg2Pos.x = (int)bg2Pos.x;
 	pSprite_bg_1->setPosition(bg1Pos);
 	pSprite_bg_2->setPosition(bg2Pos);
-	
-	// simple collision test
-	pSprite_monster->setColor(ccWHITE);
-	//pSprite_monster->setFlipY(false);
 
-    
-    if (bullet != NULL && pSprite_monster->boundingBox().intersectsRect(bullet->boundingBox()))
-    {
-        bullet->setVisible(false);
-        pSprite_monster->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
-        this->startFireAnm(monster,"fire2.png","fire2.plist","fire",40);
-    }
-
-	
-//	CCLabelAtlas* posLabel = (CCLabelAtlas*)[_player getChildByTag:1];
-//	posLabel.string = [NSString stringWithFormat:@"%.0f/%.0f", _player.position.x, _player.position.y];
 }
-
-
 
 void GameScene::beginFire(AnalysisShape shape){
     switch (shape) {
         case star:
-            bullet = CCSprite::create("fire_1.png");
-            bullet->setScale(2.0);
-            bullet->setVisible(false);
-            this->addChild(bullet,3);
-            this->attack();
-            //this->startFireAnm(monster,"fire2.png","fire2.plist","fire",40);
+            fire("fire_1.png");
             break;
         case hexagon:
-            bullet = CCSprite::create("fire_2.png");
-            bullet->setScale(2.0);
-            bullet->setVisible(false);
-            this->addChild(bullet,3);
-            this->attack();
+            fire("fire_2.png");
             // this->startFireAnm(monster,"fire.png","fire.plist","fire_",20);
             break;
         default:
@@ -329,7 +337,7 @@ void GameScene::endFire(AnalysisShape shape){
 
 void GameScene::cleanupSprite(CCSprite* inSprite)
 {
-    bullet->setPosition(center);
+   // bullet->setPosition(center);
     inSprite->removeFromParentAndCleanup(true);
 }
 
@@ -340,7 +348,7 @@ void GameScene::initPhysics()
     CCSize s = CCDirector::sharedDirector()->getWinSize();
     
     b2Vec2 gravity;
-    gravity.Set(0.0f, -10.0f);
+    gravity.Set(0.0f, 0.0f);
     world = new b2World(gravity);
     
     // Do we want to let bodies sleep?
@@ -359,38 +367,75 @@ void GameScene::initPhysics()
     //        flags += b2Draw::e_centerOfMassBit;
     //m_debugDraw->SetFlags(flags);
     
-    
     // Define the ground body.
     b2BodyDef groundBodyDef;
     groundBodyDef.position.Set(0, 0); // bottom-left corner
-    
     // Call the body factory which allocates memory for the ground body
     // from a pool and creates the ground box shape (also from a pool).
     // The body is also added to the world.
     b2Body* groundBody = world->CreateBody(&groundBodyDef);
-    
     // Define the ground box shape.
     b2EdgeShape groundBox;
-    
     // bottom
-    
     groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO_WIN,0));
     groundBody->CreateFixture(&groundBox,0);
-    
     // top
-    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN));
-    groundBody->CreateFixture(&groundBox,0);
-    
+//    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN));
+//    groundBody->CreateFixture(&groundBox,0);
     // left
     groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(0,0));
     groundBody->CreateFixture(&groundBox,0);
-    
     // right
     groundBox.Set(b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,0));
     groundBody->CreateFixture(&groundBox,0);
 }
 
 
+
+void GameScene::fire(const char *pszFileName){
+    b2BodyDef bodyDef;    //b2BodyDef構造体
+    bodyDef.type = b2_dynamicBody;    //動的な物体に
+    bodyDef.position.Set(pSprite_char->getPosition().x/PTM_RATIO_WIN, pSprite_char->getPosition().y/PTM_RATIO_WIN);   //位置を設定
+    CCSprite *bullet = CCSprite::create(pszFileName);
+    bullet->setScale(2.0);
+//    bullet->setVisible(true);
+    bullet->setPosition(pSprite_char->getPosition());
+    this->addChild(bullet,3);
+    bodyDef.userData = bullet;
+    
+    b2Body *body = world->CreateBody(&bodyDef);    //WorldからBodyを作成
+    b2CircleShape circle;    //形を定義するクラス
+    circle.m_radius = 50/PTM_RATIO;    //半径を50pxに
+    b2FixtureDef fixtureDef;    //Fixtureの定義を入れる構造体
+    fixtureDef.shape = &circle;    //形
+    fixtureDef.density = 0.4;      //密度
+    fixtureDef.friction = 0.5;     //摩擦率
+    fixtureDef.restitution = 0.6;  //反発係数
+    body->CreateFixture(&fixtureDef);  //
+    body->SetBullet(true);
+    b2Vec2 force = b2Vec2(0, 30);
+    body->ApplyLinearImpulse(force, body->GetPosition());
+}
+
+
+void GameScene::BeginContact(b2Contact* contact)
+{
+    // We need to copy out the data because the b2Contact passed in
+    // is reused.
+//    MyContact myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
+//    _contacts.push_back(myContact);
+}
+
+void GameScene::EndContact(b2Contact* contact)
+{
+//    MyContact myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
+//    std::vector::iterator pos;
+//    pos = std::find(_contacts.begin(), _contacts.end(), myContact);
+//    if (pos != _contacts.end())
+//    {
+//        _contacts.erase(pos);
+//    }
+}
 
 
 void GameScene::menuCloseCallback(CCObject* pSender)

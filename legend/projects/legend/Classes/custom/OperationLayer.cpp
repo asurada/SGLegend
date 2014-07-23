@@ -425,11 +425,12 @@ void OperationLayer::touchBegin_TouchTrail(cocos2d::CCPoint point){
 void OperationLayer::touchMove_TouchTrail(cocos2d::CCPoint point){
     CCLOG("touchMove_TouchTrail");
     CCSprite *spirit =isHit(point);
+    if(!brushSprite && !brushSprite->getParent()) return;
     adjustMark(brushSprite, brushSprite->getPosition(), point);
     if(spirit){
         if(_touchTrailLayer->insert(spirit->getPosition())){
             magicSprites->addObject(spirit);
-            adjustMark(brushSprite, brushSprite->getPosition(), point);
+            adjustMark(brushSprite, brushSprite->getPosition(), spirit->getPosition());
             magicMarks->addObject(brushSprite);
             brushSprite = addMark(spirit->getPosition());
         }
@@ -452,6 +453,11 @@ void OperationLayer::animate(CCSprite *spirit){
 void OperationLayer::touchEnd_TouchTrail(cocos2d::CCPoint point){
     CCLOG("touchEnd_TouchTrail");
     removeAllMagicSquare();
+    CCSprite *spirit =isHit(point);
+    if(!spirit){
+        magicMarks->removeObject(brushSprite);
+    }
+    //adjustMark(brushSprite, brushSprite->getPosition(), point);
     //魔方陣アニメ
     //CCFiniteTimeAction *rotate = CCRotateTo::create(2.0f, 270.f);
     //marklayer->runAction(rotate);
@@ -474,6 +480,9 @@ void OperationLayer::onPopLast(cocos2d::CCPoint point){
     tempMagicPoints.clear();
 }
 
+void OperationLayer::onPopStop(){
+
+}
 
 
 void OperationLayer::draw(cocos2d::CCPoint point){
@@ -502,6 +511,7 @@ cocos2d::CCSprite* OperationLayer::makeBrushImage(){
     brush->setAnchorPoint(CCPointMake(0,0.5));//image height/2
     brush->setPosition(tempMagicPoints[0]);
     brush->setScaleX(1/320);
+    fadeout(brush,2);
     marklayer->addChild(brush);
     return brush;
 }
@@ -510,8 +520,9 @@ cocos2d::CCSprite* OperationLayer::addMark(CCPoint point){
     CCSprite *brush= CCSprite::create("brush.png");
     brush->setAnchorPoint(CCPointMake(0,0.5));//image height/2
     brush->setPosition(point);
-    brush->setOpacity(150);
+    brush->setOpacity(225);
     brush->setScaleX(1/320);
+    fadeout(brush,1);
     marklayer->addChild(brush);
     return brush;
 }
@@ -525,6 +536,12 @@ cocos2d::CCSprite* OperationLayer::adjustMark(CCSprite* brush,CCPoint start,CCPo
     brush->setRotation(cocosAngle);
     brush->setScaleX(dist/320);
     return brush;
+}
+
+void OperationLayer::fadeout(CCSprite* sprite,float time)
+{
+    CCFadeTo *fadeOut = CCFadeTo::create(time,0);
+    sprite->runAction(fadeOut);
 }
 
 

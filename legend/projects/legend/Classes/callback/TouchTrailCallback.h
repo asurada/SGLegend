@@ -17,6 +17,7 @@ public:
     virtual void touchEnd_TouchTrail(cocos2d::CCPoint point) = 0;
     virtual void onPop(cocos2d::CCPoint point) = 0;
     virtual void onPopLast(cocos2d::CCPoint point) = 0;
+    virtual void onPopStop() = 0;
 };
 
 #endif /* defined(__legend__TouchTrailCallback__) */
