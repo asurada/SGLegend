@@ -92,3 +92,88 @@ AnalysisShape AnalysisHexagon::recogize(CCArray *linkballs){
     return result;
     
 }
+
+
+void AnalysisHexagon::init(CCLayer *_parent){
+    parent = _parent;
+    CCSize visibleSize = parent->getContentSize();
+    float width = visibleSize.width;
+    float height = visibleSize.height;
+    float x1,x2,x3,x4,x5,x6,y1,y2,y3,y4,y5,y6;
+    float centerX,centerY;
+    float distance;
+    
+    centerX = width / 2.0;
+    centerY = height / 2.0;
+    x1 = width  * 1.0 / 2.0;
+    y1 = height * 7.0 / 8.0;
+    
+    distance = y1 - centerY;
+    
+    x2 = centerX + distance * sin(60 * M_PI /180);
+    y2 = centerY + distance * cos(60 * M_PI /180);
+    
+    x3 = centerX + distance * sin(60 * M_PI /180);
+    y3 = centerY - distance * cos(60 * M_PI /180);
+    
+    
+    x4 = width  * 1.0 / 2.0;
+    y4 = height * 1.0 / 8.0;
+    
+    x5 = centerX -(x3 - centerX);
+    y5 = y3;
+    
+    x6 = centerX -(x2 - centerX);
+    y6 = y2;
+    ballPos_1 = ccp(x1, y1);
+    ballPos_2 = ccp(x2, y2);
+    ballPos_3 = ccp(x3, y3);
+    ballPos_4 = ccp(x4, y4);
+    ballPos_5 = ccp(x5, y5);
+    ballPos_6 = ccp(x6, y6);
+    
+    
+    spritesContainer->removeAllObjects();
+
+    pSprite_1 = CCSprite::create("bll_01.png");
+    pSprite_1->setPosition(ballPos_1);
+    pSprite_1->setTag(ENUM_PST_1);
+    parent->addChild(pSprite_1);
+        
+    pSprite_2 = CCSprite::create("bll_02.png");
+    pSprite_2->setTag(ENUM_PST_2);
+    pSprite_2->setPosition(ballPos_2);
+    parent->addChild(pSprite_2);
+        
+    pSprite_3 = CCSprite::create("bll_03.png");
+    pSprite_3->setTag(ENUM_PST_3);
+    pSprite_3->setPosition(ballPos_3);
+    parent->addChild(pSprite_3);
+    
+    pSprite_4 = CCSprite::create("bll_04.png");
+    pSprite_4->setTag(ENUM_PST_4);
+    pSprite_4->setPosition(ballPos_4);
+    parent->addChild(pSprite_4);
+
+    pSprite_5 = CCSprite::create("bll_05.png");
+    pSprite_5->setTag(ENUM_PST_5);
+    pSprite_5->setPosition(ballPos_5);
+    parent->addChild(pSprite_5);
+
+    pSprite_6 = CCSprite::create("bll_06.png");
+    pSprite_6->setTag(ENUM_PST_6);
+    pSprite_6->setPosition(ballPos_6);
+    parent->addChild(pSprite_6);
+    
+    spritesContainer = CCArray::create();
+    spritesContainer->addObject(pSprite_1);
+    spritesContainer->addObject(pSprite_2);
+    spritesContainer->addObject(pSprite_3);
+    spritesContainer->addObject(pSprite_4);
+    spritesContainer->addObject(pSprite_5);
+    spritesContainer->addObject(pSprite_6);
+
+    spritesContainer->retain();
+
+    
+}

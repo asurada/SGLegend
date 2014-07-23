@@ -16,6 +16,7 @@ public :
     AnalysisHexagon();
     ~AnalysisHexagon();
     AnalysisShape recogize(CCArray *linkballs);
+    void init(CCLayer *_parent);
 };
 
 #endif /* defined(__legend__AnalysisHexagon__) */

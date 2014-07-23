@@ -20,11 +20,9 @@ AnalysisShape AnalysisTriangle::recogize(CCArray *linkballs){
 }
 
 
-void AnalysisTriangle::init(CCSize visibleSize){
-    
-    spritesContainer = CCArray::create();
-    spritesContainer->retain();
-    
+void AnalysisTriangle::init(CCLayer *_parent){
+    parent = _parent;
+    CCSize visibleSize = parent->getContentSize();
     float width =visibleSize.width;
     float height =visibleSize.height;
     
@@ -57,7 +55,9 @@ void AnalysisTriangle::init(CCSize visibleSize){
     pSprite_3->setPosition(ballPos_3);
     parent->addChild(pSprite_3);
     
+    spritesContainer = CCArray::create();
     spritesContainer->addObject(pSprite_1);
     spritesContainer->addObject(pSprite_2);
     spritesContainer->addObject(pSprite_3);
+    spritesContainer->retain();
 }

@@ -57,8 +57,24 @@ AnalysisShape AnalysisRhombus::recogize(CCArray *linkballs){
 }
 
 
-void AnalysisRhombus::init(CCSize visibleSize){
-    spritesContainer->removeAllObjects();
+void AnalysisRhombus::init(CCLayer *_parent){
+    parent =_parent;
+    CCSize visibleSize = parent->getContentSize();
+    float width =visibleSize.width;
+    float height =visibleSize.height;
+    float x1,x2,x3,x4,y1,y2,y3,y4;
+    x1 = width  * 1.0 / 2.0;
+    x3 = x1;
+    y1 = height * 4.0 / 5.0;
+    y3 = height * 1.0 / 5.0;
+    y2 = height * 1.0 / 2.0;
+    y4 = y2;
+    x2 = width  * 4.0 / 5.0;
+    x4 = width  * 1.0 / 5.0;
+    ballPos_1 = ccp(x1, y1);
+    ballPos_2 = ccp(x2, y2);
+    ballPos_3 = ccp(x3, y3);
+    ballPos_4 = ccp(x4, y4);
 
     pSprite_1 = CCSprite::create("bll_01.png");
     pSprite_1->setPosition(ballPos_1);
@@ -75,15 +91,15 @@ void AnalysisRhombus::init(CCSize visibleSize){
     pSprite_3->setPosition(ballPos_3);
     parent->addChild(pSprite_3);
         
-    spritesContainer->addObject(pSprite_1);
-    spritesContainer->addObject(pSprite_2);
-    spritesContainer->addObject(pSprite_3);
-    
-    
     pSprite_4 = CCSprite::create("bll_04.png");
     pSprite_4->setTag(ENUM_PST_4);
     pSprite_4->setPosition(ballPos_4);
     parent->addChild(pSprite_4);
-    spritesContainer->addObject(pSprite_4);
     
+    spritesContainer = CCArray::create();
+    spritesContainer->addObject(pSprite_1);
+    spritesContainer->addObject(pSprite_2);
+    spritesContainer->addObject(pSprite_3);
+    spritesContainer->addObject(pSprite_4);
+    spritesContainer->retain();
 }

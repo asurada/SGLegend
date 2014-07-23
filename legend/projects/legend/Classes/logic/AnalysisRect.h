@@ -13,6 +13,7 @@
 class AnalysisRect:public AnalysisLogic{
     public:
         AnalysisShape recogize(CCArray *linkballs);
+        void init(CCLayer *_parent);
 
 };
 

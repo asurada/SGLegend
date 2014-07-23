@@ -55,7 +55,7 @@ class AnalysisLogic{
         cocos2d::CCPoint ballPos_6;
         CCLayer* parent;
         AnalysisLogic *logic;
-        void init(CCSize visibleSize);
+        void init(CCLayer *_parent);
         AnalysisLogic(int formate);
         AnalysisLogic();
         ~AnalysisLogic();

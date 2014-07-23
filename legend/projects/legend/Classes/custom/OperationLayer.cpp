@@ -24,14 +24,14 @@
 USING_NS_CC;
 
 
-enum Position{
-    ENUM_PST_1=1,
-    ENUM_PST_2=2,
-    ENUM_PST_3=3,
-    ENUM_PST_4=4,
-    ENUM_PST_5=5,
-    ENUM_PST_6=6,
-};
+//enum Position{
+//    ENUM_PST_1=1,
+//    ENUM_PST_2=2,
+//    ENUM_PST_3=3,
+//    ENUM_PST_4=4,
+//    ENUM_PST_5=5,
+//    ENUM_PST_6=6,
+//};
 
 enum DrawShape{
    ENUM_SHARP_TRIANGLE,

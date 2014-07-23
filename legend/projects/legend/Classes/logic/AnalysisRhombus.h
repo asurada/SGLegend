@@ -15,7 +15,7 @@ public :
     AnalysisRhombus *logic;
     AnalysisRhombus();
     ~AnalysisRhombus();
-    void init(CCSize visibleSize);
+    void init(CCLayer *_parent);
     AnalysisShape recogize(CCArray *linkballs);
 };
 
