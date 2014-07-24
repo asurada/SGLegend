@@ -11,8 +11,11 @@
 #include "BaseFighter.h"
 
 class Char_01 : public BaseFighter{
+private:
+    typedef CCSprite super;
 public:
-    a
+    static Char_01* create(const char *pszFileName);
+    void attack(const char *bulletName);
     
     
 };

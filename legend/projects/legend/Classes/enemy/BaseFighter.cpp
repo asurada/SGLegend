@@ -11,3 +11,8 @@
 BaseFighter* BaseFighter::create(const char *pszFileName){
     return (BaseFighter*)super::create(pszFileName);
 }
+
+
+void BaseFighter::setTarget(BaseFighter* target){
+    this->_target = target;
+}

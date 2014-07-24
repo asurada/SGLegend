@@ -11,8 +11,10 @@
 
 #include "OperationCallback.h"
 #include "OperationLayer.h"
+#include "BaseFighter.h"
 #include "cocos2d.h"
 #include "Box2D.h"
+#include "Char_01.h"
 
 class GameScene : public cocos2d::CCLayer,OperationCallback,b2ContactListener
 {
@@ -31,7 +33,7 @@ public:
     void cleanupSprite(cocos2d::CCSprite* inSprite);
     void addRectangleBetweenPointsToBody(b2Body *body, CCPoint start, CCPoint end);
     
-    void fire(const char *pszFileName);
+   // void fire(const char *pszFileName);
     void monsterAttack();
     void explode();
     void update(float dt);
@@ -57,8 +59,8 @@ private:
     cocos2d::CCPoint monster;
     cocos2d::CCSprite* bullet;
     cocos2d::CCSprite* pSprite_round;
-    cocos2d::CCSprite* pSprite_char;
-    cocos2d::CCSprite* pSprite_monster;
+    Char_01* pSprite_char;
+    BaseFighter* pSprite_monster;
     cocos2d::CCSprite* pSprite_bg_1;
     cocos2d::CCSprite* pSprite_bg_2;
     cocos2d::CCArray *touchBallArray;

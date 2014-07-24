@@ -115,7 +115,7 @@ bool GameScene::init()
     
 
     center = ccp(visibleSize.width/2 , visibleSize.height/4);
-    pSprite_char = CCSprite::create("char.png");
+    pSprite_char = Char_01::create("char.png");
     pSprite_char->setPosition(center);
     this->addChild(pSprite_char, 2);
     
@@ -123,7 +123,7 @@ bool GameScene::init()
     
     
     monster = ccp(visibleSize.width/2 , visibleSize.height/2 + visibleSize.height/4);
-    pSprite_monster = CCSprite::create("monster.png");
+    pSprite_monster = BaseFighter::create("monster.png");
     pSprite_monster->setPosition(monster);
     pSprite_monster->setScale(1.5);
     this->addChild(pSprite_monster, 0);
@@ -152,7 +152,7 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
         location = CCDirector::sharedDirector()->convertToGL(location);
         if (pSprite_char->boundingBox().containsPoint(location))
         {
-            fire("fire_1.png");
+            pSprite_char->attack("fire_1.png");
         }
     }
 
@@ -286,10 +286,10 @@ void GameScene::backgroundRun(){
 void GameScene::beginFire(AnalysisShape shape){
     switch (shape) {
         case star:
-            fire("fire_1.png");
+            pSprite_char->attack("fire_1.png");
             break;
         case hexagon:
-            fire("fire_2.png");
+            pSprite_char->attack("fire_2.png");
             break;
         default:
             break;
@@ -359,30 +359,30 @@ void GameScene::initPhysics()
 
 
 
-void GameScene::fire(const char *pszFileName){
-    b2BodyDef bodyDef;    //b2BodyDef構造体
-    bodyDef.type = b2_dynamicBody;    //動的な物体に
-    bodyDef.position.Set(pSprite_char->getPosition().x/PTM_RATIO_WIN, pSprite_char->getPosition().y/PTM_RATIO_WIN);   //位置を設定
-    CCSprite *bullet = CCSprite::create(pszFileName);
-    bullet->setScale(2.0);
-//    bullet->setVisible(true);
-    bullet->setPosition(pSprite_char->getPosition());
-    this->addChild(bullet,3);
-    bodyDef.userData = bullet;
-    
-    b2Body *body = world->CreateBody(&bodyDef);    //WorldからBodyを作成
-    b2CircleShape circle;    //形を定義するクラス
-    circle.m_radius = 50/PTM_RATIO;    //半径を50pxに
-    b2FixtureDef fixtureDef;    //Fixtureの定義を入れる構造体
-    fixtureDef.shape = &circle;    //形
-    fixtureDef.density = 0.4;      //密度
-    fixtureDef.friction = 0.5;     //摩擦率
-    fixtureDef.restitution = 0.6;  //反発係数
-    body->CreateFixture(&fixtureDef);  //
-    body->SetBullet(true);
-    b2Vec2 force = b2Vec2(0, 30);
-    body->ApplyLinearImpulse(force, body->GetPosition());
-}
+//void GameScene::fire(const char *pszFileName){
+//    b2BodyDef bodyDef;    //b2BodyDef構造体
+//    bodyDef.type = b2_dynamicBody;    //動的な物体に
+//    bodyDef.position.Set(pSprite_char->getPosition().x/PTM_RATIO_WIN, pSprite_char->getPosition().y/PTM_RATIO_WIN);   //位置を設定
+//    CCSprite *bullet = CCSprite::create(pszFileName);
+//    bullet->setScale(2.0);
+////    bullet->setVisible(true);
+//    bullet->setPosition(pSprite_char->getPosition());
+//    this->addChild(bullet,3);
+//    bodyDef.userData = bullet;
+//    
+//    b2Body *body = world->CreateBody(&bodyDef);    //WorldからBodyを作成
+//    b2CircleShape circle;    //形を定義するクラス
+//    circle.m_radius = 50/PTM_RATIO;    //半径を50pxに
+//    b2FixtureDef fixtureDef;    //Fixtureの定義を入れる構造体
+//    fixtureDef.shape = &circle;    //形
+//    fixtureDef.density = 0.4;      //密度
+//    fixtureDef.friction = 0.5;     //摩擦率
+//    fixtureDef.restitution = 0.6;  //反発係数
+//    body->CreateFixture(&fixtureDef);  //
+//    body->SetBullet(true);
+//    b2Vec2 force = b2Vec2(0, 30);
+//    body->ApplyLinearImpulse(force, body->GetPosition());
+//}
 
 
 void GameScene::BeginContact(b2Contact* contact)
