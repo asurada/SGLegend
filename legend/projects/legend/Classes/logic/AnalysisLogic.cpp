@@ -25,3 +25,7 @@ AnalysisShape AnalysisLogic::recogize(CCArray *linkballs){
     
     return noresult;
 }
+
+CCArray *AnalysisLogic::getContainer(){
+    return spritesContainer;
+}

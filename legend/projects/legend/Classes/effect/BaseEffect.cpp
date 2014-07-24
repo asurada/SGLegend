@@ -1,9 +1,9 @@
 //
-//  baseAnimation.cpp
+//  BaseEffect.cpp
 //  legend
 //
 //  Created by Yan Wei on 2014/07/24.
 //
 //
 
-#include "BaseAnimation.h"
+#include "BaseEffect.h"

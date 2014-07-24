@@ -37,24 +37,15 @@ enum Position{
 
 class AnalysisLogic{
 
-    private:
-    
-    
-    public:
+    protected:
         CCArray *spritesContainer;
-        cocos2d::CCPoint ballPos_1;
-        cocos2d::CCPoint ballPos_2;
-        cocos2d::CCPoint ballPos_3;
-        cocos2d::CCPoint ballPos_4;
-        cocos2d::CCPoint ballPos_5;
-        cocos2d::CCPoint ballPos_6;
         CCLayer* parent;
+    public:
         AnalysisLogic *logic;
         AnalysisLogic(int formate);
         AnalysisLogic();
         ~AnalysisLogic();
-        int pointCount;
-    
+        CCArray *getContainer();
         virtual void init(CCLayer *_parent,CCArray *container) = 0;
         virtual AnalysisShape recogize(CCArray *linkballs) = 0;
 

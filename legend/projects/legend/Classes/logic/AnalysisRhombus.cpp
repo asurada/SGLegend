@@ -75,10 +75,10 @@ void AnalysisRhombus::init(CCLayer *_parent,CCArray *container){
     y4 = y2;
     x2 = width  * 4.0 / 5.0;
     x4 = width  * 1.0 / 5.0;
-    ballPos_1 = ccp(x1, y1);
-    ballPos_2 = ccp(x2, y2);
-    ballPos_3 = ccp(x3, y3);
-    ballPos_4 = ccp(x4, y4);
+    CCPoint ballPos_1 = ccp(x1, y1);
+    CCPoint ballPos_2 = ccp(x2, y2);
+    CCPoint ballPos_3 = ccp(x3, y3);
+    CCPoint ballPos_4 = ccp(x4, y4);
 
     BallBase* pSprite_1 = (BallBase *)spritesContainer->objectAtIndex(0);
     pSprite_1->setPosition(ballPos_1);

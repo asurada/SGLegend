@@ -93,14 +93,10 @@ bool GameScene::init()
     operationlayer->setPosition(ccp(0,0));
     this->addChild(operationlayer,1);
 
-   
-    
-    
    //this->initBallInRect();
    // this->initBallInTriangle();
    // this->initBallInRhombus();
    // this->initBallInPentagon();
-    
     
     pSprite_bg_1 = CCSprite::create("bg@2x.png");
     pSprite_bg_1->setPosition(ccp(0 , visibleSize.height/2));
@@ -143,8 +139,7 @@ bool GameScene::init()
 
 void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 {
-    CCSize s = CCDirector::sharedDirector()->getWinSize();
-    
+
     CCSetIterator it;
     CCTouch* touch;
     
@@ -161,13 +156,6 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
         {
             fire("fire_1.png");
         }
-        
-        
-//        b2BodyDef myBodyDef;
-//        myBodyDef.type = b2_staticBody;
-//        myBodyDef.position.Set(location.x/PTM_RATIO_WIN,location.y/PTM_RATIO_WIN);
-//        currentPlatformBody = world->CreateBody(&myBodyDef);
-        
     }
 
 }

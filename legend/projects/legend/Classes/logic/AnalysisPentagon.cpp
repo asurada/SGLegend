@@ -87,11 +87,11 @@ void AnalysisPentagon::init(CCLayer *_parent,CCArray *container){
     x5 = centerX -(x2 - centerX);
     y5 = y2;
     
-    ballPos_1 = ccp(x1, y1);
-    ballPos_2 = ccp(x2, y2);
-    ballPos_3 = ccp(x3, y3);
-    ballPos_4 = ccp(x4, y4);
-    ballPos_5 = ccp(x5, y5);
+    CCPoint ballPos_1 = ccp(x1, y1);
+    CCPoint ballPos_2 = ccp(x2, y2);
+    CCPoint ballPos_3 = ccp(x3, y3);
+    CCPoint ballPos_4 = ccp(x4, y4);
+    CCPoint ballPos_5 = ccp(x5, y5);
  
 
     BallBase* pSprite_1 = (BallBase *)spritesContainer->objectAtIndex(0);

@@ -285,8 +285,12 @@
 		A21B7CCD1974F53F00B945BA /* brush.png in Resources */ = {isa = PBXBuildFile; fileRef = A21B7CCC1974F53F00B945BA /* brush.png */; };
 		A21DC6D81946FF8C00ECFCB5 /* largeBrush_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A21DC6D71946FF8C00ECFCB5 /* largeBrush_2.png */; };
 		A21DC6DA194700C700ECFCB5 /* texture_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A21DC6D9194700C700ECFCB5 /* texture_1.png */; };
-		A225ABF71980A96D00C342F3 /* baseAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225ABF51980A96D00C342F3 /* baseAnimation.cpp */; };
 		A225ABFE1980B59D00C342F3 /* BallBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225ABFC1980B59D00C342F3 /* BallBase.cpp */; };
+		A225AC021980E76E00C342F3 /* BaseAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC001980E76E00C342F3 /* BaseAnimation.cpp */; };
+		A225AC051980E7D200C342F3 /* BaseEnemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC031980E7D200C342F3 /* BaseEnemy.cpp */; };
+		A225AC091980ED4700C342F3 /* BaseEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC071980ED4700C342F3 /* BaseEffect.cpp */; };
+		A225AC0D1980EE0000C342F3 /* BaseProtagonist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC0B1980EE0000C342F3 /* BaseProtagonist.cpp */; };
+		A225AC101980F28000C342F3 /* Enm_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC0E1980F28000C342F3 /* Enm_01.cpp */; };
 		A24C49A21957F4E400FE4A50 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A24C49A11957F4E400FE4A50 /* arrow.png */; };
 		A27784F91947EDCB00765D69 /* Concept.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784F81947EDCB00765D69 /* Concept.strings */; };
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
@@ -878,10 +882,18 @@
 		A21B7CCC1974F53F00B945BA /* brush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brush.png; sourceTree = "<group>"; };
 		A21DC6D71946FF8C00ECFCB5 /* largeBrush_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeBrush_2.png; sourceTree = "<group>"; };
 		A21DC6D9194700C700ECFCB5 /* texture_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_1.png; sourceTree = "<group>"; };
-		A225ABF51980A96D00C342F3 /* baseAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = baseAnimation.cpp; path = ../Classes/animation/baseAnimation.cpp; sourceTree = "<group>"; };
-		A225ABF61980A96D00C342F3 /* baseAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = baseAnimation.h; path = ../Classes/animation/baseAnimation.h; sourceTree = "<group>"; };
 		A225ABFC1980B59D00C342F3 /* BallBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BallBase.cpp; path = ../Classes/magicBall/BallBase.cpp; sourceTree = "<group>"; };
 		A225ABFD1980B59D00C342F3 /* BallBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallBase.h; path = ../Classes/magicBall/BallBase.h; sourceTree = "<group>"; };
+		A225AC001980E76E00C342F3 /* BaseAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseAnimation.cpp; path = ../Classes/animation/BaseAnimation.cpp; sourceTree = "<group>"; };
+		A225AC011980E76E00C342F3 /* BaseAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseAnimation.h; path = ../Classes/animation/BaseAnimation.h; sourceTree = "<group>"; };
+		A225AC031980E7D200C342F3 /* BaseEnemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseEnemy.cpp; path = ../Classes/enemy/BaseEnemy.cpp; sourceTree = "<group>"; };
+		A225AC041980E7D200C342F3 /* BaseEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEnemy.h; path = ../Classes/enemy/BaseEnemy.h; sourceTree = "<group>"; };
+		A225AC071980ED4700C342F3 /* BaseEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseEffect.cpp; path = ../Classes/effect/BaseEffect.cpp; sourceTree = "<group>"; };
+		A225AC081980ED4700C342F3 /* BaseEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEffect.h; path = ../Classes/effect/BaseEffect.h; sourceTree = "<group>"; };
+		A225AC0B1980EE0000C342F3 /* BaseProtagonist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseProtagonist.cpp; path = ../Classes/protagonist/BaseProtagonist.cpp; sourceTree = "<group>"; };
+		A225AC0C1980EE0000C342F3 /* BaseProtagonist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseProtagonist.h; path = ../Classes/protagonist/BaseProtagonist.h; sourceTree = "<group>"; };
+		A225AC0E1980F28000C342F3 /* Enm_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Enm_01.cpp; path = ../Classes/enemy/Enm_01.cpp; sourceTree = "<group>"; };
+		A225AC0F1980F28000C342F3 /* Enm_01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enm_01.h; path = ../Classes/enemy/Enm_01.h; sourceTree = "<group>"; };
 		A24C49A11957F4E400FE4A50 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A27784F81947EDCB00765D69 /* Concept.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Concept.strings; sourceTree = "<group>"; };
 		A27784FA1947F61600765D69 /* TechMemo.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TechMemo.strings; sourceTree = "<group>"; };
@@ -1422,6 +1434,9 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A225AC0A1980EDB800C342F3 /* protagonist */,
+				A225AC061980ED3400C342F3 /* effect */,
+				A225ABFF1980E71E00C342F3 /* enemy */,
 				A225ABF81980B19200C342F3 /* magicBall */,
 				A225ABF41980A95600C342F3 /* animation */,
 				A2BF55CA197FB0D80077BD5F /* pattern */,
@@ -2127,6 +2142,8 @@
 		9CA1E96D1930D65100080A75 /* logic */ = {
 			isa = PBXGroup;
 			children = (
+				9C9D3A811931BD8A0041258E /* AnalysisLogic.cpp */,
+				9C9D3A821931BD8A0041258E /* AnalysisLogic.h */,
 				9C77340F193CA41F004D09E4 /* AnalysisFactory.cpp */,
 				9C773410193CA41F004D09E4 /* AnalysisFactory.h */,
 				9C773411193CA41F004D09E4 /* AnalysisPentagon.cpp */,
@@ -2137,8 +2154,6 @@
 				9C773416193CA41F004D09E4 /* AnalysisRhombus.h */,
 				9C773419193CA41F004D09E4 /* AnalysisTriangle.cpp */,
 				9C77341A193CA41F004D09E4 /* AnalysisTriangle.h */,
-				9C9D3A811931BD8A0041258E /* AnalysisLogic.cpp */,
-				9C9D3A821931BD8A0041258E /* AnalysisLogic.h */,
 				9C9D3A901931BE3B0041258E /* AnalysisHexagon.cpp */,
 				9C9D3A911931BE3B0041258E /* AnalysisHexagon.h */,
 			);
@@ -2225,8 +2240,8 @@
 		A225ABF41980A95600C342F3 /* animation */ = {
 			isa = PBXGroup;
 			children = (
-				A225ABF51980A96D00C342F3 /* baseAnimation.cpp */,
-				A225ABF61980A96D00C342F3 /* baseAnimation.h */,
+				A225AC001980E76E00C342F3 /* BaseAnimation.cpp */,
+				A225AC011980E76E00C342F3 /* BaseAnimation.h */,
 			);
 			name = animation;
 			sourceTree = "<group>";
@@ -2238,6 +2253,35 @@
 				A225ABFD1980B59D00C342F3 /* BallBase.h */,
 			);
 			name = magicBall;
+			sourceTree = "<group>";
+		};
+		A225ABFF1980E71E00C342F3 /* enemy */ = {
+			isa = PBXGroup;
+			children = (
+				A225AC031980E7D200C342F3 /* BaseEnemy.cpp */,
+				A225AC041980E7D200C342F3 /* BaseEnemy.h */,
+				A225AC0E1980F28000C342F3 /* Enm_01.cpp */,
+				A225AC0F1980F28000C342F3 /* Enm_01.h */,
+			);
+			name = enemy;
+			sourceTree = "<group>";
+		};
+		A225AC061980ED3400C342F3 /* effect */ = {
+			isa = PBXGroup;
+			children = (
+				A225AC071980ED4700C342F3 /* BaseEffect.cpp */,
+				A225AC081980ED4700C342F3 /* BaseEffect.h */,
+			);
+			name = effect;
+			sourceTree = "<group>";
+		};
+		A225AC0A1980EDB800C342F3 /* protagonist */ = {
+			isa = PBXGroup;
+			children = (
+				A225AC0B1980EE0000C342F3 /* BaseProtagonist.cpp */,
+				A225AC0C1980EE0000C342F3 /* BaseProtagonist.h */,
+			);
+			name = protagonist;
 			sourceTree = "<group>";
 		};
 		A27784F71947EDB400765D69 /* Managemnet */ = {
@@ -2390,6 +2434,7 @@
 				15A3D9021682F7D5002FB0C5 /* b2CollidePolygon.cpp in Sources */,
 				15A3D9031682F7D5002FB0C5 /* b2Collision.cpp in Sources */,
 				15A3D9041682F7D5002FB0C5 /* b2Distance.cpp in Sources */,
+				A225AC051980E7D200C342F3 /* BaseEnemy.cpp in Sources */,
 				9C0097C9192CF03200B57729 /* OperationLayer.cpp in Sources */,
 				15A3D9051682F7D5002FB0C5 /* b2DynamicTree.cpp in Sources */,
 				15A3D9061682F7D5002FB0C5 /* b2TimeOfImpact.cpp in Sources */,
@@ -2492,6 +2537,7 @@
 				15A3DA3E1682F826002FB0C5 /* CCLayerGradientLoader.cpp in Sources */,
 				15A3DA3F1682F826002FB0C5 /* CCLayerLoader.cpp in Sources */,
 				15A3DA401682F826002FB0C5 /* CCMenuItemImageLoader.cpp in Sources */,
+				A225AC0D1980EE0000C342F3 /* BaseProtagonist.cpp in Sources */,
 				375BD5101868454E0024609E /* CCActionFrameEasing.cpp in Sources */,
 				298B29C318D0668400C1920F /* PageViewReader.cpp in Sources */,
 				15A3DA411682F826002FB0C5 /* CCMenuItemLoader.cpp in Sources */,
@@ -2500,6 +2546,7 @@
 				15A3DA431682F826002FB0C5 /* CCNodeLoader.cpp in Sources */,
 				15A3DA441682F826002FB0C5 /* CCNodeLoaderLibrary.cpp in Sources */,
 				298B29C118D0668400C1920F /* ListViewReader.cpp in Sources */,
+				A225AC021980E76E00C342F3 /* BaseAnimation.cpp in Sources */,
 				15A3DA451682F826002FB0C5 /* CCParticleSystemQuadLoader.cpp in Sources */,
 				15A3DA461682F826002FB0C5 /* CCScale9SpriteLoader.cpp in Sources */,
 				15A3DA471682F826002FB0C5 /* CCScrollViewLoader.cpp in Sources */,
@@ -2512,7 +2559,6 @@
 				15A3DA4C1682F826002FB0C5 /* CCControlHuePicker.cpp in Sources */,
 				375BD50F1868454E0024609E /* CCActionFrame.cpp in Sources */,
 				15A3DA4D1682F826002FB0C5 /* CCControlPotentiometer.cpp in Sources */,
-				A225ABF71980A96D00C342F3 /* baseAnimation.cpp in Sources */,
 				9CFEFB6319460B54000D4ADE /* CCHttpRequest.cpp in Sources */,
 				9CFEFB6A194745B0000D4ADE /* CCPath.cpp in Sources */,
 				15A3DA4E1682F826002FB0C5 /* CCControlSaturationBrightnessPicker.cpp in Sources */,
@@ -2537,6 +2583,7 @@
 				15A3DA5C1682F826002FB0C5 /* CCTableViewCell.cpp in Sources */,
 				15A3DA5D1682F826002FB0C5 /* HttpClient.cpp in Sources */,
 				15A3DA5E1682F826002FB0C5 /* CCPhysicsDebugNode.cpp in Sources */,
+				A225AC091980ED4700C342F3 /* BaseEffect.cpp in Sources */,
 				375BD5131868454E0024609E /* CCActionObject.cpp in Sources */,
 				15A3DA5F1682F826002FB0C5 /* CCPhysicsSprite.cpp in Sources */,
 				15A3DAEB1682F8A6002FB0C5 /* CDAudioManager.m in Sources */,
@@ -2607,6 +2654,7 @@
 				379BB9AE17F03F3700829B88 /* CCComAudio.cpp in Sources */,
 				379BB9AF17F03F3700829B88 /* CCComController.cpp in Sources */,
 				379BB9B017F03F3700829B88 /* CCComRender.cpp in Sources */,
+				A225AC101980F28000C342F3 /* Enm_01.cpp in Sources */,
 				379BB9B117F03F3700829B88 /* CCInputDelegate.cpp in Sources */,
 				379BB9B317F03F3700829B88 /* UIWidget.cpp in Sources */,
 				379BB9B417F03F3700829B88 /* UILayout.cpp in Sources */,

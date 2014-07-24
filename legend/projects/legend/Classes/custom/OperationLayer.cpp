@@ -168,7 +168,7 @@ AnalysisLogic* OperationLayer::createBall(int shape){
 
 CCSprite* OperationLayer::isHit(cocos2d::CCPoint point){
     CCObject *obj=NULL;
-    CCARRAY_FOREACH(analysisLogic->spritesContainer,obj){
+    CCARRAY_FOREACH(analysisLogic->getContainer(),obj){
         CCSprite *spirit = (CCSprite *)obj;
         //CCLOG("x=%f,y=%f",point.x,point.y);
         if(spirit->boundingBox().containsPoint(point)){

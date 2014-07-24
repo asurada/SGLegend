@@ -9,7 +9,7 @@
 #ifndef __legend__baseAnimation__
 #define __legend__baseAnimation__
 
-class baseAnimation{
+class BaseAnimation{
     public:
         void fadeout();
         void rotation();
