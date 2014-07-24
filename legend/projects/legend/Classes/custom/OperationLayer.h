@@ -11,6 +11,11 @@
 #include "cocos2d.h"
 #include "ShapeConst.h"
 #include "AnalysisHexagon.h"
+#include "AnalysisTriangle.h"
+#include "AnalysisRhombus.h"
+#include "AnalysisRect.h"
+#include "AnalysisPentagon.h"
+
 #include "OperationCallback.h"
 #include "AnalysisFactory.h"
 #include "TouchTrailLayer.h"
@@ -25,62 +30,41 @@ public:
     int _shape;
     virtual bool init();
     static OperationLayer* create();
-    void createBall(int shape);
-    void setBallInTriangle();
-    void setBallInRect();
-    void setBallInRhombus();
-    void setBallInPentagon();
-    void setBallInHexagon();
+    AnalysisLogic* createBall(int shape);
     TouchTrailLayer *_touchTrailLayer;
     CC_SYNTHESIZE(OperationCallback*, operationCallBack, Delegate);
     std::vector<cocos2d::CCPoint> tempMagicPoints;
-    CCArray *spritesContainer;
     CCArray *magicMarks;
     CCArray *magicSprites;
+    cocos2d::CCSprite* brushSprite;
+    cocos2d::CCSprite* makeBrushImage();
+    void fadeout(CCSprite* sprite,float time);
+    void draw(cocos2d::CCPoint point);
+    void removeAllMagicSquare();
     
+private:
+    OperationLayer();
+    ~OperationLayer();
+    AnalysisShape _linkShape;
+    AnalysisFactory* factory;
+    AnalysisLogic* analysisLogic;
+    
+    cocos2d::CCSprite *brush;
+    CCLayer * marklayer;
+    CCSprite* isHit(cocos2d::CCPoint point);
+    cocos2d::CCSprite* addMark(CCPoint point);
+    cocos2d::CCSprite* adjustMark(CCSprite* brush,CCPoint start,CCPoint end);
+    void animate(CCSprite *spirit);
+    
+    void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     void touchBegin_TouchTrail(cocos2d::CCPoint point);
     void touchMove_TouchTrail(cocos2d::CCPoint point);
     void touchEnd_TouchTrail(cocos2d::CCPoint point);
     void onPop(cocos2d::CCPoint point);
     void onPopLast(cocos2d::CCPoint point);
     void onPopStop();
-    void fadeout(CCSprite* sprite,float time);
-    cocos2d::CCSprite* brushSprite;
-    void draw(cocos2d::CCPoint point);
-    cocos2d::CCSprite* makeBrushImage();
-    void removeAllMagicSquare();
-    
-private:
-    OperationLayer();
-    ~OperationLayer();
-    bool _isLoop;
-    AnalysisShape _linkShape;
-    AnalysisFactory* factory;
-    AnalysisHexagon* analysisLogic;
-    cocos2d::CCSprite* pSprite_1;
-    cocos2d::CCSprite* pSprite_2;
-    cocos2d::CCSprite* pSprite_3;
-    cocos2d::CCSprite* pSprite_4;
-    cocos2d::CCSprite* pSprite_5;
-    cocos2d::CCSprite* pSprite_6;
-    cocos2d::CCPoint ballPos_1;
-    cocos2d::CCPoint ballPos_2;
-    cocos2d::CCPoint ballPos_3;
-    cocos2d::CCPoint ballPos_4;
-    cocos2d::CCPoint ballPos_5;
-    cocos2d::CCPoint ballPos_6;
-    cocos2d::CCSprite *brush;
-    CCLayer * marklayer;
-    cocos2d::CCRenderTexture *target;
-    CCSprite* isHit(cocos2d::CCPoint point);
-    void animate(CCSprite *spirit);
-    cocos2d::CCSprite* addMark(CCPoint point);
-    cocos2d::CCSprite* adjustMark(CCSprite* brush,CCPoint start,CCPoint end);
-    void initBall();
-    bool isCloseLoop(cocos2d::CCSprite * _ball);
-    void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
-    void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
-    void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 };
 
 #endif

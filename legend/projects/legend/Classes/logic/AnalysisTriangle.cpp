@@ -20,8 +20,12 @@ AnalysisShape AnalysisTriangle::recogize(CCArray *linkballs){
 }
 
 
-void AnalysisTriangle::init(CCLayer *_parent){
+void AnalysisTriangle::init(CCLayer *_parent,CCArray *container){
+    if(container->count() != 3) return;
     parent = _parent;
+    spritesContainer = container;
+    spritesContainer->retain();
+   
     CCSize visibleSize = parent->getContentSize();
     float width =visibleSize.width;
     float height =visibleSize.height;
@@ -40,24 +44,20 @@ void AnalysisTriangle::init(CCLayer *_parent){
     ballPos_2 = ccp(x2, y2);
     ballPos_3 = ccp(x3, y3);
     
-    pSprite_1 = CCSprite::create("bll_01.png");
+    BallBase* pSprite_1 = (BallBase *)spritesContainer->objectAtIndex(0);   //BallBase::create("bll_01.png");
     pSprite_1->setPosition(ballPos_1);
     pSprite_1->setTag(ENUM_PST_1);
     parent->addChild(pSprite_1);
     
-    pSprite_2 = CCSprite::create("bll_02.png");
+    BallBase* pSprite_2 = (BallBase *)spritesContainer->objectAtIndex(1);
     pSprite_2->setTag(ENUM_PST_2);
     pSprite_2->setPosition(ballPos_2);
     parent->addChild(pSprite_2);
     
-    pSprite_3 = CCSprite::create("bll_03.png");
+    BallBase* pSprite_3 = (BallBase *)spritesContainer->objectAtIndex(2);
     pSprite_3->setTag(ENUM_PST_3);
     pSprite_3->setPosition(ballPos_3);
     parent->addChild(pSprite_3);
     
-    spritesContainer = CCArray::create();
-    spritesContainer->addObject(pSprite_1);
-    spritesContainer->addObject(pSprite_2);
-    spritesContainer->addObject(pSprite_3);
-    spritesContainer->retain();
+
 }

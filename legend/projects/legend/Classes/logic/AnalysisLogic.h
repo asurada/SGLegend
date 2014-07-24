@@ -9,6 +9,7 @@
 #ifndef __legend__AnalysisLogic__
 #define __legend__AnalysisLogic__
 #include "cocos2d.h"
+#include "ballBase.h"
 
 USING_NS_CC;
 
@@ -41,12 +42,6 @@ class AnalysisLogic{
     
     public:
         CCArray *spritesContainer;
-        cocos2d::CCSprite* pSprite_1;
-        cocos2d::CCSprite* pSprite_2;
-        cocos2d::CCSprite* pSprite_3;
-        cocos2d::CCSprite* pSprite_4;
-        cocos2d::CCSprite* pSprite_5;
-        cocos2d::CCSprite* pSprite_6;
         cocos2d::CCPoint ballPos_1;
         cocos2d::CCPoint ballPos_2;
         cocos2d::CCPoint ballPos_3;
@@ -55,12 +50,13 @@ class AnalysisLogic{
         cocos2d::CCPoint ballPos_6;
         CCLayer* parent;
         AnalysisLogic *logic;
-        void init(CCLayer *_parent);
         AnalysisLogic(int formate);
         AnalysisLogic();
         ~AnalysisLogic();
         int pointCount;
-        virtual AnalysisShape recogize(CCArray *linkballs);
+    
+        virtual void init(CCLayer *_parent,CCArray *container) = 0;
+        virtual AnalysisShape recogize(CCArray *linkballs) = 0;
 
     
 };

@@ -285,6 +285,8 @@
 		A21B7CCD1974F53F00B945BA /* brush.png in Resources */ = {isa = PBXBuildFile; fileRef = A21B7CCC1974F53F00B945BA /* brush.png */; };
 		A21DC6D81946FF8C00ECFCB5 /* largeBrush_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A21DC6D71946FF8C00ECFCB5 /* largeBrush_2.png */; };
 		A21DC6DA194700C700ECFCB5 /* texture_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A21DC6D9194700C700ECFCB5 /* texture_1.png */; };
+		A225ABF71980A96D00C342F3 /* baseAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225ABF51980A96D00C342F3 /* baseAnimation.cpp */; };
+		A225ABFE1980B59D00C342F3 /* BallBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225ABFC1980B59D00C342F3 /* BallBase.cpp */; };
 		A24C49A21957F4E400FE4A50 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A24C49A11957F4E400FE4A50 /* arrow.png */; };
 		A27784F91947EDCB00765D69 /* Concept.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784F81947EDCB00765D69 /* Concept.strings */; };
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
@@ -876,6 +878,10 @@
 		A21B7CCC1974F53F00B945BA /* brush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brush.png; sourceTree = "<group>"; };
 		A21DC6D71946FF8C00ECFCB5 /* largeBrush_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeBrush_2.png; sourceTree = "<group>"; };
 		A21DC6D9194700C700ECFCB5 /* texture_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture_1.png; sourceTree = "<group>"; };
+		A225ABF51980A96D00C342F3 /* baseAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = baseAnimation.cpp; path = ../Classes/animation/baseAnimation.cpp; sourceTree = "<group>"; };
+		A225ABF61980A96D00C342F3 /* baseAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = baseAnimation.h; path = ../Classes/animation/baseAnimation.h; sourceTree = "<group>"; };
+		A225ABFC1980B59D00C342F3 /* BallBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BallBase.cpp; path = ../Classes/magicBall/BallBase.cpp; sourceTree = "<group>"; };
+		A225ABFD1980B59D00C342F3 /* BallBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallBase.h; path = ../Classes/magicBall/BallBase.h; sourceTree = "<group>"; };
 		A24C49A11957F4E400FE4A50 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A27784F81947EDCB00765D69 /* Concept.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Concept.strings; sourceTree = "<group>"; };
 		A27784FA1947F61600765D69 /* TechMemo.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TechMemo.strings; sourceTree = "<group>"; };
@@ -1416,6 +1422,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A225ABF81980B19200C342F3 /* magicBall */,
+				A225ABF41980A95600C342F3 /* animation */,
 				A2BF55CA197FB0D80077BD5F /* pattern */,
 				A2007CC01945AB1300AA36E8 /* utility */,
 				A2007CBC1945A8B400AA36E8 /* scene */,
@@ -2214,6 +2222,24 @@
 			path = ../Classes/utility;
 			sourceTree = "<group>";
 		};
+		A225ABF41980A95600C342F3 /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				A225ABF51980A96D00C342F3 /* baseAnimation.cpp */,
+				A225ABF61980A96D00C342F3 /* baseAnimation.h */,
+			);
+			name = animation;
+			sourceTree = "<group>";
+		};
+		A225ABF81980B19200C342F3 /* magicBall */ = {
+			isa = PBXGroup;
+			children = (
+				A225ABFC1980B59D00C342F3 /* BallBase.cpp */,
+				A225ABFD1980B59D00C342F3 /* BallBase.h */,
+			);
+			name = magicBall;
+			sourceTree = "<group>";
+		};
 		A27784F71947EDB400765D69 /* Managemnet */ = {
 			isa = PBXGroup;
 			children = (
@@ -2486,12 +2512,14 @@
 				15A3DA4C1682F826002FB0C5 /* CCControlHuePicker.cpp in Sources */,
 				375BD50F1868454E0024609E /* CCActionFrame.cpp in Sources */,
 				15A3DA4D1682F826002FB0C5 /* CCControlPotentiometer.cpp in Sources */,
+				A225ABF71980A96D00C342F3 /* baseAnimation.cpp in Sources */,
 				9CFEFB6319460B54000D4ADE /* CCHttpRequest.cpp in Sources */,
 				9CFEFB6A194745B0000D4ADE /* CCPath.cpp in Sources */,
 				15A3DA4E1682F826002FB0C5 /* CCControlSaturationBrightnessPicker.cpp in Sources */,
 				15A3DA4F1682F826002FB0C5 /* CCControlSlider.cpp in Sources */,
 				15A3DA501682F826002FB0C5 /* CCControlStepper.cpp in Sources */,
 				15A3DA511682F826002FB0C5 /* CCControlSwitch.cpp in Sources */,
+				A225ABFE1980B59D00C342F3 /* BallBase.cpp in Sources */,
 				298B29C718D0668400C1920F /* WidgetReader.cpp in Sources */,
 				9C77341C193CA41F004D09E4 /* AnalysisPentagon.cpp in Sources */,
 				15A3DA521682F826002FB0C5 /* CCControlUtils.cpp in Sources */,

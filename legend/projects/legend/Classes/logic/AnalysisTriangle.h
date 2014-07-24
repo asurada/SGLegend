@@ -11,11 +11,12 @@
 
 
 #include "AnalysisLogic.h"
+#include "ballBase.h"
 
 class AnalysisTriangle:public AnalysisLogic{
     public:
         AnalysisShape recogize(cocos2d::CCArray *linkballs);
-        void init(CCLayer *_parent);
+        void init(CCLayer *_parent,CCArray *container);
 
 };
 

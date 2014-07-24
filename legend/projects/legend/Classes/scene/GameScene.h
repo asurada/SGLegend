@@ -34,7 +34,6 @@ public:
     void fire(const char *pszFileName);
     void monsterAttack();
     void explode();
- 
     void update(float dt);
     void backgroundRun();
     
@@ -53,7 +52,6 @@ public:
     
 private:
     b2World* world;
-    cocos2d::CCPoint previousLocation;
 	b2Body* currentPlatformBody;
     cocos2d::CCPoint center;
     cocos2d::CCPoint monster;

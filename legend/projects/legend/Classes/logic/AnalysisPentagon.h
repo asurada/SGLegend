@@ -16,7 +16,7 @@ public :
     AnalysisPentagon();
     ~AnalysisPentagon();
     AnalysisShape recogize(CCArray *linkballs);
-    void init(CCLayer *_parent);
+    void init(CCLayer *_parent,CCArray *container);
 };
 
 

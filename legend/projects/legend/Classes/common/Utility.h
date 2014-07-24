@@ -14,6 +14,7 @@ USING_NS_CC;
 class Utility{
 public:
     static CCPoint calCenterPoint(cocos2d::CCPoint startPoint,cocos2d::CCPoint endPoint);
+    static bool isCloseLoop(CCSprite * _ball, CCArray *magicSprites);
     
 };
 #endif /* defined(__legend__Utility__) */

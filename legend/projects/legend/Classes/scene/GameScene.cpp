@@ -163,12 +163,10 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
         }
         
         
-        previousLocation = location;
-        
-        b2BodyDef myBodyDef;
-        myBodyDef.type = b2_staticBody;
-        myBodyDef.position.Set(location.x/PTM_RATIO_WIN,location.y/PTM_RATIO_WIN);
-        currentPlatformBody = world->CreateBody(&myBodyDef);
+//        b2BodyDef myBodyDef;
+//        myBodyDef.type = b2_staticBody;
+//        myBodyDef.position.Set(location.x/PTM_RATIO_WIN,location.y/PTM_RATIO_WIN);
+//        currentPlatformBody = world->CreateBody(&myBodyDef);
         
     }
 
