@@ -11,7 +11,9 @@
 #include "BaseFighter.h"
 
 class Char_01 : public BaseFighter{
-    public:
+public:
+    a
+    
     
 };
 

@@ -20,6 +20,7 @@ public:
     static BaseFighter* create(const char *pszFileName);
     virtual void explode() = 0;
     virtual void attack() = 0;
+    virtual void enemyExplode() = 0;
     virtual void defend() = 0;
     virtual void die() = 0;
     virtual void refreshHp(int hp) = 0;
