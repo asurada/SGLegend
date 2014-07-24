@@ -14,6 +14,9 @@
 class BaseEffect : public cocos2d::CCSprite{
     public:
         void explode();
+        void fadeout();
+        void rotation();
+        void fadein();
 };
 
 #endif /* defined(__legend__BaseEffect__) */

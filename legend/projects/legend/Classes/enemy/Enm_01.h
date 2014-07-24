@@ -8,9 +8,12 @@
 
 #ifndef __legend__Enm_01__
 #define __legend__Enm_01__
-#include "BaseEnemy.h"
+#include "BaseFighter.h"
 
-class Enm_01 :public BaseEnemy{
+class Enm_01 :public BaseFighter{
+public:
+    void explode();
+    
     
 };
 

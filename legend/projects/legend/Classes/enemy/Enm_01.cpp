@@ -7,3 +7,7 @@
 //
 
 #include "Enm_01.h"
+
+void Enm_01::explode(){
+    
+}

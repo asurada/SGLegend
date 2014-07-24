@@ -9,14 +9,15 @@
 #ifndef __legend__ballBase__
 #define __legend__ballBase__
 #include "cocos2d.h"
-#include "BaseAnimation.h"
+#include "BaseEffect.h"
+
 
 USING_NS_CC;
 
 
 class BallBase :public cocos2d::CCSprite{
     private:
-        BaseAnimation *animation;
+        BaseEffect* effect;
         typedef CCSprite super;
     public:
         virtual void init(const char *pName) =0;

@@ -67,8 +67,6 @@ bool GameScene::init()
     
     this->initPhysics();
     
-    ballArray = CCArray::create();
-    ballArray->retain();
     touchBallArray = CCArray::create();
     touchBallArray->retain();
     

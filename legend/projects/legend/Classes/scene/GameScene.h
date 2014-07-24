@@ -55,20 +55,16 @@ private:
 	b2Body* currentPlatformBody;
     cocos2d::CCPoint center;
     cocos2d::CCPoint monster;
-    cocos2d::CCSprite *startSprite;
-    cocos2d::CCSprite *endSprite;
-    cocos2d::CCSprite *bullet;
+    cocos2d::CCSprite* bullet;
     cocos2d::CCSprite* pSprite_round;
     cocos2d::CCSprite* pSprite_char;
     cocos2d::CCSprite* pSprite_monster;
     cocos2d::CCSprite* pSprite_bg_1;
     cocos2d::CCSprite* pSprite_bg_2;
-    cocos2d::CCArray *ballArray;
     cocos2d::CCArray *touchBallArray;
     std::vector<cocos2d::CCPoint> autoPoints;
-    cocos2d::CCPoint startPoint;
-    cocos2d::CCPoint endPoint;
     OperationLayer *operationlayer;
+    
     void initPhysics();
     cocos2d::CCSprite* animationSprite;
 
