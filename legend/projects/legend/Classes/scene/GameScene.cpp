@@ -117,6 +117,8 @@ bool GameScene::init()
     center = ccp(visibleSize.width/2 , visibleSize.height/4);
     pSprite_char = Char_01::create("char.png");
     pSprite_char->setPosition(center);
+
+    //pSprite_char->setWorld(world);
     this->addChild(pSprite_char, 2);
     
 
@@ -152,7 +154,8 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
         location = CCDirector::sharedDirector()->convertToGL(location);
         if (pSprite_char->boundingBox().containsPoint(location))
         {
-            pSprite_char->attack("fire_1.png");
+            CCLOG("ccTouchesBegan");
+            onFire();
         }
     }
 
@@ -215,9 +218,6 @@ void GameScene::startFireAnm(CCPoint &pos,const char * image,const char * plist,
 
 }
 
-
-
-
 //背景
 void GameScene::update(float dt)
 {
@@ -228,26 +228,19 @@ void GameScene::update(float dt)
 	// simple collision test
 	pSprite_monster->setColor(ccWHITE);
 	//pSprite_monster->setFlipY(false);
-   
-    
-   
-
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() != NULL) {
             CCSprite *sprite = (CCSprite *)b->GetUserData();
             sprite->setPosition(ccp(b->GetPosition().x * PTM_RATIO_WIN,
                                   b->GetPosition().y * PTM_RATIO_WIN));
             sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
-            
-            
-
             if (sprite != NULL && pSprite_monster->boundingBox().intersectsRect(sprite->boundingBox()))
             {
                 pSprite_monster->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
                 this->startFireAnm(monster,"fire2.png","fire2.plist","fire",40);
                 b->GetWorld()->DestroyBody(b);
                 sprite->removeFromParentAndCleanup(true);
-            }else if(sprite != NULL && sprite->getPosition().y > s.height){
+            }else if(sprite != NULL && (sprite->getPosition().y > s.height || sprite->getPosition().y < 0 || sprite->getPosition().x > s.width || sprite->getPosition().x < 0)){
                 b->GetWorld()->DestroyBody(b);
                 sprite->removeFromParentAndCleanup(true);
                 //delete sprite;
@@ -274,8 +267,6 @@ void GameScene::backgroundRun(){
     if(bg2Pos.y < -pSprite_bg_1->getContentSize().height/2){
         bg2Pos.y = pSprite_bg_2->getContentSize().height * 3 / 2;
     }
-	
-	// remove any inaccuracies by assigning only int values (this prevents floating point rounding errors accumulating over time)
 	bg1Pos.x = (int)bg1Pos.x;
 	bg2Pos.x = (int)bg2Pos.x;
 	pSprite_bg_1->setPosition(bg1Pos);
@@ -286,10 +277,10 @@ void GameScene::backgroundRun(){
 void GameScene::beginFire(AnalysisShape shape){
     switch (shape) {
         case star:
-            pSprite_char->attack("fire_1.png");
+            onFire();
             break;
         case hexagon:
-            pSprite_char->attack("fire_2.png");
+            onFire();
             break;
         default:
             break;
@@ -301,10 +292,36 @@ void GameScene::endFire(AnalysisShape shape){
 }
 
 
+void GameScene::onFire(){
+    BaseBullet *bullet = BaseBullet::create("fire_1.png");
+    bullet->setPosition(pSprite_char->getPosition());
+    this->addChild(bullet,5);
+    
+    b2BodyDef bodyDef; //b2BodyDef構造体
+    b2Body *body;
+    b2FixtureDef fixtureDef;//Fixtureの定義を入れる構造体
+    b2CircleShape circle;
+    bodyDef.type = b2_dynamicBody;    //動的な物体に
+    bodyDef.position.Set(bullet->getPosition().x/PTM_RATIO_WIN, bullet->getPosition().y/PTM_RATIO_WIN);   //位置を設定
+    bodyDef.userData = bullet;
+    body = this->world->CreateBody(&bodyDef);
+    //b2CircleShape circle;//形を定義するクラス
+    circle.m_radius = 50/PTM_RATIO;    //半径を50pxに
+    // b2FixtureDef fixtureDef;    //Fixtureの定義を入れる構造体
+    fixtureDef.shape = &circle;    //形
+    fixtureDef.density = 0.4;      //密度
+    fixtureDef.friction = 0.5;     //摩擦率
+    fixtureDef.restitution = 0.6;  //反発係数
+    body->CreateFixture(&fixtureDef);  //
+    body->SetBullet(true);
+    b2Vec2 force = b2Vec2(0, 30);
+    body->ApplyLinearImpulse(force, body->GetPosition());
+}
+
+
 
 void GameScene::cleanupSprite(CCSprite* inSprite)
 {
-   // bullet->setPosition(center);
     inSprite->removeFromParentAndCleanup(true);
 }
 
@@ -344,45 +361,18 @@ void GameScene::initPhysics()
     // Define the ground box shape.
     b2EdgeShape groundBox;
     // bottom
-    groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO_WIN,0));
-    groundBody->CreateFixture(&groundBox,0);
+//    groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO_WIN,0));
+//    groundBody->CreateFixture(&groundBox,0);
     // top
 //    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN));
 //    groundBody->CreateFixture(&groundBox,0);
     // left
-    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(0,0));
-    groundBody->CreateFixture(&groundBox,0);
+//    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(0,0));
+//    groundBody->CreateFixture(&groundBox,0);
     // right
-    groundBox.Set(b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,0));
-    groundBody->CreateFixture(&groundBox,0);
+//    groundBox.Set(b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,0));
+//    groundBody->CreateFixture(&groundBox,0);
 }
-
-
-
-//void GameScene::fire(const char *pszFileName){
-//    b2BodyDef bodyDef;    //b2BodyDef構造体
-//    bodyDef.type = b2_dynamicBody;    //動的な物体に
-//    bodyDef.position.Set(pSprite_char->getPosition().x/PTM_RATIO_WIN, pSprite_char->getPosition().y/PTM_RATIO_WIN);   //位置を設定
-//    CCSprite *bullet = CCSprite::create(pszFileName);
-//    bullet->setScale(2.0);
-////    bullet->setVisible(true);
-//    bullet->setPosition(pSprite_char->getPosition());
-//    this->addChild(bullet,3);
-//    bodyDef.userData = bullet;
-//    
-//    b2Body *body = world->CreateBody(&bodyDef);    //WorldからBodyを作成
-//    b2CircleShape circle;    //形を定義するクラス
-//    circle.m_radius = 50/PTM_RATIO;    //半径を50pxに
-//    b2FixtureDef fixtureDef;    //Fixtureの定義を入れる構造体
-//    fixtureDef.shape = &circle;    //形
-//    fixtureDef.density = 0.4;      //密度
-//    fixtureDef.friction = 0.5;     //摩擦率
-//    fixtureDef.restitution = 0.6;  //反発係数
-//    body->CreateFixture(&fixtureDef);  //
-//    body->SetBullet(true);
-//    b2Vec2 force = b2Vec2(0, 30);
-//    body->ApplyLinearImpulse(force, body->GetPosition());
-//}
 
 
 void GameScene::BeginContact(b2Contact* contact)

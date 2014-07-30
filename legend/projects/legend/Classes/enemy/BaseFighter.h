@@ -13,6 +13,8 @@
 #include "BaseEnemyEffect.h"
 #include "BaseBullet.h"
 #include "ShapeConst.h"
+#include "Box2D.h"
+#include "FighterCallback.h"
 
 class BaseFighter : public cocos2d::CCSprite{
 private:
@@ -20,14 +22,15 @@ private:
     BaseFighter* _target;
     typedef CCSprite super;
     cocos2d::CCLayer* _parent;
+    b2World* world;
     int hp;
     int magic;
     int exp;
+    
 public:
     virtual void init(int hp,int magic,int exp) =0;
     static BaseFighter* create(const char *pszFileName);
     virtual void explode() = 0;
-    virtual void attack(const char *bulletName,b2World &world);
     virtual void enemyExplode() = 0;
     virtual void defend() = 0;
     virtual void die() = 0;
@@ -39,7 +42,7 @@ public:
     virtual BaseFighter* transform() = 0;
     virtual BaseFighter* evolve() = 0;
     void setTarget(BaseFighter* target);
-    
+    CC_SYNTHESIZE(FighterCallback*, fighterCallback, Delegate);
 };
 
 #endif /* defined(__legend__BaseEnemy__) */

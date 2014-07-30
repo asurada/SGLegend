@@ -10,8 +10,12 @@
 #define __legend__FireBullet__
 
 #include "BaseBullet.h"
+#include "cocos2d.h"
 
 class FireBullet : public BaseBullet{
+    public:
+        void explode();
+    private:
     
 };
 

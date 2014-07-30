@@ -10,12 +10,16 @@
 #define __legend__Char_01__
 #include "BaseFighter.h"
 
+
 class Char_01 : public BaseFighter{
 private:
     typedef CCSprite super;
+    
 public:
     static Char_01* create(const char *pszFileName);
+
     void attack(const char *bulletName);
+    
     
     
 };

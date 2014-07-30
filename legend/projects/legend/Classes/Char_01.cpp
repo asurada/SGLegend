@@ -17,7 +17,12 @@ Char_01* Char_01::create(const char *pszFileName){
 void Char_01::attack(const char *bulletName){
     BaseBullet *bullet = FireBullet::create(bulletName);
     bullet->setPosition(this->getPosition());
-    this->getParent()->addChild(bullet);
-//    bullet->init(world);
+    this->getParent()->addChild(bullet,5);
+ 
+    if(fighterCallback){
+        fighterCallback->onInitBullet(bullet);
+    }
+    
+ //   bullet->init(getWorld());
 //    bullet->fire();
 }

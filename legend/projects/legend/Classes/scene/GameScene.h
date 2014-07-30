@@ -12,6 +12,7 @@
 #include "OperationCallback.h"
 #include "OperationLayer.h"
 #include "BaseFighter.h"
+#include "FighterCallback.h"
 #include "cocos2d.h"
 #include "Box2D.h"
 #include "Char_01.h"
@@ -47,6 +48,8 @@ public:
     virtual void EndContact(b2Contact* contact);
     virtual void beginFire(AnalysisShape shape);
     virtual void endFire(AnalysisShape shape);
+    void onFire();
+
 
     // implement the "static node()" method manually
     CREATE_FUNC(GameScene);
@@ -59,14 +62,13 @@ private:
     cocos2d::CCPoint monster;
     cocos2d::CCSprite* bullet;
     cocos2d::CCSprite* pSprite_round;
-    Char_01* pSprite_char;
     BaseFighter* pSprite_monster;
     cocos2d::CCSprite* pSprite_bg_1;
     cocos2d::CCSprite* pSprite_bg_2;
     cocos2d::CCArray *touchBallArray;
     std::vector<cocos2d::CCPoint> autoPoints;
     OperationLayer *operationlayer;
-    
+    Char_01* pSprite_char;
     void initPhysics();
     cocos2d::CCSprite* animationSprite;
 

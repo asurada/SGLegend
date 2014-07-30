@@ -16,3 +16,4 @@ BaseFighter* BaseFighter::create(const char *pszFileName){
 void BaseFighter::setTarget(BaseFighter* target){
     this->_target = target;
 }
+

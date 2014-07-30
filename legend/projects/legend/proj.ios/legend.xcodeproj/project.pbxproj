@@ -928,6 +928,7 @@
 		A225AC491981137600C342F3 /* FireBullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FireBullet.cpp; path = ../Classes/FireBullet.cpp; sourceTree = "<group>"; };
 		A225AC4A1981137600C342F3 /* FireBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FireBullet.h; path = ../Classes/FireBullet.h; sourceTree = "<group>"; };
 		A24C49A11957F4E400FE4A50 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		A262967D19866B6F000A77F9 /* FighterCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FighterCallback.h; sourceTree = "<group>"; };
 		A27784F81947EDCB00765D69 /* Concept.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Concept.strings; sourceTree = "<group>"; };
 		A27784FA1947F61600765D69 /* TechMemo.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TechMemo.strings; sourceTree = "<group>"; };
 		A27784FC1947F93B00765D69 /* schedule.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = schedule.strings; sourceTree = "<group>"; };
@@ -2166,6 +2167,7 @@
 			children = (
 				9CA1E96C1930C7AA00080A75 /* OperationCallback.h */,
 				A2121065196CEE290062776D /* TouchTrailCallback.h */,
+				A262967D19866B6F000A77F9 /* FighterCallback.h */,
 			);
 			name = callback;
 			path = ../Classes/callback;
