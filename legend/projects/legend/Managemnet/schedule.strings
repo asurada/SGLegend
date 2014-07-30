@@ -31,7 +31,7 @@
   リーリス
  
  
-     　｜ーー   魔法石ーーー基本攻撃
+     　｜ーー   魔法石ーーー基本攻撃----
        |         ｜
        |         ｜
        |         ｜------基本防衛
@@ -41,6 +41,20 @@
  
  　　　         |
  　　　　       |----魔法陣防衛
+ 
+ 
+ 
+ 
+ 
+ char-----(n)magicSquare
+ 
+ char-----(n)stone Bullet
+ 
+ 
+ 
+ bullet-----sprite
+        |
+        |---explodeEffect
  
  
  
