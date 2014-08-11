@@ -203,16 +203,20 @@ void GameScene::update(float dt)
 	pSprite_monster->setColor(ccWHITE);
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() != NULL) {
-            CCSprite *sprite = (CCSprite *)b->GetUserData();
+            BaseBullet *sprite = (BaseBullet *)b->GetUserData();
             sprite->setPosition(ccp(b->GetPosition().x * PTM_RATIO_WIN,
                                   b->GetPosition().y * PTM_RATIO_WIN));
             sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
+            
             if (sprite != NULL && pSprite_monster->boundingBox().intersectsRect(sprite->boundingBox()))
             {
                 pSprite_monster->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
-                FireBullet* bullet = dynamic_cast<FireBullet*>(sprite);
+                BaseBullet* bullet = dynamic_cast<BaseBullet*>(sprite);
                 if(bullet){
+                    CCLog("is bullet");
                     bullet->explode();
+                }else{
+                    CCLog("is not bullet");
                 }
         
                 animationSprite = AnimationTool::startFireAnm(monster,"fire2.png","fire2.plist","fire",40,this,callfuncND_selector(GameScene::cleanupSprite));
