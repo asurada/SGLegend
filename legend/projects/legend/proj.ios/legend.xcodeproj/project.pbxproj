@@ -307,6 +307,7 @@
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
 		A27784FD1947F93B00765D69 /* schedule.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FC1947F93B00765D69 /* schedule.strings */; };
 		A2786304197661B20039476C /* CCShake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2786302197661B20039476C /* CCShake.cpp */; };
+		A2B9764A1998DB6F002B1E2C /* AnimationTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B976481998DB6F002B1E2C /* AnimationTool.cpp */; };
 		A2BF55CD197FB0F90077BD5F /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
@@ -934,6 +935,8 @@
 		A27784FC1947F93B00765D69 /* schedule.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = schedule.strings; sourceTree = "<group>"; };
 		A2786302197661B20039476C /* CCShake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCShake.cpp; sourceTree = "<group>"; };
 		A2786303197661B20039476C /* CCShake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShake.h; sourceTree = "<group>"; };
+		A2B976481998DB6F002B1E2C /* AnimationTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationTool.cpp; sourceTree = "<group>"; };
+		A2B976491998DB6F002B1E2C /* AnimationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationTool.h; sourceTree = "<group>"; };
 		A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseMagic.cpp; path = ../Classes/BaseMagic.cpp; sourceTree = "<group>"; };
 		A2BF55CC197FB0F90077BD5F /* BaseMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMagic.h; path = ../Classes/BaseMagic.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2265,6 +2268,8 @@
 				9CFEFB6219460B54000D4ADE /* CCHttpRequest.h */,
 				A2007CC11945AB2F00AA36E8 /* NSDataCrypt.h */,
 				A2007CC21945AB2F00AA36E8 /* NSDataCrypt.m */,
+				A2B976481998DB6F002B1E2C /* AnimationTool.cpp */,
+				A2B976491998DB6F002B1E2C /* AnimationTool.h */,
 			);
 			name = utility;
 			path = ../Classes/utility;
@@ -2631,6 +2636,7 @@
 				15A3DA3B1682F826002FB0C5 /* CCLabelBMFontLoader.cpp in Sources */,
 				15A3DA3C1682F826002FB0C5 /* CCLabelTTFLoader.cpp in Sources */,
 				15A3DA3D1682F826002FB0C5 /* CCLayerColorLoader.cpp in Sources */,
+				A2B9764A1998DB6F002B1E2C /* AnimationTool.cpp in Sources */,
 				15A3DA3E1682F826002FB0C5 /* CCLayerGradientLoader.cpp in Sources */,
 				15A3DA3F1682F826002FB0C5 /* CCLayerLoader.cpp in Sources */,
 				15A3DA401682F826002FB0C5 /* CCMenuItemImageLoader.cpp in Sources */,

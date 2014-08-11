@@ -16,6 +16,7 @@
 #include "cocos2d.h"
 #include "Box2D.h"
 #include "Char_01.h"
+#include "FireBullet.h"
 
 class GameScene : public cocos2d::CCLayer,OperationCallback,b2ContactListener
 {
@@ -49,7 +50,7 @@ public:
     virtual void beginFire(AnalysisShape shape);
     virtual void endFire(AnalysisShape shape);
     void onFire();
-    void setBullet(BaseBullet *bullet,float radius, float density,float friction,float restitution);
+    void setBullet(FireBullet* bullet,float radius, float density,float friction,float restitution);
 
     // implement the "static node()" method manually
     CREATE_FUNC(GameScene);

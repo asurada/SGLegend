@@ -13,6 +13,7 @@
 #include "PhysicsSprite.h"
 #include "ShapeConst.h"
 #include "FireBullet.h"
+#include "AnimationTool.h"
 using namespace cocos2d;
 
 USING_NS_CC;
@@ -191,33 +192,6 @@ void GameScene::explode(){
     operationlayer->removeAllMagicSquare();
 }
 
-void GameScene::startFireAnm(CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count){
-    
-    CCTextureCache::sharedTextureCache()->addImage(image);
-    CCTextureCache *cache = CCTextureCache::sharedTextureCache();
-    CCTexture2D *texture2D = cache->textureForKey(image);
-    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(plist, texture2D);
-    CCArray *normalAnimFrames = CCArray::create();
-    for (int i=1; i<count; i++) {
-        char* tempString = new char;
-        sprintf(tempString, "%s%d.png", imgSplit,i);
-        CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(tempString);
-        normalAnimFrames->addObject(frame);
-    }
-    CCAnimation *animation = CCAnimation::createWithSpriteFrames(normalAnimFrames,0.016f);
-    animation->setLoops(1);
-    
-    CCAnimate *animate = CCAnimate::create(animation);
-    animationSprite = CCSprite::create("fire1.png");
-    animationSprite->setScale(2.0f);
-    animationSprite->setPosition(pos);
-    this->addChild(animationSprite, 1);
-    
-    CCCallFuncND *cleanupAction = CCCallFuncND::create(this,callfuncND_selector(GameScene::cleanupSprite),animationSprite);
-    CCSequence *seq = CCSequence::create(animate, cleanupAction,NULL);
-    animationSprite->runAction(seq);
-
-}
 
 //背景
 void GameScene::update(float dt)
@@ -227,7 +201,6 @@ void GameScene::update(float dt)
     CCSize s = CCDirector::sharedDirector()->getWinSize();
 	// simple collision test
 	pSprite_monster->setColor(ccWHITE);
-	//pSprite_monster->setFlipY(false);
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() != NULL) {
             CCSprite *sprite = (CCSprite *)b->GetUserData();
@@ -237,12 +210,13 @@ void GameScene::update(float dt)
             if (sprite != NULL && pSprite_monster->boundingBox().intersectsRect(sprite->boundingBox()))
             {
                 pSprite_monster->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
-            
-                if(dynamic_cast<FireBullet*>(sprite)){
-                    FireBullet* bullet = dynamic_cast<FireBullet*>(sprite);
+                FireBullet* bullet = dynamic_cast<FireBullet*>(sprite);
+                if(bullet){
                     bullet->explode();
                 }
-                //this->startFireAnm(monster,"fire2.png","fire2.plist","fire",40);
+        
+                animationSprite = AnimationTool::startFireAnm(monster,"fire2.png","fire2.plist","fire",40,this,callfuncND_selector(GameScene::cleanupSprite));
+                 this->addChild(animationSprite, 1);
                 b->GetWorld()->DestroyBody(b);
                 sprite->removeFromParentAndCleanup(true);
             }else if(sprite != NULL && (sprite->getPosition().y > s.height || sprite->getPosition().y < 0 || sprite->getPosition().x > s.width || sprite->getPosition().x < 0)){
@@ -297,35 +271,12 @@ void GameScene::endFire(AnalysisShape shape){
 }
 
 
+
 void GameScene::onFire(){
     FireBullet *bullet = FireBullet::create("fire_1.png");
     bullet->setPosition(pSprite_char->getPosition());
     this->addChild(bullet,5);
-    this->setBullet(bullet,50.0, 0.4, 0.5, 0.6);
-}
-
-
-void GameScene::setBullet(BaseBullet *bullet,float radius, float density,float friction,float restitution){
-    b2BodyDef bodyDef; //b2BodyDef構造体
-    b2Body *body;
-    b2FixtureDef fixtureDef;//Fixtureの定義を入れる構造体
-    b2CircleShape circle;
-    bodyDef.type = b2_dynamicBody;    //動的な物体に
-    bodyDef.position.Set(bullet->getPosition().x/PTM_RATIO_WIN, bullet->getPosition().y/PTM_RATIO_WIN);   //位置を設定
-    bodyDef.userData = bullet;
-    body = this->world->CreateBody(&bodyDef);
-    //b2CircleShape circle;//形を定義するクラス
-    circle.m_radius = radius/PTM_RATIO;    //半径を50pxに
-    // b2FixtureDef fixtureDef;    //Fixtureの定義を入れる構造体
-    fixtureDef.shape = &circle;    //形
-    fixtureDef.density = density;      //密度
-    fixtureDef.friction = friction;     //摩擦率
-    fixtureDef.restitution = restitution;  //反発係数
-    body->CreateFixture(&fixtureDef);  //
-    body->SetBullet(true);
-    b2Vec2 force = b2Vec2(0, 30);
-    body->ApplyLinearImpulse(force, body->GetPosition());
-
+    AnimationTool::setBullet(bullet,50.0, 0.4, 0.5, 0.6,this->world);
 }
 
 
