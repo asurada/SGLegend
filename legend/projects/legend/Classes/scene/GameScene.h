@@ -49,7 +49,7 @@ public:
     virtual void beginFire(AnalysisShape shape);
     virtual void endFire(AnalysisShape shape);
     void onFire();
-
+    void setBullet(BaseBullet *bullet,float radius, float density,float friction,float restitution);
 
     // implement the "static node()" method manually
     CREATE_FUNC(GameScene);
@@ -71,6 +71,6 @@ private:
     Char_01* pSprite_char;
     void initPhysics();
     cocos2d::CCSprite* animationSprite;
-
+   
 };
 #endif /* defined(__legend__GameScene__) */

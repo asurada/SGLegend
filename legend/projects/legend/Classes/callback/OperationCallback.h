@@ -12,12 +12,6 @@
 class OperationCallback{
     
 public:
-//	virtual void beginDrawMagicSquare( int a, int b, int c );
-//    virtual void endDrawMagicSquare( int a, int b, int c );
-//    virtual void beginAutoDrawMagicSquare( int a, int b, int c );
-//    virtual void endAutoDrawMagicSquare( int a, int b, int c );
-    
-
     virtual void beginFire(AnalysisShape shape) = 0;
     virtual void endFire(AnalysisShape shape) = 0;
 

@@ -11,13 +11,21 @@
 
 USING_NS_CC;
 
+FireBullet* FireBullet::create(const char *pszFileName){
+    return (FireBullet*)super::create(pszFileName);
+}
+
+
 void FireBullet::explode(){
-    const char * image = "";
+    const char * image = "fire2.png";
+    const char *plist = "fire2.plist";
+    const char *imgSplit = "fire";
     CCTextureCache::sharedTextureCache()->addImage(image);
     CCTextureCache *cache = CCTextureCache::sharedTextureCache();
     CCTexture2D *texture2D = cache->textureForKey(image);
     CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(plist, texture2D);
     CCArray *normalAnimFrames = CCArray::create();
+    int count = 7;
     for (int i=1; i<count; i++) {
         char* tempString = new char;
         sprintf(tempString, "%s%d.png", imgSplit,i);

@@ -15,7 +15,10 @@
 class FireBullet : public BaseBullet{
     public:
         void explode();
+        static FireBullet* create(const char *pszFileName);
+    
     private:
+        typedef BaseBullet super;
     
 };
 
