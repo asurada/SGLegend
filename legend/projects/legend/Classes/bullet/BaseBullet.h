@@ -22,7 +22,7 @@ public:
     CCSprite* animationSprite;
     void cleanupSprite();
     static BaseBullet* create(const char *pszFileName);
-    virtual void explode() = 0;
+   // virtual void explode() = 0;
 
 };
 

@@ -203,7 +203,7 @@ void GameScene::update(float dt)
 	pSprite_monster->setColor(ccWHITE);
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() != NULL) {
-            BaseBullet *sprite = (BaseBullet *)b->GetUserData();
+            CCSprite *sprite = (CCSprite *)(b->GetUserData());
             sprite->setPosition(ccp(b->GetPosition().x * PTM_RATIO_WIN,
                                   b->GetPosition().y * PTM_RATIO_WIN));
             sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
@@ -211,15 +211,15 @@ void GameScene::update(float dt)
             if (sprite != NULL && pSprite_monster->boundingBox().intersectsRect(sprite->boundingBox()))
             {
                 pSprite_monster->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
-                BaseBullet* bullet = dynamic_cast<BaseBullet*>(sprite);
-                if(bullet){
+                FireBullet* bullet = static_cast<FireBullet*>(sprite);
+                if(bullet != NULL){
                     CCLog("is bullet");
-                    bullet->explode();
+                    animationSprite = AnimationTool::startFireAnm(monster,bullet->image,bullet->plist,bullet->imgSplit,40,this,callfuncND_selector(GameScene::cleanupSprite));
                 }else{
                     CCLog("is not bullet");
                 }
         
-                animationSprite = AnimationTool::startFireAnm(monster,"fire2.png","fire2.plist","fire",40,this,callfuncND_selector(GameScene::cleanupSprite));
+//                animationSprite = AnimationTool::startFireAnm(monster,"fire2.png","fire2.plist","fire",40,this,callfuncND_selector(GameScene::cleanupSprite));
                  this->addChild(animationSprite, 1);
                 b->GetWorld()->DestroyBody(b);
                 sprite->removeFromParentAndCleanup(true);

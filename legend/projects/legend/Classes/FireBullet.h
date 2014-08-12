@@ -14,6 +14,9 @@
 
 class FireBullet : public BaseBullet{
     public:
+        const char * image = "fire2.png";
+        const char *plist = "fire2.plist";
+        const char *imgSplit = "fire";
         void explode();
         static FireBullet* create(const char *pszFileName);
     
