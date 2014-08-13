@@ -26,13 +26,13 @@ void Bullet::setExplode(bulletType _type){
             _strImage = "fire2.png";
             _strPlist = "fire2.plist";
             _strImgSplit = "fire";
-            _count = 40;
+            _frameCount = 40;
             break;
         case water:
-            _strImage = "fire2.png";
-            _strPlist = "fire2.plist";
-            _strImgSplit = "fire";
-            _count = 40;
+            _strImage = "fire.png";
+            _strPlist = "fire.plist";
+            _strImgSplit = "fire_";
+            _frameCount = 20;
             break;
         default:
             break;
@@ -56,5 +56,5 @@ const char* Bullet::getImageSplit(){
 
 
 int Bullet::getFrameCount(){
-    return _count;
+    return _frameCount;
 }

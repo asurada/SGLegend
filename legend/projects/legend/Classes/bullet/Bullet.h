@@ -21,10 +21,10 @@ enum bulletType{
 class Bullet : public cocos2d::CCSprite{
 private:
     typedef CCSprite super;
-       string _strImage;
+    string _strImage;
     string _strPlist;
     string _strImgSplit;
-    int    _count;
+    int    _frameCount;
 public:
     void setExplode(bulletType _type);
     const char* getImage();

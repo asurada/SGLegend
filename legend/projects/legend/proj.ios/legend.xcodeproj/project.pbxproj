@@ -302,6 +302,8 @@
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
 		A27784FD1947F93B00765D69 /* schedule.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FC1947F93B00765D69 /* schedule.strings */; };
 		A2786304197661B20039476C /* CCShake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2786302197661B20039476C /* CCShake.cpp */; };
+		A28F8F9A199B75A600450024 /* light.plist in Resources */ = {isa = PBXBuildFile; fileRef = A28F8F98199B75A600450024 /* light.plist */; };
+		A28F8F9B199B75A600450024 /* light.png in Resources */ = {isa = PBXBuildFile; fileRef = A28F8F99199B75A600450024 /* light.png */; };
 		A2B9764A1998DB6F002B1E2C /* AnimationTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B976481998DB6F002B1E2C /* AnimationTool.cpp */; };
 		A2BF55CD197FB0F90077BD5F /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
@@ -924,6 +926,8 @@
 		A27784FC1947F93B00765D69 /* schedule.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = schedule.strings; sourceTree = "<group>"; };
 		A2786302197661B20039476C /* CCShake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCShake.cpp; sourceTree = "<group>"; };
 		A2786303197661B20039476C /* CCShake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShake.h; sourceTree = "<group>"; };
+		A28F8F98199B75A600450024 /* light.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = light.plist; sourceTree = "<group>"; };
+		A28F8F99199B75A600450024 /* light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light.png; sourceTree = "<group>"; };
 		A2B976481998DB6F002B1E2C /* AnimationTool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationTool.cpp; sourceTree = "<group>"; };
 		A2B976491998DB6F002B1E2C /* AnimationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationTool.h; sourceTree = "<group>"; };
 		A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseMagic.cpp; path = ../Classes/BaseMagic.cpp; sourceTree = "<group>"; };
@@ -2121,6 +2125,8 @@
 		9C15AA02192796DF00737452 /* animation */ = {
 			isa = PBXGroup;
 			children = (
+				A28F8F98199B75A600450024 /* light.plist */,
+				A28F8F99199B75A600450024 /* light.png */,
 				9CD6F9E51928E6F1002C7D2C /* fire2.plist */,
 				9CD6F9E61928E6F1002C7D2C /* fire2.png */,
 				9C15AA03192796ED00737452 /* fire.plist */,
@@ -2470,6 +2476,7 @@
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				9C15A9FB19277FDC00737452 /* bll_04.png in Resources */,
+				A28F8F9B199B75A600450024 /* light.png in Resources */,
 				9CD6F9DD19286B5E002C7D2C /* Deco_shine_v1.png in Resources */,
 				9C15A9EE1927273F00737452 /* ball.png in Resources */,
 				A27784FD1947F93B00765D69 /* schedule.strings in Resources */,
@@ -2488,6 +2495,7 @@
 				9C69D73819337DBC007C4286 /* fire_2.png in Resources */,
 				9C15AA011927833B00737452 /* monster.png in Resources */,
 				A27784FB1947F61600765D69 /* TechMemo.strings in Resources */,
+				A28F8F9A199B75A600450024 /* light.plist in Resources */,
 				9C15A9F819277FDC00737452 /* bll_01.png in Resources */,
 				A21B7CCD1974F53F00B945BA /* brush.png in Resources */,
 			);

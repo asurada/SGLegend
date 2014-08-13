@@ -27,7 +27,7 @@ CCSprite* AnimationTool::startFireAnm(CCPoint &pos,const char * image,const char
     
     CCAnimate *animate = CCAnimate::create(animation);
     
-    CCSprite* animationSprite = CCSprite::create("fire1.png");
+    CCSprite* animationSprite = CCSprite::create();
     animationSprite->setScale(2.0f);
     animationSprite->setPosition(pos);
     
