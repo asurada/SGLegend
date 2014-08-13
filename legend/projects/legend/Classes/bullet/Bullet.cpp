@@ -29,9 +29,10 @@ void Bullet::setExplode(bulletType _type){
             _count = 40;
             break;
         case water:
-            _strImage = "";
-            _strPlist = "";
-            _strImgSplit = "";
+            _strImage = "fire2.png";
+            _strPlist = "fire2.plist";
+            _strImgSplit = "fire";
+            _count = 40;
             break;
         default:
             break;

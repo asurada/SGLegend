@@ -25,6 +25,12 @@ const char* Char_01::getBulletName(bulletType _type){
             friction = 0.5,
             restitution = 0.6;
             break;
+        case water:
+            result = "fire_2.png";
+            radius= 50.0,
+            density = 0.4,
+            friction = 0.5,
+            restitution = 0.6;
         default:
             break;
     }

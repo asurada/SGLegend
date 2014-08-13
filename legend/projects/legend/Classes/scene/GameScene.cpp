@@ -255,7 +255,7 @@ void GameScene::endFire(AnalysisShape shape){
 
 
 void GameScene::onFire(){
-    CCSprite *bullet = pSprite_char->attack(fire);
+    CCSprite *bullet = pSprite_char->attack(water);
     AnimationTool::setBullet(bullet,pSprite_char->getRadius(),
                              pSprite_char->getDensity(),
                              pSprite_char->getFriction(),
