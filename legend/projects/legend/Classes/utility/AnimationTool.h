@@ -11,15 +11,15 @@
 
 #include "cocos2d.h"
 #include "Box2D.h"
-#include "BaseBullet.h"
-#include "FireBullet.h"
+#include "Bullet.h"
+
 USING_NS_CC;
 
 class AnimationTool{
     public:
     static CCSprite* startFireAnm(CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count,CCObject* pSelectorTarget,SEL_CallFuncND selector);
 
-    static void setBullet(FireBullet * bullet,float radius, float density,float friction,float restitution, b2World* world);
+    static void setBullet(CCSprite * bullet,float radius, float density,float friction,float restitution, b2World* world);
     
 };
 

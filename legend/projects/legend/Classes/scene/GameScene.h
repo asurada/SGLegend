@@ -16,7 +16,8 @@
 #include "cocos2d.h"
 #include "Box2D.h"
 #include "Char_01.h"
-#include "FireBullet.h"
+#include "Enm_01.h"
+
 
 class GameScene : public cocos2d::CCLayer,OperationCallback,b2ContactListener
 {
@@ -37,7 +38,6 @@ public:
     
    // void fire(const char *pszFileName);
     void monsterAttack();
-    void explode();
     void update(float dt);
     void backgroundRun();
     
@@ -50,8 +50,6 @@ public:
     virtual void beginFire(AnalysisShape shape);
     virtual void endFire(AnalysisShape shape);
     void onFire();
-    void setBullet(FireBullet* bullet,float radius, float density,float friction,float restitution);
-
     // implement the "static node()" method manually
     CREATE_FUNC(GameScene);
     
@@ -64,14 +62,15 @@ private:
     cocos2d::CCSprite* bullet;
     cocos2d::CCSprite* pSprite_round;
     BaseFighter* pSprite_monster;
+    BaseFighter* pSprite_char;
     cocos2d::CCSprite* pSprite_bg_1;
     cocos2d::CCSprite* pSprite_bg_2;
     cocos2d::CCArray *touchBallArray;
     std::vector<cocos2d::CCPoint> autoPoints;
     OperationLayer *operationlayer;
-    Char_01* pSprite_char;
+
     void initPhysics();
     cocos2d::CCSprite* animationSprite;
-   
+    Bullet *bullets;
 };
 #endif /* defined(__legend__GameScene__) */

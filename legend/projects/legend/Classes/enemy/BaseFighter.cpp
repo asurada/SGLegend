@@ -8,12 +8,37 @@
 
 #include "BaseFighter.h"
 
-BaseFighter* BaseFighter::create(const char *pszFileName){
-    return (BaseFighter*)super::create(pszFileName);
+
+void BaseFighter::setPosition(CCLayer* _layer,CCPoint _position,int zOrder){
+    _parent = _layer;
+    _char->setPosition(_position);
+    _parent->addChild(_char,zOrder);
 }
 
 
-void BaseFighter::setTarget(BaseFighter* target){
-    this->_target = target;
+CCSprite* BaseFighter::getChar(){
+    return _char;
 }
 
+
+CCSprite* BaseFighter::attack(bulletType _type){
+    CCSprite* bullet = CCSprite::create(getBulletName(_type));
+    bullet->setTag(_type);
+    bullet->setPosition(_char->getPosition());
+    _parent->addChild(bullet,4);
+    return bullet;
+}
+
+
+float BaseFighter::getRadius(){
+    return radius;
+}
+float BaseFighter::getDensity(){
+    return density;
+}
+float BaseFighter::getFriction(){
+    return friction;
+}
+float BaseFighter::getRestitution(){
+    return restitution;
+}

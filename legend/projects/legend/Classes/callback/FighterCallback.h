@@ -9,13 +9,13 @@
 #ifndef legend_FighterCallback_h
 #define legend_FighterCallback_h
 
-#include "BaseBullet.h"
+#include "Bullet.h"
 
 class FighterCallback{
     
 public:
-    virtual void onInitBullet(BaseBullet* bullet) = 0;
-    virtual void onFire(BaseBullet* bullet) = 0;
+    virtual void onInitBullet(Bullet* bullet) = 0;
+    virtual void onFire(Bullet* bullet) = 0;
 };
 
 #endif

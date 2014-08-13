@@ -7,22 +7,27 @@
 //
 
 #include "Char_01.h"
-#include "FireBullet.h"
 
 
-Char_01* Char_01::create(const char *pszFileName){
-    return (Char_01*)super::create(pszFileName);
+Char_01::Char_01(const char *pszFileName){
+    _char = CCSprite::create(pszFileName);
 }
 
-void Char_01::attack(const char *bulletName){
-    BaseBullet *bullet = FireBullet::create(bulletName);
-    bullet->setPosition(this->getPosition());
-    this->getParent()->addChild(bullet,5);
- 
-    if(fighterCallback){
-        fighterCallback->onInitBullet(bullet);
+
+
+const char* Char_01::getBulletName(bulletType _type){
+    string result;
+    switch (_type) {
+        case fire:
+            result = "fire_1.png";
+            radius= 50.0,
+            density = 0.4,
+            friction = 0.5,
+            restitution = 0.6;
+            break;
+        default:
+            break;
     }
-    
- //   bullet->init(getWorld());
-//    bullet->fire();
+    return result.c_str();
 }
+

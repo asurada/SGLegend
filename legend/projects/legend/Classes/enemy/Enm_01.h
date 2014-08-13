@@ -11,8 +11,13 @@
 #include "BaseFighter.h"
 
 class Enm_01 :public BaseFighter{
+private:
+    typedef CCSprite super;
 public:
-    void explode();
+    Enm_01(const char *pszFileName);
+   // ~Enm_01();
+   // virtual CCSprite *attack(bulletType _type);
+    const char* getBulletName(bulletType _type);
     
     
 };

@@ -12,8 +12,8 @@
 #include "OperationLayer.h"
 #include "PhysicsSprite.h"
 #include "ShapeConst.h"
-#include "FireBullet.h"
 #include "AnimationTool.h"
+#include "Enm_01.h"
 using namespace cocos2d;
 
 USING_NS_CC;
@@ -86,7 +86,6 @@ bool GameScene::init()
     pMenu->setPosition(CCPointZero);
     this->addChild(pMenu, 1);
     
-
     operationlayer = OperationLayer::create();
     operationlayer->setDelegate(this);
     operationlayer->init();
@@ -117,23 +116,17 @@ bool GameScene::init()
     
 
     center = ccp(visibleSize.width/2 , visibleSize.height/4);
-    pSprite_char = Char_01::create("char.png");
-    pSprite_char->setPosition(center);
+    pSprite_char = new Char_01("char.png");
+    pSprite_char->setPosition(this, center,2);
 
-    //pSprite_char->setWorld(world);
-    this->addChild(pSprite_char, 2);
-    
-
-    
     
     monster = ccp(visibleSize.width/2 , visibleSize.height/2 + visibleSize.height/4);
-    pSprite_monster = BaseFighter::create("monster.png");
-    pSprite_monster->setPosition(monster);
-    pSprite_monster->setScale(1.5);
-    this->addChild(pSprite_monster, 0);
+    pSprite_monster = new Enm_01("monster.png");
+    pSprite_monster->setPosition(this, monster, 0);
     
     this->scheduleUpdate();
-    
+    bullets = new Bullet();
+
     return true;
 }
 
@@ -144,7 +137,6 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 
     CCSetIterator it;
     CCTouch* touch;
-    
     for( it = touches->begin(); it != touches->end(); it++)
     {
         touch = (CCTouch*)(*it);
@@ -154,7 +146,7 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 
         CCPoint location = touch->getLocationInView();
         location = CCDirector::sharedDirector()->convertToGL(location);
-        if (pSprite_char->boundingBox().containsPoint(location))
+        if (pSprite_char->getChar()->boundingBox().containsPoint(location))
         {
             CCLOG("ccTouchesBegan");
             onFire();
@@ -187,11 +179,6 @@ void GameScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 }
 
 
-void GameScene::explode(){
-    bullet->setVisible(false);
-    operationlayer->removeAllMagicSquare();
-}
-
 
 //背景
 void GameScene::update(float dt)
@@ -200,27 +187,21 @@ void GameScene::update(float dt)
     backgroundRun();
     CCSize s = CCDirector::sharedDirector()->getWinSize();
 	// simple collision test
-	pSprite_monster->setColor(ccWHITE);
+	pSprite_monster->getChar()->setColor(ccWHITE);
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() != NULL) {
-            CCSprite *sprite = (CCSprite *)(b->GetUserData());
+            CCSprite *sprite  = (CCSprite *)(b->GetUserData());
             sprite->setPosition(ccp(b->GetPosition().x * PTM_RATIO_WIN,
                                   b->GetPosition().y * PTM_RATIO_WIN));
             sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
             
-            if (sprite != NULL && pSprite_monster->boundingBox().intersectsRect(sprite->boundingBox()))
+            if (sprite != NULL && pSprite_monster->getChar()->boundingBox().intersectsRect(sprite->boundingBox()))
             {
-                pSprite_monster->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
-                FireBullet* bullet = static_cast<FireBullet*>(sprite);
-                if(bullet != NULL){
-                    CCLog("is bullet");
-                    animationSprite = AnimationTool::startFireAnm(monster,bullet->image,bullet->plist,bullet->imgSplit,40,this,callfuncND_selector(GameScene::cleanupSprite));
-                }else{
-                    CCLog("is not bullet");
-                }
-        
-//                animationSprite = AnimationTool::startFireAnm(monster,"fire2.png","fire2.plist","fire",40,this,callfuncND_selector(GameScene::cleanupSprite));
-                 this->addChild(animationSprite, 1);
+                pSprite_monster->getChar()->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
+                bulletType type = (bulletType)sprite->getTag();
+                bullets->setExplode(type);
+                animationSprite = AnimationTool::startFireAnm(monster,bullets->getImage(),bullets->getPlist(),bullets->getImageSplit(),bullets->getFrameCount(),this,callfuncND_selector(GameScene::cleanupSprite));
+                this->addChild(animationSprite, 1);
                 b->GetWorld()->DestroyBody(b);
                 sprite->removeFromParentAndCleanup(true);
             }else if(sprite != NULL && (sprite->getPosition().y > s.height || sprite->getPosition().y < 0 || sprite->getPosition().x > s.width || sprite->getPosition().x < 0)){
@@ -230,9 +211,6 @@ void GameScene::update(float dt)
             }
         }
     }
-	
-//	CCLabelAtlas* posLabel = (CCLabelAtlas*)[_player getChildByTag:1];
-//	posLabel.string = [NSString stringWithFormat:@"%.0f/%.0f", _player.position.x, _player.position.y];
 }
 
 void GameScene::backgroundRun(){
@@ -277,10 +255,12 @@ void GameScene::endFire(AnalysisShape shape){
 
 
 void GameScene::onFire(){
-    FireBullet *bullet = FireBullet::create("fire_1.png");
-    bullet->setPosition(pSprite_char->getPosition());
-    this->addChild(bullet,5);
-    AnimationTool::setBullet(bullet,50.0, 0.4, 0.5, 0.6,this->world);
+    CCSprite *bullet = pSprite_char->attack(fire);
+    AnimationTool::setBullet(bullet,pSprite_char->getRadius(),
+                             pSprite_char->getDensity(),
+                             pSprite_char->getFriction(),
+                             pSprite_char->getRestitution(),
+                             this->world);
 }
 
 
@@ -325,17 +305,19 @@ void GameScene::initPhysics()
     // Define the ground box shape.
     b2EdgeShape groundBox;
     // bottom
-//    groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO_WIN,0));
-//    groundBody->CreateFixture(&groundBox,0);
+    if(false){
+        groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO_WIN,0));
+        groundBody->CreateFixture(&groundBox,0);
     // top
-//    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN));
-//    groundBody->CreateFixture(&groundBox,0);
+        groundBox.Set(b2Vec2(0,s.height/(PTM_RATIO_WIN*2)), b2Vec2(s.width/PTM_RATIO_WIN,s.height/(PTM_RATIO_WIN*2)));
+        groundBody->CreateFixture(&groundBox,0);
     // left
-//    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(0,0));
-//    groundBody->CreateFixture(&groundBox,0);
+        groundBox.Set(b2Vec2(0,s.height/PTM_RATIO_WIN), b2Vec2(0,0));
+        groundBody->CreateFixture(&groundBox,0);
     // right
-//    groundBox.Set(b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,0));
-//    groundBody->CreateFixture(&groundBox,0);
+        groundBox.Set(b2Vec2(s.width/PTM_RATIO_WIN,s.height/PTM_RATIO_WIN), b2Vec2(s.width/PTM_RATIO_WIN,0));
+        groundBody->CreateFixture(&groundBox,0);
+    }
 }
 
 

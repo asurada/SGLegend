@@ -14,12 +14,13 @@
 class Char_01 : public BaseFighter{
 private:
     typedef CCSprite super;
+   
     
 public:
-    static Char_01* create(const char *pszFileName);
-
-    void attack(const char *bulletName);
-    
+    Char_01(const char *pszFileName);
+    ~Char_01();
+    const char* getBulletName(bulletType _type);
+   
     
     
 };

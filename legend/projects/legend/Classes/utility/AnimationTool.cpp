@@ -41,7 +41,7 @@ CCSprite* AnimationTool::startFireAnm(CCPoint &pos,const char * image,const char
 
 
 
-void AnimationTool::setBullet(FireBullet* bullet,float radius, float density,float friction,float restitution,b2World* world){
+void AnimationTool::setBullet(CCSprite* bullet,float radius, float density,float friction,float restitution,b2World* world){
     b2BodyDef bodyDef; //b2BodyDef構造体
     b2Body *body;
     b2FixtureDef fixtureDef;//Fixtureの定義を入れる構造体

@@ -300,8 +300,7 @@
 		A225AC371981022700C342F3 /* WindEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC351981022700C342F3 /* WindEffect.cpp */; };
 		A225AC3A1981027800C342F3 /* TyphoonEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC381981027800C342F3 /* TyphoonEffect.cpp */; };
 		A225AC3E198105EF00C342F3 /* Char_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC3C198105EF00C342F3 /* Char_01.cpp */; };
-		A225AC471981097B00C342F3 /* BaseBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC451981097B00C342F3 /* BaseBullet.cpp */; };
-		A225AC4B1981137600C342F3 /* FireBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC491981137600C342F3 /* FireBullet.cpp */; };
+		A225AC471981097B00C342F3 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC451981097B00C342F3 /* Bullet.cpp */; };
 		A24C49A21957F4E400FE4A50 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A24C49A11957F4E400FE4A50 /* arrow.png */; };
 		A27784F91947EDCB00765D69 /* Concept.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784F81947EDCB00765D69 /* Concept.strings */; };
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
@@ -924,10 +923,8 @@
 		A225AC391981027800C342F3 /* TyphoonEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TyphoonEffect.h; path = ../Classes/TyphoonEffect.h; sourceTree = "<group>"; };
 		A225AC3C198105EF00C342F3 /* Char_01.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Char_01.cpp; path = ../Classes/Char_01.cpp; sourceTree = "<group>"; };
 		A225AC3D198105EF00C342F3 /* Char_01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Char_01.h; path = ../Classes/Char_01.h; sourceTree = "<group>"; };
-		A225AC451981097B00C342F3 /* BaseBullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseBullet.cpp; path = ../Classes/bullet/BaseBullet.cpp; sourceTree = "<group>"; };
-		A225AC461981097B00C342F3 /* BaseBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseBullet.h; path = ../Classes/bullet/BaseBullet.h; sourceTree = "<group>"; };
-		A225AC491981137600C342F3 /* FireBullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FireBullet.cpp; path = ../Classes/FireBullet.cpp; sourceTree = "<group>"; };
-		A225AC4A1981137600C342F3 /* FireBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FireBullet.h; path = ../Classes/FireBullet.h; sourceTree = "<group>"; };
+		A225AC451981097B00C342F3 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bullet.cpp; path = ../Classes/bullet/Bullet.cpp; sourceTree = "<group>"; };
+		A225AC461981097B00C342F3 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bullet.h; path = ../Classes/bullet/Bullet.h; sourceTree = "<group>"; };
 		A24C49A11957F4E400FE4A50 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A262967D19866B6F000A77F9 /* FighterCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FighterCallback.h; sourceTree = "<group>"; };
 		A27784F81947EDCB00765D69 /* Concept.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Concept.strings; sourceTree = "<group>"; };
@@ -2363,8 +2360,6 @@
 			isa = PBXGroup;
 			children = (
 				A225AC481981098100C342F3 /* base */,
-				A225AC491981137600C342F3 /* FireBullet.cpp */,
-				A225AC4A1981137600C342F3 /* FireBullet.h */,
 			);
 			name = bullet;
 			sourceTree = "<group>";
@@ -2372,8 +2367,8 @@
 		A225AC481981098100C342F3 /* base */ = {
 			isa = PBXGroup;
 			children = (
-				A225AC451981097B00C342F3 /* BaseBullet.cpp */,
-				A225AC461981097B00C342F3 /* BaseBullet.h */,
+				A225AC451981097B00C342F3 /* Bullet.cpp */,
+				A225AC461981097B00C342F3 /* Bullet.h */,
 			);
 			name = base;
 			sourceTree = "<group>";
@@ -2603,7 +2598,7 @@
 				A225AC311981019D00C342F3 /* PoisonEffect.cpp in Sources */,
 				15A3D9A21682F7F9002FB0C5 /* cpArbiter.c in Sources */,
 				15A3D9A31682F7F9002FB0C5 /* cpArray.c in Sources */,
-				A225AC471981097B00C342F3 /* BaseBullet.cpp in Sources */,
+				A225AC471981097B00C342F3 /* Bullet.cpp in Sources */,
 				15A3D9A41682F7F9002FB0C5 /* cpBB.c in Sources */,
 				15A3D9A51682F7F9002FB0C5 /* cpBBTree.c in Sources */,
 				15A3D9A61682F7F9002FB0C5 /* cpBody.c in Sources */,
@@ -2632,7 +2627,6 @@
 				15A3DA391682F826002FB0C5 /* CCControlLoader.cpp in Sources */,
 				15A3DA3A1682F826002FB0C5 /* CCData.cpp in Sources */,
 				298B29BC18D0668400C1920F /* ImageViewReader.cpp in Sources */,
-				A225AC4B1981137600C342F3 /* FireBullet.cpp in Sources */,
 				15A3DA3B1682F826002FB0C5 /* CCLabelBMFontLoader.cpp in Sources */,
 				15A3DA3C1682F826002FB0C5 /* CCLabelTTFLoader.cpp in Sources */,
 				15A3DA3D1682F826002FB0C5 /* CCLayerColorLoader.cpp in Sources */,
