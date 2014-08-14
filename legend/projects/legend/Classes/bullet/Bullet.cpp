@@ -29,10 +29,16 @@ void Bullet::setExplode(bulletType _type){
             _frameCount = 40;
             break;
         case water:
-            _strImage = "fire.png";
-            _strPlist = "fire.plist";
-            _strImgSplit = "fire_";
-            _frameCount = 20;
+            _strImage = "light.png";
+            _strPlist = "light.plist";
+            _strImgSplit = "light-";
+            _frameCount = 7;
+//            _strImage = "fire.png";
+//            _strPlist = "fire.plist";
+//            _strImgSplit = "fire_";
+            // _frameCount = 20;
+
+
             break;
         default:
             break;

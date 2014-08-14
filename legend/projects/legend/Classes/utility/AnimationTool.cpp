@@ -18,11 +18,11 @@ CCSprite* AnimationTool::startFireAnm(CCPoint &pos,const char * image,const char
     CCArray *normalAnimFrames = CCArray::create();
     for (int i=1; i<count; i++) {
         char* tempString = new char;
-        sprintf(tempString, "%s%d.png", imgSplit,i);
+        sprintf(tempString, "%s%d.tiff", imgSplit,i);
         CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(tempString);
         normalAnimFrames->addObject(frame);
     }
-    CCAnimation *animation = CCAnimation::createWithSpriteFrames(normalAnimFrames,0.016f);
+    CCAnimation *animation = CCAnimation::createWithSpriteFrames(normalAnimFrames,0.1f);
     animation->setLoops(1);
     
     CCAnimate *animate = CCAnimate::create(animation);
