@@ -52,7 +52,7 @@ void TouchTrailLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
         CCBlade *blade = CCBlade::create(kFileStreak, 24, 20);
-        CCLOG("touch begin");
+        //CCLOG("touch begin");
         _map[touch] = blade;
 		addChild(blade);
         blade->setColor(ccc3(255,0,0));
@@ -72,7 +72,7 @@ void TouchTrailLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 {
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
-        CCLOG("touch move");
+        //CCLOG("touch move");
         if (_map.find(touch) == _map.end()) continue;
         CCBlade *blade = _map[touch];
         CCPoint point = convertTouchToNodeSpace(touch);
@@ -80,7 +80,7 @@ void TouchTrailLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
             touchTrailCallback->touchMove_TouchTrail(point);
         }
         point = ccpAdd(ccpMult(point, 0.5f), ccpMult(touch->getPreviousLocation(), 0.5f));
-        CCLOG("touch x:%f y:%f",point.x,point.y);
+        //CCLOG("touch x:%f y:%f",point.x,point.y);
 		blade->push(point);
          _bladeSparkle->setPosition(point);
     }
@@ -90,7 +90,7 @@ void TouchTrailLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 {
     for (CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++) {
         CCTouch *touch = (CCTouch *)*it;
-        CCLOG("touch end");
+        //CCLOG("touch end");
         if (_map.find(touch) == _map.end()) continue;
         CCBlade *blade = _map[touch];
         blade->autoCleanup();
@@ -186,7 +186,7 @@ bool TouchTrailLayer::isCloseShape(cocos2d::CCPoint point){
 
 
 void TouchTrailLayer::autoDrawPoints(){
-    CCLOG("_point.size :%d",(int)_points.size());
+    //CCLOG("_point.size :%d",(int)_points.size());
     if(_points.size() > 1){
         CCPoint point = _points.back();
         blade->push(point);
@@ -205,7 +205,7 @@ void TouchTrailLayer::autoDrawPoints(){
 
 
 void TouchTrailLayer::autoDrawAfterFinger(){
-    CCLOG("autoDrawAfterFinger");
+    //CCLOG("autoDrawAfterFinger");
     blade = CCBlade::create(kFileStreak, 24, 30);
     addChild(blade);
     blade->setDrainInterval(1.5/40.0);

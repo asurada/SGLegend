@@ -14,7 +14,7 @@
 #include "AnalysisPentagon.h"
 #include "AnalysisHexagon.h"
 
-AnalysisShape AnalysisFactory::analysis(int &formation,CCArray* linkballs){
+ResultData* AnalysisFactory::analysis(int &formation,CCArray* linkballs){
 
     AnalysisShape result = noresult;
     CCLog("formation = %d",formation);
@@ -39,10 +39,10 @@ AnalysisShape AnalysisFactory::analysis(int &formation,CCArray* linkballs){
     }
 
     if(logic != NULL){
-        result = logic->recogize(linkballs);
+        return  logic->recogize(linkballs);
     }
     
-    return result;
+    return NULL;
 
 
 }

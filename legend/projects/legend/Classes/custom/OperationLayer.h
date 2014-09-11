@@ -45,7 +45,7 @@ public:
 private:
     OperationLayer();
     ~OperationLayer();
-    AnalysisShape _linkShape;
+    ResultData *resultData;
     AnalysisFactory* factory;
     AnalysisLogic* analysisLogic;
     

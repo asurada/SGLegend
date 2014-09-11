@@ -15,7 +15,7 @@
 
 class AnalysisTriangle:public AnalysisLogic{
     public:
-        AnalysisShape recogize(cocos2d::CCArray *linkballs);
+        ResultData* recogize(cocos2d::CCArray *linkballs);
         void init(CCLayer *_parent,CCArray *container);
 
 };

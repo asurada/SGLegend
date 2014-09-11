@@ -238,11 +238,35 @@ void GameScene::backgroundRun(){
 void GameScene::beginFire(AnalysisShape shape){
     switch (shape) {
         case star:
+            CCLOG("star:星");
             onFire();
             break;
         case hexagon:
+            CCLOG("star：六角");
             onFire();
             break;
+        case noresult:
+            CCLOG("noresult：no");
+            break;
+        case triangle:
+            CCLOG("triangle：三角");
+            break;
+        case rect:
+            CCLOG("triangle：四角");
+            break;
+        case pentagon:
+            CCLOG("triangle：五角");
+            break;
+        case cross:
+            CCLOG("triangle：十字");
+            break;
+        case equaltriangle:
+            CCLOG("triangle：等辺三角");
+            break;
+        case reverse_equaltriangle:
+            CCLOG("reverse_equaltriangle");
+            break;
+            
         default:
             break;
     }

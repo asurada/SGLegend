@@ -13,22 +13,22 @@ AnalysisPentagon::AnalysisPentagon(){
 }
 
 
-AnalysisShape AnalysisPentagon::recogize(CCArray *linkballs){
+ResultData* AnalysisPentagon::recogize(CCArray *linkballs){
     int preTag = -1;
     int sameInterval = 0;
     AnalysisShape result = noresult;
-    
+     ResultData *resultData = new ResultData();
     
     if(linkballs->count() != 5){
         //        if(logic! = NULL ){
         //            return logic->recogize(linkballs);
         //        }
-        return result;
+       resultData->setShape(result);
     }
     
     for(int i=0; i < linkballs->count(); i++)
     {
-        CCSprite *sprite = (CCSprite *)linkballs->objectAtIndex(i);
+        StoneData *sprite = (StoneData *)linkballs->objectAtIndex(i);
         int tag = sprite->getTag();
         //        CCLOG("tag = %d", tag);
         //        CCLOG("preTag = %d", preTag);
@@ -46,13 +46,13 @@ AnalysisShape AnalysisPentagon::recogize(CCArray *linkballs){
     }
     
     if(sameInterval == 5 && linkballs->count() == 5){
-        return pentagon;
+        result =  pentagon;
     }
     
     //    if(logic!= NULL){
     //        return logic->recogize(linkballs);
     //    }
-    return result;
+    return resultData;
     
 }
 
@@ -94,29 +94,29 @@ void AnalysisPentagon::init(CCLayer *_parent,CCArray *container){
     CCPoint ballPos_5 = ccp(x5, y5);
  
 
-    BallBase* pSprite_1 = (BallBase *)spritesContainer->objectAtIndex(0);
+    StoneData* pSprite_1 = (StoneData *)spritesContainer->objectAtIndex(0);
     pSprite_1->setPosition(ballPos_1);
     pSprite_1->setTag(ENUM_PST_1);
     parent->addChild(pSprite_1);
         
-    BallBase* pSprite_2 = (BallBase *)spritesContainer->objectAtIndex(1);
+    StoneData* pSprite_2 = (StoneData *)spritesContainer->objectAtIndex(1);
     pSprite_2->setTag(ENUM_PST_2);
     pSprite_2->setPosition(ballPos_2);
     parent->addChild(pSprite_2);
         
-    BallBase* pSprite_3 = (BallBase *)spritesContainer->objectAtIndex(2);
+    StoneData* pSprite_3 = (StoneData *)spritesContainer->objectAtIndex(2);
     pSprite_3->setTag(ENUM_PST_3);
     pSprite_3->setPosition(ballPos_3);
     parent->addChild(pSprite_3);
         
    
-    BallBase* pSprite_4 = (BallBase *)spritesContainer->objectAtIndex(3);
+    StoneData* pSprite_4 = (StoneData *)spritesContainer->objectAtIndex(3);
     pSprite_4->setTag(ENUM_PST_4);
     pSprite_4->setPosition(ballPos_4);
     parent->addChild(pSprite_4);
     
 
-    BallBase* pSprite_5 = (BallBase *)spritesContainer->objectAtIndex(4);
+    StoneData* pSprite_5 = (StoneData *)spritesContainer->objectAtIndex(4);
     pSprite_5->setTag(ENUM_PST_5);
     pSprite_5->setPosition(ballPos_5);
     parent->addChild(pSprite_5);

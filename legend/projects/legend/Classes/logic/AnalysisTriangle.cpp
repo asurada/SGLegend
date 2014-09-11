@@ -10,13 +10,15 @@
 
 
 
-AnalysisShape AnalysisTriangle::recogize(CCArray *linkballs){
+ResultData* AnalysisTriangle::recogize(CCArray *linkballs){
 
     AnalysisShape result = noresult;
+    ResultData *resultData = new ResultData();
+    resultData->setShape(result);
     if(linkballs->count() == 3){
-        return triangle;
+          resultData->setShape(triangle);
     }
-    return result;
+    return resultData;
 }
 
 
@@ -44,17 +46,17 @@ void AnalysisTriangle::init(CCLayer *_parent,CCArray *container){
     CCPoint ballPos_2 = ccp(x2, y2);
     CCPoint ballPos_3 = ccp(x3, y3);
     
-    BallBase* pSprite_1 = (BallBase *)spritesContainer->objectAtIndex(0);   //BallBase::create("bll_01.png");
+    StoneData* pSprite_1 = (StoneData *)spritesContainer->objectAtIndex(0);   //BallBase::create("bll_01.png");
     pSprite_1->setPosition(ballPos_1);
     pSprite_1->setTag(ENUM_PST_1);
     parent->addChild(pSprite_1);
     
-    BallBase* pSprite_2 = (BallBase *)spritesContainer->objectAtIndex(1);
+    StoneData* pSprite_2 = (StoneData *)spritesContainer->objectAtIndex(1);
     pSprite_2->setTag(ENUM_PST_2);
     pSprite_2->setPosition(ballPos_2);
     parent->addChild(pSprite_2);
     
-    BallBase* pSprite_3 = (BallBase *)spritesContainer->objectAtIndex(2);
+    StoneData* pSprite_3 = (StoneData *)spritesContainer->objectAtIndex(2);
     pSprite_3->setTag(ENUM_PST_3);
     pSprite_3->setPosition(ballPos_3);
     parent->addChild(pSprite_3);

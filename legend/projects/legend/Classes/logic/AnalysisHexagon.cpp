@@ -13,31 +13,42 @@ AnalysisHexagon::AnalysisHexagon(){
 }
 
 
-AnalysisShape AnalysisHexagon::recogize(CCArray *linkballs){
+ResultData* AnalysisHexagon::recogize(CCArray *linkballs){
     int preTag = -1;
     int sameInterval = 0;
     int starCount = 0;
     int triangleCount = 0;
     int reverseTriangel = 0;
-    AnalysisShape result = noresult;
+    int value = 0;
+    int order = 0;
+    AnalysisShape shape = noresult;
+    ResultData *resultData = new ResultData();
     for(int i=0; i < linkballs->count(); i++)
     {
-        CCSprite *sprite = (CCSprite *)linkballs->objectAtIndex(i);
+        StoneData *sprite = (StoneData *)linkballs->objectAtIndex(i);
         int tag = sprite->getTag();
-        //        CCLOG("tag = %d", tag);
-        //        CCLOG("preTag = %d", preTag);
+        
+        if(preTag != -1){
+            order = preTag-tag;
+        }
+        value += tag;
+        
+        
+        CCLOG("tag : %d",tag);
         if(preTag == -1){
             preTag = tag;
         }else{
             //6角形判断
-            if(linkballs->count() == 6){
+            if(linkballs->count() == 6){//6角形判断
+                CCLOG("6角形判断");
                 if(abs(preTag-tag)==1 || abs(preTag-tag)==5){
                     sameInterval++;
                 }
                 preTag = tag;
             }else if(linkballs->count() == 5){//星形
+                CCLOG("星形判断");
                 if(abs(preTag-tag) < 2){
-                    return noresult;
+                    shape = noresult;
                 }
                 if(abs(preTag-tag) > 1 && (preTag%3 == tag%3) ){
                     starCount++;
@@ -46,15 +57,17 @@ AnalysisShape AnalysisHexagon::recogize(CCArray *linkballs){
                 }
                 preTag = tag;
             }else if(linkballs->count() == 4){//四角
+                 CCLOG("四角判断");
                 if(tag == 1 || tag == 4)
-                    return noresult;
+                    shape =  noresult;
                 if(abs(preTag-tag) == 3){
-                    return cross;
+                    shape =  cross;
                 }else{
-                    return rect;
+                    shape =  rect;
                 }
                 preTag = tag;
             }else if(linkballs->count() == 3){//三角
+                CCLOG("三角判断");
                 if(tag == 1 || tag == 3 || tag == 5){
                     triangleCount++;
                 }
@@ -62,28 +75,30 @@ AnalysisShape AnalysisHexagon::recogize(CCArray *linkballs){
                     reverseTriangel++;
                 }
                 if(triangleCount == 3){
-                    return equaltriangle;
+                    shape =  equaltriangle;
                 }
                 if(reverseTriangel == 3){
-                    return reverse_equaltriangle;
+                    shape =  reverse_equaltriangle;
                 }
-                return triangle;
+                shape =  triangle;
             }
         }
     }
 
-    if(sameInterval == 6 && linkballs->count() == 6){
-        return hexagon;
+    if(sameInterval == 5 && linkballs->count() == 6){
+        shape =  hexagon;
     }
     
     if(starCount == 2 && linkballs->count() == 5){
-        return star;
+        shape =  star;
     }
     
-    if(sameInterval == 5 && linkballs->count() == 6){
-        return star;
+    if(sameInterval == 5 && linkballs->count() == 5){
+        shape =  star;
     }
-    return result;
+    resultData->setShape(shape);
+    resultData->setValue(value);
+    return resultData;
     
 }
 
@@ -132,32 +147,32 @@ void AnalysisHexagon::init(CCLayer *_parent,CCArray *container){
     CCPoint ballPos_6 = ccp(x6, y6);
 
 
-    BallBase* pSprite_1 = (BallBase *)spritesContainer->objectAtIndex(0);
+    StoneData* pSprite_1 = (StoneData *)spritesContainer->objectAtIndex(0);
     pSprite_1->setPosition(ballPos_1);
     pSprite_1->setTag(ENUM_PST_1);
     parent->addChild(pSprite_1);
         
-    BallBase* pSprite_2 = (BallBase *)spritesContainer->objectAtIndex(1);
+    StoneData* pSprite_2 = (StoneData *)spritesContainer->objectAtIndex(1);
     pSprite_2->setTag(ENUM_PST_2);
     pSprite_2->setPosition(ballPos_2);
     parent->addChild(pSprite_2);
         
-    BallBase* pSprite_3 = (BallBase *)spritesContainer->objectAtIndex(2);
+    StoneData* pSprite_3 = (StoneData *)spritesContainer->objectAtIndex(2);
     pSprite_3->setTag(ENUM_PST_3);
     pSprite_3->setPosition(ballPos_3);
     parent->addChild(pSprite_3);
     
-    BallBase* pSprite_4 = (BallBase *)spritesContainer->objectAtIndex(3);
+    StoneData* pSprite_4 = (StoneData *)spritesContainer->objectAtIndex(3);
     pSprite_4->setTag(ENUM_PST_4);
     pSprite_4->setPosition(ballPos_4);
     parent->addChild(pSprite_4);
 
-    BallBase* pSprite_5 = (BallBase *)spritesContainer->objectAtIndex(4);
+    StoneData* pSprite_5 = (StoneData *)spritesContainer->objectAtIndex(4);
     pSprite_5->setTag(ENUM_PST_5);
     pSprite_5->setPosition(ballPos_5);
     parent->addChild(pSprite_5);
 
-    BallBase* pSprite_6 =(BallBase *)spritesContainer->objectAtIndex(5);
+    StoneData* pSprite_6 =(StoneData *)spritesContainer->objectAtIndex(5);
     pSprite_6->setTag(ENUM_PST_6);
     pSprite_6->setPosition(ballPos_6);
     parent->addChild(pSprite_6);

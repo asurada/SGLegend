@@ -10,20 +10,10 @@
 #define __legend__AnalysisLogic__
 #include "cocos2d.h"
 #include "ballBase.h"
+#include "StoneData.h"
+#include "ResultData.h"
 
 USING_NS_CC;
-
-enum AnalysisShape{
-    noresult = 0,
-    triangle = 1,
-    rect = 2,
-    star = 3,
-    hexagon = 4,
-    pentagon = 5,
-    cross = 6,
-    equaltriangle = 7,
-    reverse_equaltriangle= 8,
-};
 
 
 enum Position{
@@ -38,8 +28,8 @@ enum Position{
 class AnalysisLogic{
 
     protected:
-        CCArray *spritesContainer;
-        CCLayer* parent;
+        CCArray * spritesContainer;
+        CCLayer * parent;
     public:
         AnalysisLogic *logic;
         AnalysisLogic(int formate);
@@ -47,7 +37,7 @@ class AnalysisLogic{
         ~AnalysisLogic();
         CCArray *getContainer();
         virtual void init(CCLayer *_parent,CCArray *container) = 0;
-        virtual AnalysisShape recogize(CCArray *linkballs) = 0;
+        virtual ResultData *recogize(CCArray *linkballs) = 0;
 
     
 };

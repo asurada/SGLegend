@@ -10,6 +10,7 @@
 #include "cocos2d.h"
 #include "Utility.h"
 #include "ShapeConst.h"
+#include "StoneData.h"
 
 #define SPEED_CONST 0.01f
 
@@ -60,7 +61,7 @@ bool OperationLayer::init()
     bool bRet = false;
     CCSize s = CCDirector::sharedDirector()->getWinSize();
     cocos2d::CCDirector * pDirector = cocos2d::CCDirector::sharedDirector();
-    CCLOG("width=%f,height=%f",s.width,s.height);
+    //CCLOG("width=%f,height=%f",s.width,s.height);
     _touchTrailLayer = TouchTrailLayer::create();
     _touchTrailLayer->setDelegate(this);
     marklayer = CCLayer::create();
@@ -82,12 +83,12 @@ bool OperationLayer::init()
     //#define HEXAGON  7
     analysisLogic = this->createBall(HEXAGON);
     CCArray* array = CCArray::create();
-    array->addObject(BallBase::create("bll_01.png"));
-    array->addObject(BallBase::create("bll_02.png"));
-    array->addObject(BallBase::create("bll_03.png"));
-    array->addObject(BallBase::create("bll_04.png"));
-    array->addObject(BallBase::create("bll_05.png"));
-    array->addObject(BallBase::create("bll_06.png"));
+    array->addObject(StoneData::create("bll_01.png"));
+    array->addObject(StoneData::create("bll_02.png"));
+    array->addObject(StoneData::create("bll_03.png"));
+    array->addObject(StoneData::create("bll_04.png"));
+    array->addObject(StoneData::create("bll_05.png"));
+    array->addObject(StoneData::create("bll_06.png"));
     analysisLogic->init(this,array);
     return bRet;
 }
@@ -180,7 +181,7 @@ CCSprite* OperationLayer::isHit(cocos2d::CCPoint point){
 
 //==========================TouchTrailCallback====================================
 void OperationLayer::touchBegin_TouchTrail(cocos2d::CCPoint point){
-    CCLOG("touchBegin_TouchTrail");
+    //CCLOG("touchBegin_TouchTrail");
     magicSprites->removeAllObjects();
     CCSprite *spirit =isHit(point);
     if(spirit){
@@ -195,7 +196,7 @@ void OperationLayer::touchBegin_TouchTrail(cocos2d::CCPoint point){
 }
 
 void OperationLayer::touchMove_TouchTrail(cocos2d::CCPoint point){
-    CCLOG("touchMove_TouchTrail");
+    //CCLOG("touchMove_TouchTrail");
     CCSprite *spirit =isHit(point);
     if(!brushSprite || !brushSprite->getParent()) return;
     adjustMark(brushSprite, brushSprite->getPosition(), point);
@@ -211,7 +212,7 @@ void OperationLayer::touchMove_TouchTrail(cocos2d::CCPoint point){
 
 
 void OperationLayer::touchEnd_TouchTrail(cocos2d::CCPoint point){
-    CCLOG("touchEnd_TouchTrail");
+    //CCLOG("touchEnd_TouchTrail");
     removeAllMagicSquare();
     CCSprite *spirit =isHit(point);
     if(!spirit){
@@ -243,10 +244,10 @@ void OperationLayer::onPop(cocos2d::CCPoint point){
 
 void OperationLayer::onPopLast(cocos2d::CCPoint point){
     draw(point);
-    _linkShape = factory->analysis(_shape,magicSprites);
-    CCLOG("shape = %d",_linkShape);
-    if(_linkShape != noresult){
-        operationCallBack->beginFire(_linkShape);
+    resultData = factory->analysis(_shape,magicSprites);
+    CCLOG("value = %d,order = %d",resultData->getValue(),resultData->getValue());
+    if(resultData->getShape() != noresult){
+        operationCallBack->beginFire(resultData->getShape());
     }
     tempMagicPoints.clear();
 }

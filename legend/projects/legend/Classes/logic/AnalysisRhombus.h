@@ -9,6 +9,7 @@
 #ifndef __legend__AnalysisRhombus__
 #define __legend__AnalysisRhombus__
 #include "AnalysisLogic.h"
+#include "ballBase.h"
 
 class AnalysisRhombus:public AnalysisLogic{
 public :
@@ -16,7 +17,7 @@ public :
     AnalysisRhombus();
     ~AnalysisRhombus();
     void init(CCLayer *_parent,CCArray *container);
-    AnalysisShape recogize(CCArray *linkballs);
+    ResultData* recogize(CCArray *linkballs);
 };
 
 #endif /* defined(__legend__AnalysisRhombus__) */

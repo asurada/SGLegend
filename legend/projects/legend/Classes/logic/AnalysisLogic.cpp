@@ -21,9 +21,10 @@ AnalysisLogic::AnalysisLogic(int formate){
 }
 
 
-AnalysisShape AnalysisLogic::recogize(CCArray *linkballs){
-    
-    return noresult;
+ResultData* AnalysisLogic::recogize(CCArray *linkballs){
+    ResultData *result = new ResultData();
+    result->setShape(noresult);
+    return result;
 }
 
 CCArray *AnalysisLogic::getContainer(){

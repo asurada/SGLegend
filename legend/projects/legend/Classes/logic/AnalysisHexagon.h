@@ -15,7 +15,7 @@ public :
     AnalysisHexagon *logic;
     AnalysisHexagon();
     ~AnalysisHexagon();
-    AnalysisShape recogize(CCArray *linkballs);
+    ResultData* recogize(CCArray *linkballs);
     void init(CCLayer *_parent,CCArray *container);
 };
 

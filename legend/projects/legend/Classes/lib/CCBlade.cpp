@@ -227,7 +227,7 @@ void CCBlade::push(const CCPoint &point)
 void CCBlade::pop(int count)
 {
     while (_path.size() > 0 && count > DELETE_START_LIMIT) {
-        CCLOG("pop_back: x %f, y:%f ",_path.back().x,_path.back().y);
+        //CCLOG("pop_back: x %f, y:%f ",_path.back().x,_path.back().y);
         _path.pop_back();
         count--;
     }

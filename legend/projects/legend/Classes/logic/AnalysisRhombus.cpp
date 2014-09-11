@@ -13,11 +13,11 @@ AnalysisRhombus::AnalysisRhombus(){
 }
 
 
-AnalysisShape AnalysisRhombus::recogize(CCArray *linkballs){
+ResultData* AnalysisRhombus::recogize(CCArray *linkballs){
 //    int preTag = -1;
 //    int sameInterval = 0;
     AnalysisShape result = noresult;
-    
+    ResultData *resultData = new ResultData();
     
 //    if(linkballs->count() != 6){
 //        //        if(logic! = NULL ){
@@ -52,7 +52,8 @@ AnalysisShape AnalysisRhombus::recogize(CCArray *linkballs){
 //    //    if(logic!= NULL){
 //    //        return logic->recogize(linkballs);
 //    //    }
-    return result;
+    resultData->setShape(result);
+    return resultData;
     
 }
 
@@ -80,22 +81,22 @@ void AnalysisRhombus::init(CCLayer *_parent,CCArray *container){
     CCPoint ballPos_3 = ccp(x3, y3);
     CCPoint ballPos_4 = ccp(x4, y4);
 
-    BallBase* pSprite_1 = (BallBase *)spritesContainer->objectAtIndex(0);
+    StoneData* pSprite_1 = (StoneData *)spritesContainer->objectAtIndex(0);
     pSprite_1->setPosition(ballPos_1);
     pSprite_1->setTag(ENUM_PST_1);
     parent->addChild(pSprite_1);
         
-    BallBase* pSprite_2 =  (BallBase *)spritesContainer->objectAtIndex(1);
+    StoneData* pSprite_2 =  (StoneData *)spritesContainer->objectAtIndex(1);
     pSprite_2->setTag(ENUM_PST_2);
     pSprite_2->setPosition(ballPos_2);
     parent->addChild(pSprite_2);
         
-    BallBase* pSprite_3 =  (BallBase *)spritesContainer->objectAtIndex(2);
+    StoneData* pSprite_3 =  (StoneData *)spritesContainer->objectAtIndex(2);
     pSprite_3->setTag(ENUM_PST_3);
     pSprite_3->setPosition(ballPos_3);
     parent->addChild(pSprite_3);
         
-    BallBase* pSprite_4 =  (BallBase *)spritesContainer->objectAtIndex(3);
+    StoneData* pSprite_4 =  (StoneData *)spritesContainer->objectAtIndex(3);
     pSprite_4->setTag(ENUM_PST_4);
     pSprite_4->setPosition(ballPos_4);
     parent->addChild(pSprite_4);

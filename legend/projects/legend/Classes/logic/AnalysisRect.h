@@ -9,10 +9,12 @@
 #ifndef __legend__AnalysisRect__
 #define __legend__AnalysisRect__
 #include "AnalysisLogic.h"
+#include "ballBase.h"
+
 
 class AnalysisRect:public AnalysisLogic{
     public:
-        AnalysisShape recogize(CCArray *linkballs);
+        ResultData* recogize(CCArray *linkballs);
         void init(CCLayer *_parent,CCArray *container);
 
 };

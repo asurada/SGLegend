@@ -15,7 +15,7 @@ class AnalysisFactory{
     
     public:
         AnalysisLogic *logic;
-        AnalysisShape analysis(int &formation,CCArray* linkballs);
+        ResultData* analysis(int &formation,CCArray* linkballs);
 };
 
 #endif /* defined(__legend__AnalysisFactory__) */
