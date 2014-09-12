@@ -309,6 +309,7 @@
 		A2B9764A1998DB6F002B1E2C /* AnimationTool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B976481998DB6F002B1E2C /* AnimationTool.cpp */; };
 		A2BD0EC519C17F65006D0D3F /* ResultData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BD0EC319C17F65006D0D3F /* ResultData.cpp */; };
 		A2BF55CD197FB0F90077BD5F /* BaseMagic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */; };
+		A2BFA16619C29FCE00E0FBEB /* GaugeSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BFA16419C29FCE00E0FBEB /* GaugeSprite.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -941,6 +942,8 @@
 		A2BD0EC419C17F65006D0D3F /* ResultData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultData.h; sourceTree = "<group>"; };
 		A2BF55CB197FB0F90077BD5F /* BaseMagic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseMagic.cpp; path = ../Classes/BaseMagic.cpp; sourceTree = "<group>"; };
 		A2BF55CC197FB0F90077BD5F /* BaseMagic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMagic.h; path = ../Classes/BaseMagic.h; sourceTree = "<group>"; };
+		A2BFA16419C29FCE00E0FBEB /* GaugeSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GaugeSprite.cpp; sourceTree = "<group>"; };
+		A2BFA16519C29FCE00E0FBEB /* GaugeSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaugeSprite.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -2163,6 +2166,8 @@
 		9CA1E9641930B8EA00080A75 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				A2BFA16419C29FCE00E0FBEB /* GaugeSprite.cpp */,
+				A2BFA16519C29FCE00E0FBEB /* GaugeSprite.h */,
 				9CA1E9681930BDFB00080A75 /* Utility.cpp */,
 				9CA1E9691930BDFB00080A75 /* Utility.h */,
 				9C9D3A931931BF9A0041258E /* ShapeConst.h */,
@@ -2651,6 +2656,7 @@
 				15A3DA441682F826002FB0C5 /* CCNodeLoaderLibrary.cpp in Sources */,
 				298B29C118D0668400C1920F /* ListViewReader.cpp in Sources */,
 				15A3DA451682F826002FB0C5 /* CCParticleSystemQuadLoader.cpp in Sources */,
+				A2BFA16619C29FCE00E0FBEB /* GaugeSprite.cpp in Sources */,
 				15A3DA461682F826002FB0C5 /* CCScale9SpriteLoader.cpp in Sources */,
 				15A3DA471682F826002FB0C5 /* CCScrollViewLoader.cpp in Sources */,
 				15A3DA481682F826002FB0C5 /* CCSpriteLoader.cpp in Sources */,

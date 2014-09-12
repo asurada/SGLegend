@@ -16,13 +16,15 @@
 #include "Box2D.h"
 #include "FighterCallback.h"
 
-class BaseFighter{
+class BaseFighter : public CCSprite{
 private:
    
 
     
 protected:
      CCSprite* _char;
+     CCSprite* _hpGauge;
+     CCSprite* _magicGauge;
      CCLayer* _parent;
      int hp;
      int magic;
@@ -53,6 +55,7 @@ public:
     float getDensity();
     float getFriction();
     float getRestitution();
+    
 //    void setTarget(BaseFighter* target);
     CC_SYNTHESIZE(FighterCallback*, fighterCallback, Delegate);
 };
