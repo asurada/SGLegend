@@ -23,6 +23,7 @@ typedef enum
 class GaugeSprite : public CCSprite{
 
 private:
+    CCSprite super;
     double_t val_;
     double_t get_val_() const { return val_; }
     double_t set_val_(double_t const& value) { return val_ = value; }
@@ -67,7 +68,7 @@ public :
     void updateBarLen(double_t _val);
     void updateBarLen(double_t _val ,double_t _minVal ,double_t _maxVal);
     
-    bool moveStart(double_t _tarVal,int _duration , _target selector:(SEL)_selector;
+    //bool moveStart(double_t _tarVal,int _duration , _target selector:(SEL)_selector;
     
     
     void moveFinish();
