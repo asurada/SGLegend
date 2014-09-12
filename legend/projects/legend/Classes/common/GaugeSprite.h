@@ -45,9 +45,9 @@ private:
     double_t get_diffVal_() const { return diffVal_; }
     double_t set_diffVal_(double_t const& value) { return diffVal_ = value; }
     
-    int duration_;
-    int get_duration_() const { return duration_; }
-    int set_duration_(double_t const& value) { return duration_ = value; }
+    CCTime duration_;
+    CCTime get_duration_() const { return duration_; }
+    CCTime set_duration_(CCTime const& value) { return duration_ = value; }
     
     bool isMove_;
     int get_isMove_() const { return isMove_; }
