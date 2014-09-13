@@ -57,7 +57,7 @@ private:
 public :
     
     void update(double_t val,double_t minVal,double_t maxVal);
-    
+    void init();
     static CCSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir);
     static CCSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir ,double_t _val , double_t _minVal,double_t _maxVal);
     static CCSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir);

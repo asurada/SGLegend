@@ -10,22 +10,23 @@
 
 
 static GaugeSprite::CCSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir){
-    return this->nodeWithBarFile(_barFileName,_barLenMax,_barDir,0.0,0.0,0.0f);
+    return GaugeSprite::nodeWithBarFile(_barFileName,_barLenMax,_barDir,0.0,0.0,0.0f);
 }
 
 
-static GaugeSprite::CCSprite* nodeWithBarFile(std::string  _barFileName , float _barLenMax,BarDir _barDir, double_t _val,double_t _minVal ,double_t _maxVal){
-	CCTexture2D* texture = CCTextureCache::sharedTextureCache()->addImage(_barFileName->char);
-	return this->nodeWithBarTexture:texture:_barLenMax:_barDir:_val:_minVal:_maxVal];
+static GaugeSprite::CCSprite* nodeWithBarFile(std::string  _barFileName , float _barLenMax,GaugeDirection _barDir, double_t _val,double_t _minVal ,double_t _maxVal){
+	CCTexture2D* texture = CCTextureCache::sharedTextureCache()->addImage(_barFileName.c_str());
+	return GaugeSprite::nodeWithBarTexture(texture,_barLenMax,_barDir,_val,_minVal,_maxVal);
 }
-static GaugeSprite::CCSprite* nodeWithBarTexture:(CCTexture2D*)_barTexture :(float)_barLenMax :(BarDir)_barDir
+static GaugeSprite::CCSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir)
 {
-	return [self nodeWithBarTexture:_barTexture:_barLenMax:_barDir:0.0f:0.0f:0.0f];
+	return GaugeSprite::nodeWithBarTexture(_barTexture,_barLenMax,_barDir,0.0f,0.0f,0.0f);
 }
-static GaugeSprite::CCSprite* nodeWithBarTexture:(CCTexture2D*)_barTexture :(float)_barLenMax :(BarDir)_barDir :(double_t)_val :(double_t)_minVal :(double_t)_maxVal
+
+static GaugeSprite::CCSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir ,double_t _val ,double_t _minVal ,double_t _maxVal)
 {
-	id obj = [self spriteWithTexture:_barTexture];
-	[obj initBarParam:_barLenMax:_barDir:_val :_minVal :_maxVal];
+	GaugeSprite  *obj =(GaugeSprite*)CCSprite::createWithTexture(_barTexture);
+	obj->initBarParam(_barLenMax,_barDir,_val,_minVal,_maxVal);
 	return obj;
 }
 
@@ -33,7 +34,7 @@ static GaugeSprite::CCSprite* nodeWithBarTexture:(CCTexture2D*)_barTexture :(flo
 
 
 // Override
--(id) init
+void GaugeSprite::init()
 {
 	if((self = [super init])){
 		val_		= 0.0f;
@@ -50,7 +51,7 @@ static GaugeSprite::CCSprite* nodeWithBarTexture:(CCTexture2D*)_barTexture :(flo
 	return self;
 }
 
-- (void) initBarParam:(float)_barLenMax :(BarDir)_barDir :(double_t)_val :(double_t)_minVal :(double_t)_maxVal
+- (void)GaugeSprite::initBarParam(float _barLenMax,BarDir _barDir ,double_t _val ,double_t _minVal , double_t _maxVal)
 {
 	val_		= _val;
 	minVal_		= _minVal;
