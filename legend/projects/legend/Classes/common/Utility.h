@@ -15,6 +15,7 @@ class Utility{
 public:
     static CCPoint calCenterPoint(cocos2d::CCPoint startPoint,cocos2d::CCPoint endPoint);
     static bool isCloseLoop(CCSprite * _ball, CCArray *magicSprites);
-    
+    static float calcPercentD(double_t _val ,double_t _minVal ,double_t _maxVal);
+    static float getBarScale(float _percent,float _varImageLen,float _viewMaxLen);
 };
 #endif /* defined(__legend__Utility__) */

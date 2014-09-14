@@ -19,6 +19,7 @@ private:
 public:
     Char_01(const char *pszFileName);
     ~Char_01();
+    static Char_01* create(const char *pszFileName);
     const char* getBulletName(bulletType _type);
    
     

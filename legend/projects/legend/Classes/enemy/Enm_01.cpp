@@ -8,10 +8,27 @@
 
 #include "Enm_01.h"
 
-Enm_01::Enm_01(const char *pszFileName){
-    _char = CCSprite::create(pszFileName);
+
+Enm_01* Enm_01::create(const char *pszFileName){
+    return (Enm_01*)CCSprite::create(pszFileName);
 }
 
+
+Enm_01::Enm_01(const char *pszFileName){
+    _char = Enm_01::create(pszFileName);
+    _hpGauge = GaugeSprite::nodeWithBarFile("ips_co_gg_gr@2x.png",100.0f,BARDIR_LEFT);
+    this->addChild(_hpGauge,2);
+}
+
+Enm_01::~Enm_01(){
+   
+}
+
+
+bool Enm_01::init(){
+    
+    return true;
+}
 
 
 const char* Enm_01::getBulletName(bulletType _type){

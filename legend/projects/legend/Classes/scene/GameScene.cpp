@@ -117,13 +117,12 @@ bool GameScene::init()
 
     center = ccp(visibleSize.width/2 , visibleSize.height/4);
     pSprite_char = new Char_01("char.png");
-    pSprite_char->setPosition(this, center,2);
+    pSprite_char->setPosition(this,center,0);
+   
 
-    
     monster = ccp(visibleSize.width/2 , visibleSize.height/2 + visibleSize.height/4);
     pSprite_monster = new Enm_01("monster.png");
-    pSprite_monster->setPosition(this, monster, 0);
-    
+    pSprite_monster->setPosition(this,monster,0);
     this->scheduleUpdate();
     bullets = new Bullet();
 

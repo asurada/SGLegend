@@ -300,6 +300,8 @@
 		A225AC3A1981027800C342F3 /* TyphoonEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC381981027800C342F3 /* TyphoonEffect.cpp */; };
 		A225AC3E198105EF00C342F3 /* Char_01.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC3C198105EF00C342F3 /* Char_01.cpp */; };
 		A225AC471981097B00C342F3 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A225AC451981097B00C342F3 /* Bullet.cpp */; };
+		A265378619C5A9000041FEE4 /* ips_co_gg_bt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A265378419C5A9000041FEE4 /* ips_co_gg_bt@2x.png */; };
+		A265378719C5A9000041FEE4 /* ips_co_gg_gr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A265378519C5A9000041FEE4 /* ips_co_gg_gr@2x.png */; };
 		A27784F91947EDCB00765D69 /* Concept.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784F81947EDCB00765D69 /* Concept.strings */; };
 		A27784FB1947F61600765D69 /* TechMemo.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FA1947F61600765D69 /* TechMemo.strings */; };
 		A27784FD1947F93B00765D69 /* schedule.strings in Resources */ = {isa = PBXBuildFile; fileRef = A27784FC1947F93B00765D69 /* schedule.strings */; };
@@ -929,6 +931,9 @@
 		A225AC451981097B00C342F3 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bullet.cpp; path = ../Classes/bullet/Bullet.cpp; sourceTree = "<group>"; };
 		A225AC461981097B00C342F3 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bullet.h; path = ../Classes/bullet/Bullet.h; sourceTree = "<group>"; };
 		A262967D19866B6F000A77F9 /* FighterCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FighterCallback.h; sourceTree = "<group>"; };
+		A265378319C58BB80041FEE4 /* GaugeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GaugeDelegate.h; sourceTree = "<group>"; };
+		A265378419C5A9000041FEE4 /* ips_co_gg_bt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ips_co_gg_bt@2x.png"; path = "../ips_co_gg_bt@2x.png"; sourceTree = "<group>"; };
+		A265378519C5A9000041FEE4 /* ips_co_gg_gr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ips_co_gg_gr@2x.png"; path = "../ips_co_gg_gr@2x.png"; sourceTree = "<group>"; };
 		A27784F81947EDCB00765D69 /* Concept.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Concept.strings; sourceTree = "<group>"; };
 		A27784FA1947F61600765D69 /* TechMemo.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TechMemo.strings; sourceTree = "<group>"; };
 		A27784FC1947F93B00765D69 /* schedule.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = schedule.strings; sourceTree = "<group>"; };
@@ -2115,6 +2120,8 @@
 		9C15A9EC1927272800737452 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				A265378419C5A9000041FEE4 /* ips_co_gg_bt@2x.png */,
+				A265378519C5A9000041FEE4 /* ips_co_gg_gr@2x.png */,
 				A21B7CCC1974F53F00B945BA /* brush.png */,
 				9C69D73519337DBC007C4286 /* fire_1.png */,
 				9C69D73619337DBC007C4286 /* fire_2.png */,
@@ -2166,6 +2173,7 @@
 		9CA1E9641930B8EA00080A75 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				A265378319C58BB80041FEE4 /* GaugeDelegate.h */,
 				A2BFA16419C29FCE00E0FBEB /* GaugeSprite.cpp */,
 				A2BFA16519C29FCE00E0FBEB /* GaugeSprite.h */,
 				9CA1E9681930BDFB00080A75 /* Utility.cpp */,
@@ -2492,6 +2500,7 @@
 				9C15A9FA19277FDC00737452 /* bll_03.png in Resources */,
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
+				A265378619C5A9000041FEE4 /* ips_co_gg_bt@2x.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
@@ -2514,6 +2523,7 @@
 				9C69D73719337DBC007C4286 /* fire_1.png in Resources */,
 				9C69D73819337DBC007C4286 /* fire_2.png in Resources */,
 				9C15AA011927833B00737452 /* monster.png in Resources */,
+				A265378719C5A9000041FEE4 /* ips_co_gg_gr@2x.png in Resources */,
 				A27784FB1947F61600765D69 /* TechMemo.strings in Resources */,
 				A28F8F9A199B75A600450024 /* light.plist in Resources */,
 				9C15A9F819277FDC00737452 /* bll_01.png in Resources */,

@@ -9,12 +9,20 @@
 #include "Char_01.h"
 
 
-Char_01::Char_01(const char *pszFileName){
-    _char = CCSprite::create(pszFileName);
+
+
+Char_01* Char_01::create(const char *pszFileName){
+    return (Char_01*)CCSprite::create(pszFileName);
 }
 
 
+Char_01::Char_01(const char *pszFileName){
+    _char = Char_01::create(pszFileName);
+}
 
+Char_01::~Char_01(){
+    
+}
 const char* Char_01::getBulletName(bulletType _type){
     string result;
     switch (_type) {

@@ -9,6 +9,9 @@
 #ifndef __legend__GaugeSprite__
 #define __legend__GaugeSprite__
 #include "cocos2d.h"
+#include "Utility.h"
+#include "GaugeDelegate.h"
+
 USING_NS_CC;
 
 typedef enum
@@ -24,6 +27,7 @@ class GaugeSprite : public CCSprite{
 
 private:
     CCSprite super;
+
     double_t val_;
     double_t get_val_() const { return val_; }
     double_t set_val_(double_t const& value) { return val_ = value; }
@@ -46,35 +50,46 @@ private:
     double_t get_diffVal_() const { return diffVal_; }
     double_t set_diffVal_(double_t const& value) { return diffVal_ = value; }
     
-    CCTime duration_;
-    CCTime get_duration_() const { return duration_; }
-    CCTime set_duration_(CCTime const& value) { return duration_ = value; }
+    double_t duration_;
+    double_t get_duration_() const { return duration_; }
+    double_t set_duration_(double_t const& value) { return duration_ = value; }
     
     bool isMove_;
+    float barLenMax_;
     int get_isMove_() const { return isMove_; }
-
+    GaugeDirection barDir_;
     
 public :
     
     void update(double_t val,double_t minVal,double_t maxVal);
-    void init();
+    GaugeSprite();
+    ~GaugeSprite();
+    
+    CC_SYNTHESIZE(GaugeDelegate*, gaugeDelegate, Delegate);
+    
     static CCSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir);
     static CCSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir ,double_t _val , double_t _minVal,double_t _maxVal);
     static CCSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir);
     static CCSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir, double_t _val ,double_t _minVal ,double_t _maxVal);
     void initBarParam(float _barLenMax ,GaugeDirection _barDir,double_t _val ,double_t _minVal ,double_t _maxVal);
     
-    float getBarFitScale(double_t _val);
+    void onSchedule(float dt);
+    bool moveStart(double_t _tarVal,double_t _duration);
+   float getBarFitScale(double_t _val);
     void updateBarLen(double_t _val);
     void updateBarLen(double_t _val ,double_t _minVal ,double_t _maxVal);
-    
     //bool moveStart(double_t _tarVal,int _duration , _target selector:(SEL)_selector;
-    
-    
     void moveFinish();
     void cancelFinishSelector();
     void moveForceFinish();
     void moveStop();
+    
+    
+    
+    virtual void onMoveStart() = 0;
+    virtual void onMoveCancel() = 0;
+    virtual void onMoveForceFinish() = 0;
+    virtual void onMoveFinish() = 0;
     
 };
 

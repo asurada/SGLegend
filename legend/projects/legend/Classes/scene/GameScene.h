@@ -61,8 +61,8 @@ private:
     cocos2d::CCPoint monster;
     cocos2d::CCSprite* bullet;
     cocos2d::CCSprite* pSprite_round;
-    BaseFighter* pSprite_monster;
-    BaseFighter* pSprite_char;
+    Enm_01* pSprite_monster;
+    Char_01* pSprite_char;
     cocos2d::CCSprite* pSprite_bg_1;
     cocos2d::CCSprite* pSprite_bg_2;
     cocos2d::CCArray *touchBallArray;

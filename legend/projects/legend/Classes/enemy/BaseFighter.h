@@ -15,6 +15,7 @@
 #include "ShapeConst.h"
 #include "Box2D.h"
 #include "FighterCallback.h"
+#include "GaugeSprite.h"
 
 class BaseFighter : public CCSprite{
 private:
