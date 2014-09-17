@@ -17,6 +17,8 @@ Char_01* Char_01::create(const char *pszFileName){
 
 
 Char_01::Char_01(const char *pszFileName){
+    _hp  =   100;
+    _maxHp = 100;
     _char = Char_01::create(pszFileName);
 }
 

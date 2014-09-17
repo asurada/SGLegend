@@ -27,7 +27,9 @@ class GaugeSprite : public CCSprite{
 
 private:
     CCSprite super;
-
+    CCSprite *_bar;
+    CCSprite *_bg;
+    
     double_t val_;
     double_t get_val_() const { return val_; }
     double_t set_val_(double_t const& value) { return val_ = value; }
@@ -61,35 +63,35 @@ private:
     
 public :
     
-    void update(double_t val,double_t minVal,double_t maxVal);
     GaugeSprite();
+    GaugeSprite(double_t _val,double_t _maxVal);
     ~GaugeSprite();
     
     CC_SYNTHESIZE(GaugeDelegate*, gaugeDelegate, Delegate);
     
-    static CCSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir);
-    static CCSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir ,double_t _val , double_t _minVal,double_t _maxVal);
-    static CCSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir);
-    static CCSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir, double_t _val ,double_t _minVal ,double_t _maxVal);
+    static GaugeSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir);
+    static GaugeSprite* nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir ,double_t _val , double_t _minVal,double_t _maxVal);
+    static GaugeSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir);
+    static GaugeSprite* nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir, double_t _val ,double_t _minVal ,double_t _maxVal);
     void initBarParam(float _barLenMax ,GaugeDirection _barDir,double_t _val ,double_t _minVal ,double_t _maxVal);
     
     void onSchedule(float dt);
     bool moveStart(double_t _tarVal,double_t _duration);
-   float getBarFitScale(double_t _val);
+    float getBarFitScale(double_t _val);
     void updateBarLen(double_t _val);
     void updateBarLen(double_t _val ,double_t _minVal ,double_t _maxVal);
-    //bool moveStart(double_t _tarVal,int _duration , _target selector:(SEL)_selector;
     void moveFinish();
     void cancelFinishSelector();
     void moveForceFinish();
     void moveStop();
+    CCSprite *getBar();
     
     
     
-    virtual void onMoveStart() = 0;
-    virtual void onMoveCancel() = 0;
-    virtual void onMoveForceFinish() = 0;
-    virtual void onMoveFinish() = 0;
+//    virtual void onMoveStart() = 0;
+//    virtual void onMoveCancel() = 0;
+//    virtual void onMoveForceFinish() = 0;
+//    virtual void onMoveFinish() = 0;
     
 };
 

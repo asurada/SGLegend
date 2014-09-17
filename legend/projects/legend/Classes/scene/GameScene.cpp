@@ -117,13 +117,22 @@ bool GameScene::init()
 
     center = ccp(visibleSize.width/2 , visibleSize.height/4);
     pSprite_char = new Char_01("char.png");
-    pSprite_char->setPosition(this,center,0);
+    if(pSprite_char->init()){
+        pSprite_char->setPosition(this,center,0);
+        pSprite_char->initGauge(center);
+    }
+    
    
 
     monster = ccp(visibleSize.width/2 , visibleSize.height/2 + visibleSize.height/4);
     pSprite_monster = new Enm_01("monster.png");
-    pSprite_monster->setPosition(this,monster,0);
+    if(pSprite_monster->init()){
+        pSprite_monster->setPosition(this,monster,0);
+        pSprite_monster->initGauge(monster);
+    }
+
     this->scheduleUpdate();
+        
     bullets = new Bullet();
 
     return true;
@@ -197,8 +206,10 @@ void GameScene::update(float dt)
             if (sprite != NULL && pSprite_monster->getChar()->boundingBox().intersectsRect(sprite->boundingBox()))
             {
                 pSprite_monster->getChar()->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
+                pSprite_monster->updateHpBar((double_t)10.0);
                 bulletType type = (bulletType)sprite->getTag();
-                bullets->setExplode(type);
+                //bullets->setExplode(type);
+                
                 animationSprite = AnimationTool::startFireAnm(monster,bullets->getImage(),bullets->getPlist(),bullets->getImageSplit(),bullets->getFrameCount(),this,callfuncND_selector(GameScene::cleanupSprite));
                 this->addChild(animationSprite, 1);
                 b->GetWorld()->DestroyBody(b);
@@ -289,6 +300,7 @@ void GameScene::onFire(){
 
 void GameScene::cleanupSprite(CCSprite* inSprite)
 {
+
     inSprite->removeFromParentAndCleanup(true);
 }
 

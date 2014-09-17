@@ -17,7 +17,6 @@ public:
     Enm_01(const char *pszFileName);
     ~Enm_01();
     
-    bool init();
     static Enm_01* create(const char *pszFileName);
    // virtual CCSprite *attack(bulletType _type);
     const char* getBulletName(bulletType _type);

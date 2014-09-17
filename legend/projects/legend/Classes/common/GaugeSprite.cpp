@@ -9,27 +9,26 @@
 #include "GaugeSprite.h"
 
 
-CCSprite*  GaugeSprite::nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir){
+GaugeSprite*  GaugeSprite::nodeWithBarFile(std::string _barFileName ,float _barLenMax, GaugeDirection _barDir){
     return GaugeSprite::nodeWithBarFile(_barFileName,_barLenMax,_barDir,0.0,0.0,0.0f);
 }
 
-CCSprite*  GaugeSprite::nodeWithBarFile(std::string  _barFileName , float _barLenMax,GaugeDirection _barDir, double_t _val,double_t _minVal ,double_t _maxVal){
+GaugeSprite*  GaugeSprite::nodeWithBarFile(std::string  _barFileName , float _barLenMax,GaugeDirection _barDir, double_t _val,double_t _minVal ,double_t _maxVal){
 	CCTexture2D* texture = CCTextureCache::sharedTextureCache()->addImage(_barFileName.c_str());
 	return GaugeSprite::nodeWithBarTexture(texture,_barLenMax,_barDir,_val,_minVal,_maxVal);
 }
 
-CCSprite*  GaugeSprite::nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir)
+GaugeSprite*  GaugeSprite::nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir)
 {
 	return GaugeSprite::nodeWithBarTexture(_barTexture,_barLenMax,_barDir,0.0f,0.0f,0.0f);
 }
 
-CCSprite*  GaugeSprite::nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir ,double_t _val ,double_t _minVal ,double_t _maxVal)
+GaugeSprite*  GaugeSprite::nodeWithBarTexture(CCTexture2D* _barTexture ,float _barLenMax ,GaugeDirection _barDir ,double_t _val ,double_t _minVal ,double_t _maxVal)
 {
 	GaugeSprite  *obj =(GaugeSprite*)CCSprite::createWithTexture(_barTexture);
 	obj->initBarParam(_barLenMax,_barDir,_val,_minVal,_maxVal);
 	return obj;
 }
-
 
 GaugeSprite::GaugeSprite(){
     val_		= 0.0f;
@@ -39,7 +38,22 @@ GaugeSprite::GaugeSprite(){
     isMove_		= false;
     tarVal_		= 0.0f;
     diffVal_	= 0.0f;
-   // duration_	= 0.0f;
+
+}
+
+
+GaugeSprite::GaugeSprite(double_t _val,double_t _maxVal){
+    val_		= _val;
+    minVal_		= 0.0f;
+    maxVal_		= _maxVal;
+    barDir_		= BARDIR_RIGHT;
+    isMove_		= false;
+    tarVal_		= 0.0f;
+    diffVal_	= 0.0f;
+    
+//    _bar = GaugeSprite::nodeWithBarFile("ips_co_gg_gr@2x.png",100.0f,BARDIR_RIGHT, val_ ,0 , maxVal_);
+//    _bg  = GaugeSprite::nodeWithBarFile("ips_co_gg_bt@2x.png",100.0f,BARDIR_RIGHT, val_ ,0 , maxVal_);
+   // _bg->addChild(_bar,1);
 }
 
 
@@ -90,7 +104,7 @@ void GaugeSprite::initBarParam(float _barLenMax,GaugeDirection _barDir ,double_t
 float GaugeSprite::getBarFitScale(double_t _val)
 {
 	float per = Utility::calcPercentD(_val,minVal_,maxVal_);
-	return Utility::getBarScale(per,this->getContentSize().width,barLenMax_);
+	return Utility::getBarScale(per,_bar->getContentSize().width,barLenMax_);
 }
 
 
@@ -155,6 +169,9 @@ void GaugeSprite::onSchedule(float dt)
 }
 
 
+CCSprite* GaugeSprite::getBar(){
+    return _bg;
+}
 
 
 // 移動終了
@@ -174,6 +191,7 @@ void GaugeSprite::cancelFinishSelector()
 		gaugeDelegate->onMoveCancel();
 	}
 }
+
 // 強制終了
 void GaugeSprite::moveForceFinish()
 {
@@ -181,6 +199,7 @@ void GaugeSprite::moveForceFinish()
 	this->updateBarLen(tarVal_);
 	this->moveFinish();
 }
+
 // 移動停止
 void GaugeSprite::moveStop()
 {
