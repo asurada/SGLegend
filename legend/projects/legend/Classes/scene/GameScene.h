@@ -40,6 +40,7 @@ public:
     void monsterAttack();
     void update(float dt);
     void backgroundRun();
+    void draw();
     
     virtual void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
 	virtual void ccTouchesMoved(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
@@ -49,7 +50,7 @@ public:
     virtual void EndContact(b2Contact* contact);
     virtual void beginFire(AnalysisShape shape);
     virtual void endFire(AnalysisShape shape);
-    void onFire();
+    void onFire(bulletType _type);
     // implement the "static node()" method manually
     CREATE_FUNC(GameScene);
     
@@ -65,6 +66,7 @@ private:
     Char_01* pSprite_char;
     cocos2d::CCSprite* pSprite_bg_1;
     cocos2d::CCSprite* pSprite_bg_2;
+    cocos2d::CCSprite* emptyNode;
     cocos2d::CCArray *touchBallArray;
     std::vector<cocos2d::CCPoint> autoPoints;
     OperationLayer *operationlayer;

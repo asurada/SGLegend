@@ -17,9 +17,9 @@ USING_NS_CC;
 
 class AnimationTool{
     public:
-    static CCSprite* startFireAnm(CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count,CCObject* pSelectorTarget,SEL_CallFuncND selector);
-
+    static CCSprite* startFireAnm(CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count,const char *format,CCObject* pSelectorTarget,SEL_CallFuncND selector);
     static void setBullet(CCSprite * bullet,float radius, float density,float friction,float restitution, b2World* world);
+
     
 };
 

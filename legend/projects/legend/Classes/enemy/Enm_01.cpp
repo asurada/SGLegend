@@ -26,7 +26,7 @@ Enm_01::~Enm_01(){
 const char* Enm_01::getBulletName(bulletType _type){
     string result;
     switch (_type) {
-        case fire:
+        case attack_1:
             result = "fire_1.png";
             radius = 50.0,
             density = 0.4,

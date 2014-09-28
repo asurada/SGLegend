@@ -26,6 +26,7 @@ protected:
      CCSprite super;
      CCSprite* _char;
      CCSprite* _hpGauge;
+     CCSprite* _mgGauge;
      CCSprite* _bg;
      float bgHpPer;
      CCSprite* _magicGauge;
@@ -39,7 +40,7 @@ protected:
      float radius, density, friction, restitution;
      BaseEnemyEffect* _effect;
      BaseFighter* _target;
-    
+     float x,y,width,height;
      b2World* world;
 public:
 //    virtual void init(int hp,int magic,int exp) =0;
@@ -65,6 +66,11 @@ public:
     float getDensity();
     float getFriction();
     float getRestitution();
+    void changeSize(CCSize &size);
+    void changeRect(CCRect &rect);
+    void setVisible(bool isVisible);
+    bool appear();
+    bool disappear();
     double_t getPercent();
     bool init();
     

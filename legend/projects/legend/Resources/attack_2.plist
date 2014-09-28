@@ -4,122 +4,122 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>light-1.tiff</key>
+            <key>attack_2_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{120,120}}</string>
+                <string>{{308,154},{112,112}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{60,60}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{124,4},{112,112}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
-            <key>light-2.tiff</key>
+            <key>attack_2_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,124},{120,120}}</string>
+                <string>{{292,290},{124,124}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{41,42}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{99,16},{124,124}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
-            <key>light-3.tiff</key>
+            <key>attack_2_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,246},{120,120}}</string>
+                <string>{{172,154},{136,136}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{23,24}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{75,28},{136,136}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
-            <key>light-4.tiff</key>
+            <key>attack_2_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,368},{120,120}}</string>
+                <string>{{0,332},{148,148}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{4,5}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{50,41},{148,148}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
-            <key>light-5.tiff</key>
+            <key>attack_2_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,490},{120,120}}</string>
+                <string>{{0,172},{160,160}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{-14,-13}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{26,53},{160,160}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
-            <key>light-6.tiff</key>
+            <key>attack_2_6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,612},{120,120}}</string>
+                <string>{{0,0},{172,172}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{-32,-31}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{2,65},{172,172}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
-            <key>light-7.tiff</key>
+            <key>attack_2_7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,734},{120,120}}</string>
+                <string>{{172,0},{154,154}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{-42,-41}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{1,84},{154,154}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
-            <key>light-8.tiff</key>
+            <key>attack_2_8.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,856},{120,120}}</string>
+                <string>{{160,290},{132,132}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{-50,-49}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{4,103},{132,132}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
-            <key>light-9.tiff</key>
+            <key>attack_2_9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,978},{120,120}}</string>
+                <string>{{326,0},{64,90}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{-46,-44}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{120,120}}</string>
+                <string>{{42,119},{64,90}}</string>
                 <key>sourceSize</key>
-                <string>{120,120}</string>
+                <string>{240,240}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -127,13 +127,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>light.png</string>
+            <string>attack_2.png</string>
             <key>size</key>
-            <string>{124,1100}</string>
+            <string>{420,480}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:abf2bba3429d6b94f4691c03e98e0804:7940be63b345315638c6f39f18a807fc:b2addeb3122b9af095fd97312ef00a86$</string>
+            <string>$TexturePacker:SmartUpdate:88429d1caefd05ca1f9b7a0d37fd382d:1245e02810e007ae7eb23fa3a5e7f18e:40fcd70bd7fe43bd302d1968e478e19b$</string>
             <key>textureFileName</key>
-            <string>light.png</string>
+            <string>attack_2.png</string>
         </dict>
     </dict>
 </plist>

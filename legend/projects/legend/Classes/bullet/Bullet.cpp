@@ -22,24 +22,72 @@ void Bullet::cleanupSprite()
 
 void Bullet::setExplode(bulletType _type){
     switch (_type) {
-        case fire:
+        case attack_1:
+            _strImage = "attack_1.png";
+            _strPlist = "attack_1.plist";
+            _strImgSplit = "attack_1";
+            _frameCount = 10;
+            _format = "%s_%d.png";
+            wound_r = 255;
+            wound_g = 0;
+            wound_b = 0;
+            break;
+        case attack_2:
+            _strImage = "attack_2.png";
+            _strPlist = "attack_2.plist";
+            _strImgSplit = "attack_2";
+            _format = "%s_%d.png";
+            _frameCount = 9;
+            wound_r = 0;
+            wound_g = 255;
+            wound_b = 0;
+            break;
+        case attack_3:
+            _strImage = "attack_3.png";
+            _strPlist = "attack_3.plist";
+            _strImgSplit = "attack_3";
+            _format = "%s_%d.png";
+            _frameCount = 10;
+            wound_r = 0;
+            wound_g = 0;
+            wound_b = 255;
+            break;
+        case attack_4:
+            _strImage = "attack_4.png";
+            _strPlist = "attack_4.plist";
+            _strImgSplit = "attack_4";
+            _format = "%s_%d.png";
+            _frameCount = 10;
+            wound_r = 0;
+            wound_g = 255;
+            wound_b = 255;
+            break;
+        case attack_5:
+            _strImage = "attack_5.png";
+            _strPlist = "attack_5.plist";
+            _strImgSplit = "attack_5";
+            _format = "%s_%d.png";
+            _frameCount = 10;
+            wound_r = 255;
+            wound_g = 0;
+            wound_b = 255;
+            break;
+        case attack_6:
+            _strImage = "attack_6.png";
+            _strPlist = "attack_6.plist";
+            _strImgSplit = "attack_6";
+            _format = "%s_%d.png";
+            _frameCount = 15;
+            wound_r = 255;
+            wound_g = 255;
+            wound_b = 0;
+            break;
+        case effect_1:
             _strImage = "fire2.png";
             _strPlist = "fire2.plist";
             _strImgSplit = "fire";
+            _format = "%s%d.png";
             _frameCount = 40;
-            break;
-        case water:
-            _strImage = "light.png";
-            _strPlist = "light.plist";
-            _strImgSplit = "light-";
-            _frameCount = 7;
-//            _strImage = "fire.png";
-//            _strPlist = "fire.plist";
-//            _strImgSplit = "fire_";
-            // _frameCount = 20;
-
-
-            break;
         default:
             break;
     }
@@ -60,7 +108,28 @@ const char* Bullet::getImageSplit(){
     return _strImgSplit.c_str();
 }
 
+const char* Bullet::getFormat(){
+    return _format.c_str();
+}
+
+
+
 
 int Bullet::getFrameCount(){
     return _frameCount;
 }
+
+int Bullet::getWound_r(){
+    return wound_r;
+}
+
+int Bullet::getWound_g(){
+    return wound_g;
+}
+
+int Bullet::getWound_b(){
+    return wound_b;
+}
+
+
+

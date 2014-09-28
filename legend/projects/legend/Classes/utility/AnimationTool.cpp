@@ -9,7 +9,7 @@
 #include "AnimationTool.h"
 #define PTM_RATIO (32)
 
-CCSprite* AnimationTool::startFireAnm(CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count,CCObject* pSelectorTarget,SEL_CallFuncND selector){
+CCSprite* AnimationTool::startFireAnm(CCPoint &pos,const char * image,const char * plist,const char * imgSplit,int count,const char *format,CCObject* pSelectorTarget,SEL_CallFuncND selector){
     
     CCTextureCache::sharedTextureCache()->addImage(image);
     CCTextureCache *cache = CCTextureCache::sharedTextureCache();
@@ -18,7 +18,7 @@ CCSprite* AnimationTool::startFireAnm(CCPoint &pos,const char * image,const char
     CCArray *normalAnimFrames = CCArray::create();
     for (int i=1; i<count; i++) {
         char* tempString = new char;
-        sprintf(tempString, "%s%d.tiff", imgSplit,i);
+        sprintf(tempString, format, imgSplit,i);
         CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(tempString);
         normalAnimFrames->addObject(frame);
     }
@@ -28,13 +28,13 @@ CCSprite* AnimationTool::startFireAnm(CCPoint &pos,const char * image,const char
     CCAnimate *animate = CCAnimate::create(animation);
     
     CCSprite* animationSprite = CCSprite::create();
-    animationSprite->setScale(2.0f);
+    animationSprite->setScale(1.0f);
     animationSprite->setPosition(pos);
     
     CCCallFuncND *cleanupAction = CCCallFuncND::create(pSelectorTarget,selector,animationSprite);
     CCSequence *seq = CCSequence::create(animate, cleanupAction,NULL);
     animationSprite->runAction(seq);
-    
+
     return animationSprite;
     
 }

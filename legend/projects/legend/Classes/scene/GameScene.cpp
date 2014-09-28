@@ -14,6 +14,7 @@
 #include "ShapeConst.h"
 #include "AnimationTool.h"
 #include "Enm_01.h"
+#include "DrawUtils.h"
 using namespace cocos2d;
 
 USING_NS_CC;
@@ -27,7 +28,7 @@ enum {
 
 GameScene::GameScene(){
     
-   
+ 
 }
 
 GameScene::~GameScene(){
@@ -80,6 +81,7 @@ bool GameScene::init()
     
 	pCloseItem->setPosition(ccp(origin.x + visibleSize.width - pCloseItem->getContentSize().width/2 ,
                                 origin.y + pCloseItem->getContentSize().height/2));
+
     
     // create menu, it's an autorelease object
     CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
@@ -89,8 +91,11 @@ bool GameScene::init()
     operationlayer = OperationLayer::create();
     operationlayer->setDelegate(this);
     operationlayer->init();
-    operationlayer->setPosition(ccp(0,0));
-    this->addChild(operationlayer,1);
+  //  operationlayer->setPosition(ccp(0,0));
+   // this->addChild(operationlayer,1);
+    
+    
+    
 
    //this->initBallInRect();
    // this->initBallInTriangle();
@@ -102,6 +107,7 @@ bool GameScene::init()
     pSprite_bg_1->setAnchorPoint(ccp(0,0.5f));
     this->addChild(pSprite_bg_1, 0);
     
+    //DrawUtils::drawSolidCircle(ccp(0,0),20,30,ccc4f(0,255,0,0.5));
     
     pSprite_bg_2 = CCSprite::create("bg@2x.png");
     pSprite_bg_2->setPosition(ccp(0 , visibleSize.height*3/2));
@@ -109,21 +115,36 @@ bool GameScene::init()
     this->addChild(pSprite_bg_2, 0);
     
     
-    pSprite_round = CCSprite::create("round.png");
-    pSprite_round->setPosition(ccp(visibleSize.width/2 , visibleSize.height/4));
-    pSprite_round->setScale(1);
-    this->addChild(pSprite_round, 0);
     
-
-    center = ccp(visibleSize.width/2 , visibleSize.height/4);
+    
+    
+    pSprite_round = CCSprite::create("round.png");
+    pSprite_round->setAnchorPoint(ccp(0.5,0.5));
+    emptyNode = CCSprite::create();
+    pSprite_round->addChild(operationlayer);
+    emptyNode->addChild(pSprite_round);
+    emptyNode->setPosition(ccp(visibleSize.width/2 , visibleSize.height/4 +135));
+    emptyNode->setAnchorPoint(ccp(0.5,0.5));
+    emptyNode->cocos2d::CCNode::setScale(1.0, 1.0);
+    
+    
+    this->addChild(emptyNode);
+    
+    center = ccp(visibleSize.width/2 , visibleSize.height/4+100);
     pSprite_char = new Char_01("char.png");
+    pSprite_char->setVisible(false);
+    CCSize rect = CCSize(150, 0);
+    
+    
     if(pSprite_char->init()){
+        pSprite_char->changeSize(rect);
         pSprite_char->setPosition(this,center,0);
         pSprite_char->initGauge(center);
     }
     
-   
-
+    
+    
+    
     monster = ccp(visibleSize.width/2 , visibleSize.height/2 + visibleSize.height/4);
     pSprite_monster = new Enm_01("monster.png");
     if(pSprite_monster->init()){
@@ -157,7 +178,6 @@ void GameScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
         if (pSprite_char->getChar()->boundingBox().containsPoint(location))
         {
             CCLOG("ccTouchesBegan");
-            onFire();
         }
     }
 
@@ -186,16 +206,69 @@ void GameScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
    
 }
 
-
+float rotation = 0;
+float scaleY = 1;
+bool canPerform = true;
+bool disappear = false;
+bool isAnimationRun = false;
 
 //背景
 void GameScene::update(float dt)
 {
     world->Step(dt, 10, 10);
     backgroundRun();
+    
+    
+    
+    //出現
+    if(canPerform){
+        if(emptyNode->getScaleY() > 0.3){
+            emptyNode->cocos2d::CCNode::setScale(1.0, emptyNode->getScaleY()-0.02);
+        }else{
+        
+            if(pSprite_char != NULL){
+                rotation = rotation + 8;
+                pSprite_round->setRotation(rotation);
+                if(pSprite_char->appear()){
+                    emptyNode->setPosition(ccp(emptyNode->getPosition().x,emptyNode->getPosition().y-4));
+                }else{
+                    canPerform = false;
+                }
+            }
+        }
+    }else{
+        if(emptyNode->getScaleY()  < 1){
+            emptyNode->cocos2d::CCNode::setScale(1.0, emptyNode->getScaleY()+0.02);
+        }else{
+            
+            rotation = 0;
+            CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+            
+            if(emptyNode->getPosition().y < visibleSize.height/4){
+                emptyNode->setPosition(ccp(emptyNode->getPosition().x,emptyNode->getPosition().y+4));
+                pSprite_round->setRotation(rotation);
+            }
+        }
+        
+    }
+    
+    //消える
+    if(disappear){
+        if(pSprite_char->disappear()){
+            
+        }else{
+            disappear = false;
+            canPerform = true;
+        }
+    }
+    
+    
+    
     CCSize s = CCDirector::sharedDirector()->getWinSize();
 	// simple collision test
 	pSprite_monster->getChar()->setColor(ccWHITE);
+    
+    
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() != NULL) {
             CCSprite *sprite  = (CCSprite *)(b->GetUserData());
@@ -205,12 +278,14 @@ void GameScene::update(float dt)
             
             if (sprite != NULL && pSprite_monster->getChar()->boundingBox().intersectsRect(sprite->boundingBox()))
             {
-                pSprite_monster->getChar()->setColor(ccc3(CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255, CCRANDOM_0_1() * 255));
+                
+                
                 pSprite_monster->updateHpBar((double_t)10.0);
                 bulletType type = (bulletType)sprite->getTag();
-                //bullets->setExplode(type);
+                bullets->setExplode(type);
                 
-                animationSprite = AnimationTool::startFireAnm(monster,bullets->getImage(),bullets->getPlist(),bullets->getImageSplit(),bullets->getFrameCount(),this,callfuncND_selector(GameScene::cleanupSprite));
+                animationSprite = AnimationTool::startFireAnm(monster,bullets->getImage(),bullets->getPlist(),bullets->getImageSplit(),bullets->getFrameCount(),bullets->getFormat(),this,callfuncND_selector(GameScene::cleanupSprite));
+                isAnimationRun = true;
                 this->addChild(animationSprite, 1);
                 b->GetWorld()->DestroyBody(b);
                 sprite->removeFromParentAndCleanup(true);
@@ -220,6 +295,10 @@ void GameScene::update(float dt)
                 //delete sprite;
             }
         }
+    }
+    
+    if(isAnimationRun && bullets != NULL){
+        pSprite_monster->getChar()->setColor(ccc3(CCRANDOM_0_1() * bullets->getWound_r(), CCRANDOM_0_1()  * bullets->getWound_g(), CCRANDOM_0_1() * bullets->getWound_b()));
     }
 }
 
@@ -249,28 +328,34 @@ void GameScene::beginFire(AnalysisShape shape){
     switch (shape) {
         case star:
             CCLOG("star:星");
-            onFire();
+            disappear = true;
             break;
         case hexagon:
             CCLOG("star：六角");
-            onFire();
+            onFire(attack_2);
             break;
         case noresult:
             CCLOG("noresult：no");
             break;
         case triangle:
             CCLOG("triangle：三角");
+             onFire(attack_3);
             break;
         case rect:
             CCLOG("triangle：四角");
+            onFire(attack_4);
             break;
         case pentagon:
             CCLOG("triangle：五角");
+            onFire(attack_5);
             break;
         case cross:
             CCLOG("triangle：十字");
+            onFire(effect_1);
             break;
         case equaltriangle:
+           
+             onFire(attack_1);
             CCLOG("triangle：等辺三角");
             break;
         case reverse_equaltriangle:
@@ -288,8 +373,8 @@ void GameScene::endFire(AnalysisShape shape){
 
 
 
-void GameScene::onFire(){
-    CCSprite *bullet = pSprite_char->attack(water);
+void GameScene::onFire(bulletType _type){
+    CCSprite *bullet = pSprite_char->attack(_type);
     AnimationTool::setBullet(bullet,pSprite_char->getRadius(),
                              pSprite_char->getDensity(),
                              pSprite_char->getFriction(),
@@ -300,7 +385,7 @@ void GameScene::onFire(){
 
 void GameScene::cleanupSprite(CCSprite* inSprite)
 {
-
+    isAnimationRun = false;
     inSprite->removeFromParentAndCleanup(true);
 }
 
@@ -375,6 +460,10 @@ void GameScene::EndContact(b2Contact* contact)
 //    }
 }
 
+
+void GameScene::draw(){
+    DrawUtils::drawSolidCircle(ccp(100,100),30,30,ccc4f(0,255,0,0.5));
+}
 
 void GameScene::menuCloseCallback(CCObject* pSender)
 {
